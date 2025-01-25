@@ -1,6 +1,6 @@
 services:   
   servicio_php-apache-xdebug:
-    container_name: php8.0-apache-mysql-XDebug  
+    container_name: php8.0-apache-mysql-XDebug_Gestion_Horarios
     build: .
     volumes:
       # Montamos a web desde fóra no directorio web do contenedor
@@ -10,7 +10,7 @@ services:
       - 8081:80
 
   db:
-    container_name: dbXDebug
+    container_name: dbXDebug_Gestion_Horarios
     image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
