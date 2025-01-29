@@ -1,6 +1,6 @@
 <?php
 
-$server = "dbXdebug";
+$server = "db";
 $user = "root";
 $pass = "root";
 $bbdd = "Gestion_Horarios";
