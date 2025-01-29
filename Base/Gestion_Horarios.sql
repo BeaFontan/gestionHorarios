@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db
--- Tiempo de generación: 28-01-2025 a las 19:29:43
+-- Tiempo de generación: 29-01-2025 a las 09:48:20
 -- Versión del servidor: 9.1.0
 -- Versión de PHP: 8.2.24
 
@@ -29,14 +29,27 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `modules` (
   `id` int NOT NULL,
-  `id_professor` int NOT NULL,
-  `id_vocational_training` int NOT NULL,
+  `professor_id` int NOT NULL,
+  `vocational_training_id` int NOT NULL,
   `module_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `name` varchar(50) NOT NULL,
-  `course` enum('first','second','other','') NOT NULL,
+  `course` enum('first','second') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `sessions_number` int NOT NULL,
   `time_Stamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `modules`
+--
+
+INSERT INTO `modules` (`id`, `professor_id`, `vocational_training_id`, `module_code`, `name`, `course`, `sessions_number`, `time_Stamp`) VALUES
+(1, 3, 2, 'MP0612', 'Desarrollo Web en Entorno Cliente', 'second', 40, '2025-01-29 06:57:16'),
+(2, 1, 2, 'MP0613', 'Desarrollo Web en Entorno Servidor', 'second', 50, '2025-01-29 06:57:16'),
+(3, 4, 2, 'MP0615', 'Diseño de Interfaces Web', 'second', 35, '2025-01-29 06:57:16'),
+(4, 5, 2, 'EXTRA', 'Lengua estranjera profesional II', 'second', 20, '2025-01-29 06:57:16'),
+(5, 2, 2, 'MP0618', 'Empresa e Iniciativa Emprendedora', 'second', 30, '2025-01-29 06:57:16'),
+(6, 6, 1, 'MP0156', 'Inglés profesional', 'first', 20, '2025-01-29 06:57:16'),
+(7, 2, 1, 'MP0618', 'Empresa e Iniciativa Emprendedora', 'second', 30, '2025-01-29 06:57:16');
 
 -- --------------------------------------------------------
 
@@ -45,9 +58,17 @@ CREATE TABLE `modules` (
 --
 
 CREATE TABLE `modules_time_tables` (
-  `id_module` int NOT NULL,
-  `id_time_tables` int NOT NULL
+  `module_id` int NOT NULL,
+  `time_tables_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `modules_time_tables`
+--
+
+INSERT INTO `modules_time_tables` (`module_id`, `time_tables_id`) VALUES
+(4, 43),
+(4, 44);
 
 -- --------------------------------------------------------
 
@@ -73,7 +94,8 @@ INSERT INTO `professors` (`id`, `name`, `first_name`, `second_name`, `email`, `t
 (2, 'Ofelia', 'López', NULL, 'ofelia.lopez@example.com', '2025-01-28 19:05:38'),
 (3, 'César', 'Rodríguez', 'Fernández', 'cesar.rodriguez@example.com', '2025-01-28 19:05:38'),
 (4, 'Luis', 'González', 'Pérez', 'luis.gonzalez@example.com', '2025-01-28 19:05:38'),
-(5, 'Xoana', 'Costa', NULL, 'xoana.costa@example.com', '2025-01-28 19:05:38');
+(5, 'Xoana', 'Costa', NULL, 'xoana.costa@example.com', '2025-01-28 19:05:38'),
+(6, 'Pedro', 'García', 'García', 'pedrogarcia@sanclemente.net', '2025-01-29 06:35:49');
 
 -- --------------------------------------------------------
 
@@ -227,6 +249,18 @@ CREATE TABLE `users_modules` (
   `module_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `users_modules`
+--
+
+INSERT INTO `users_modules` (`user_id`, `module_id`) VALUES
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 4),
+(4, 6),
+(4, 7);
+
 -- --------------------------------------------------------
 
 --
@@ -256,7 +290,7 @@ CREATE TABLE `vocational_trainings` (
   `id` int NOT NULL,
   `course_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `course_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `modality` enum('ordinary','dual','remote','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `modality` enum('ordinary','dual','modular','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `type` enum('medium','higher') NOT NULL,
   `time_stamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -267,7 +301,7 @@ CREATE TABLE `vocational_trainings` (
 
 INSERT INTO `vocational_trainings` (`id`, `course_code`, `course_name`, `modality`, `type`, `time_stamp`) VALUES
 (1, 'ASIR_ORD', 'Administración de Sistemas Informáticos en Red', 'ordinary', 'higher', '2025-01-28 18:09:03'),
-(2, 'DAW_DIS', 'Desarrollo de Aplicaciones Web', 'remote', 'higher', '2025-01-28 18:09:03'),
+(2, 'DAW_MOD', 'Desarrollo de Aplicaciones Web', 'modular', 'higher', '2025-01-28 18:09:03'),
 (3, 'DAM_DUAL', 'Desarrollo de Aplicaciones Multiplataforma', 'dual', 'higher', '2025-01-28 18:09:03'),
 (4, 'SMR_ORD', 'Sistemas Microinformáticos y Redes', 'ordinary', 'medium', '2025-01-28 18:09:03');
 
@@ -280,15 +314,15 @@ INSERT INTO `vocational_trainings` (`id`, `course_code`, `course_name`, `modalit
 --
 ALTER TABLE `modules`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_professor_modules` (`id_professor`),
-  ADD KEY `fk_vocational_training_modules` (`id_vocational_training`);
+  ADD KEY `fk_professor_modules` (`professor_id`),
+  ADD KEY `fk_vocational_training_modules` (`vocational_training_id`);
 
 --
 -- Indices de la tabla `modules_time_tables`
 --
 ALTER TABLE `modules_time_tables`
-  ADD PRIMARY KEY (`id_module`,`id_time_tables`),
-  ADD KEY `fk_time_tables` (`id_time_tables`);
+  ADD PRIMARY KEY (`module_id`,`time_tables_id`),
+  ADD KEY `fk_time_tables` (`time_tables_id`);
 
 --
 -- Indices de la tabla `professors`
@@ -336,13 +370,13 @@ ALTER TABLE `vocational_trainings`
 -- AUTO_INCREMENT de la tabla `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `professors`
 --
 ALTER TABLE `professors`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `time_tables`
@@ -370,15 +404,15 @@ ALTER TABLE `vocational_trainings`
 -- Filtros para la tabla `modules`
 --
 ALTER TABLE `modules`
-  ADD CONSTRAINT `fk_professor_modules` FOREIGN KEY (`id_professor`) REFERENCES `professors` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_vocational_training_modules` FOREIGN KEY (`id_vocational_training`) REFERENCES `vocational_trainings` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_professor_modules` FOREIGN KEY (`professor_id`) REFERENCES `professors` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_vocational_training_modules` FOREIGN KEY (`vocational_training_id`) REFERENCES `vocational_trainings` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Filtros para la tabla `modules_time_tables`
 --
 ALTER TABLE `modules_time_tables`
-  ADD CONSTRAINT `fk_modules` FOREIGN KEY (`id_module`) REFERENCES `modules` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_time_tables` FOREIGN KEY (`id_time_tables`) REFERENCES `time_tables` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_modules` FOREIGN KEY (`module_id`) REFERENCES `modules` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `fk_time_tables` FOREIGN KEY (`time_tables_id`) REFERENCES `time_tables` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Filtros para la tabla `users_modules`
