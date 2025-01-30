@@ -15,7 +15,7 @@
 
     <h1>Timetable IES San Clemente</h1>
 
-    <form action="/prueba.php" method="get">
+    <form action="/prueba.php" method="post">
         <input type="text" name="txtUser" id= "txtUser" placeholder="Usuario">
         <input type="password" name="txtPass" id="txtPass" placeholder="Contrasinal">
         <button type="submit" name="btnLogin" id="btnLogin">Entrar</button>

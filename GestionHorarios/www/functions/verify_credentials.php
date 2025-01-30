@@ -1,6 +1,6 @@
 <?php
 
-if (isset($_GET["btnLogin"])) {
+if (isset($_POST["btnLogin"])) {
     echo "Credenciasis";
 }
 
