@@ -16,7 +16,8 @@ if (isset($_POST["btnLogin"])) {
     if ($result && password_verify($pass, $result['password'])) {
         $_SESSION['user'] = [
             'name' => $result['name'],
-            'pass' => $result['password']
+            'pass' => $result['password'],
+            'firstName' => $result['first_name']
         ];
 
         if ($result['password_reset'] != 1) {

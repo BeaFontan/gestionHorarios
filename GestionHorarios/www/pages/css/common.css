@@ -1,5 +1,6 @@
 :root {
   --color-primario: #468dae;
+  --second-color: #2bc187;
   --fuente-principal: "Arial", sans-serif;
 }
 
@@ -7,4 +8,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+a {
+  color: var(--color-primario);
 }

@@ -1,0 +1,102 @@
+@import url("common.css");
+/* Estilo general para el body */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Contenedor principal */
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Título centrado */
+h2 {
+  text-align: center;
+  font-size: 2em;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+/* Contenedor izquierdo */
+.container-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+  border: solid var(--color-primario);
+  border-radius: 20px;
+}
+
+.circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 80%;
+  border: 1px solid var(--color-primario);
+}
+
+.container-left h3 {
+  margin-bottom: 20px;
+}
+
+.container-left p {
+  color: rebeccapurple;
+}
+
+.container-left ul {
+  list-style-type: none;
+}
+
+.container-left ul li {
+  margin: 10px 0;
+}
+
+.container-left ul li a {
+  text-decoration: none;
+}
+
+/* ----------------------------- */
+
+/* Contenedor derecho */
+.container-rigth {
+  width: 70%; /* Ajusta según lo necesites */
+  padding: 20px;
+}
+
+/* Estilo para los usuarios */
+.mostrar-users {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.container-user {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 100%; /* Esto hará que cada "usuario" ocupe el 100% del espacio en su contenedor, puedes cambiarlo a un porcentaje si quieres más usuarios por fila */
+  box-sizing: border-box;
+}
+
+.container-user .circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.container-user p {
+  margin: 5px 0;
+}
+
+/* Botones */
+button {
+  padding: 5px 10px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+form {
+  display: inline-block;
+}
