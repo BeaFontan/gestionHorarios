@@ -16,7 +16,7 @@
 
     <div class="circle"></div>
 
-    <form action="/prueba.php" method="get">
+    <form action="../functions/verify_credentials.php" method="post">
         <input type="text" name="txtUser" id="txtUser" placeholder="Usuario" />
         <input
             type="password"
