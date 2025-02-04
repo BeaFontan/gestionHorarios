@@ -1,0 +1,72 @@
+@import url("commun.css");
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--fuente-principal);
+}
+
+h1 {
+  border-bottom: 3px var(--color-primario) solid;
+  margin-top: 70px;
+  width: 707px;
+  text-align: center;
+  font-weight: 100;
+}
+
+.raya {
+  border-right: 3px #468dae solid;
+  padding-right: 5px;
+}
+
+.negrita {
+  font-weight: 900;
+}
+
+.circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 80%;
+  margin: 40px;
+  border: 1px solid var(--color-primario);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+form input {
+  margin: 10px;
+  height: 32px;
+  width: 288px;
+  border-radius: 10px;
+  border: 1px solid var(--color-primario);
+  text-align: center;
+}
+
+form input:focus {
+  background-color: #468dae0b;
+  border: solid var(--color-primario) 2px;
+  outline: none;
+}
+
+form button {
+  width: 155px;
+  align-items: center;
+  height: 40px;
+  background-color: #468dae;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  margin: 10px;
+}
+
+a {
+  color: var(--color-primario);
+  font-size: 13px;
+}
