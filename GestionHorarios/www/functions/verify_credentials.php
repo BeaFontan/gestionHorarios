@@ -13,7 +13,6 @@ if (isset($_POST["btnLogin"])) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Verificar si el usuario existe y la contraseña es válida
-
     if ($result && password_verify($pass, $result['password'])) {
         $_SESSION['user'] = [
             'name' => $result['name'],
