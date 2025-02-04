@@ -1,9 +1,9 @@
 <?php
 session_start();
-require_once "connection.php";
+require_once "../connection.php";
 
 if (isset($_POST["btnLogin"])) {
-    $user = $_POST['txtUser'];
+    $user = htmlspecialchars($_POST['txtUser']);
     $pass = $_POST['txtPass'];
 
     // Preparar la consulta para buscar al usuario por nombre
@@ -19,13 +19,15 @@ if (isset($_POST["btnLogin"])) {
             'pass' => $result['password']
         ];
 
-        echo "¡Bienvenido, " . $result['name'] . "!";
+        if ($result['password_reset'] != 1) {
+            header('Location: ../../pages/reset_password.php');
+            exit();
+        } else {
+            echo "¡Bienvenido, " . $result['name'] . "!"; //Redigir al panel de user
+        }
     } else {
-        header('Location: ../pages/login.php');
+        $message = "Usuario ou contrasinal incorrectos";
+        header('Location: ../../pages/login.php?message=' . $message);
         exit();
     }
 }
-
-
-
-//TODO!!!! Todas las contraseñas van a estar haseadas?

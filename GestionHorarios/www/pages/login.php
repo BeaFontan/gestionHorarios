@@ -10,23 +10,34 @@
 
 <body>
     <h1>
-        <span class="raya">Timetable</span> <span class="negrita">IES</span> San
+        <span class="raya">Login</span> <span class="negrita">IES</span> San
         Clemente
     </h1>
 
     <div class="circle"></div>
+    <?php
+    if (isset($_GET['message'])) {
+        echo '<p style="color: red;">' . $_GET['message'] . '</p>';
+    }
+    ?>
 
-    <form action="../functions/verify_credentials.php" method="post">
+
+
+
+    <form action="../functions/user/function_verify_credentials.php" method="post">
         <input type="text" name="txtUser" id="txtUser" placeholder="Usuario" />
         <input
             type="password"
             name="txtPass"
             id="txtPass"
             placeholder="Contrasinal" />
+
         <button type="submit" name="btnLogin" id="btnLogin">Entrar</button>
     </form>
 
     <a href="#">¿Esqueceches a túa contrasinal?</a>
+
+
 </body>
 
 </html>
