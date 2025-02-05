@@ -1,6 +1,9 @@
 :root {
   --color-primario: #468dae;
   --second-color: #2bc187;
+  --tertiary-color: #444444;
+  --forty-color: #fcfcfc;
+  --danger-color: #c12b2e;
   --fuente-principal: "Arial", sans-serif;
 }
 
@@ -10,6 +13,21 @@
   box-sizing: border-box;
 }
 
-a {
-  color: var(--color-primario);
+/* estilos para ver o no las pass */
+.password-container {
+  position: relative;
+  display: inline-block;
+}
+
+#togglePassword {
+  position: absolute;
+  right: 27px;
+  top: 34%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2em;
+  color: rgba(68, 68, 68, 0.45);
+  width: 5px;
 }

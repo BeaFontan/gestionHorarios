@@ -15,6 +15,7 @@ $stmt = $pdo->query($sql);
 
     <link rel="stylesheet" href="../pages/css/administrator_panel.css">
     <!-- <link rel="stylesheet" href="../pages/css/style.css"> -->
+    <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -37,6 +38,7 @@ $stmt = $pdo->query($sql);
         <!-- Contenedor derecho -->
         <div class="container-rigth">
             <input type="text" placeholder="Buscar alumno" name="txtFindUser">
+
             <button>Filtros</button>
 
             <div class="mostrar-users">
@@ -63,8 +65,10 @@ $stmt = $pdo->query($sql);
     </div>
 
     <form action="create_user.php">
-        <button name="btnCreateUser">+</button>
+        <button name="btnCreateUser" class="btnCreateUser">+</button>
     </form>
+
+
 </body>
 
 </html>

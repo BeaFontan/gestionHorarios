@@ -2,10 +2,9 @@
 /* Estilo general para el body */
 body {
   font-family: Arial, sans-serif;
-  height: 100vh;
-  overflow: hidden; /* Esto evita que la página tenga scroll */
-  margin: 0 20px;
-  width: calc(100% - 40px); /* Compensa el ancho para evitar overflow */
+  margin: 0;
+  padding: 0;
+  padding: 38px;
 }
 
 /* Contenedor principal */
@@ -61,7 +60,7 @@ h2 {
   font-size: 20px;
   padding: 10px 0;
   position: relative;
-  transition: padding-left 0.3s; /* Agregamos transición para el padding */
+  transition: background-color 0.3s, border-radius 0.3s, padding-right 0.3s;
 }
 
 .container-left ul li a {
@@ -71,31 +70,12 @@ h2 {
   padding: 10px 20px;
 }
 
-/* Agregamos el pseudo-elemento para el efecto */
-.container-left ul li::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0; /* Comienza con el fondo invisible */
-  height: 100%;
-  background-color: var(--color-primario);
-  transition: width 0.3s ease-out; /* Transición para el fondo */
-  z-index: -1;
-
-  border-top-right-radius: 50px;
-  border-bottom-right-radius: 50px;
-}
-
-/* Efecto hover */
-.container-left ul li:hover::after {
-  width: 90%; /* El pseudo-elemento cubre el fondo */
-}
-
+/* Efecto hover hacia la derecha */
 .container-left ul li:hover {
-  padding-left: 20px; /* Movimiento del contenido hacia la derecha */
+  background-color: var(--color-primario);
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
+  padding-right: 20px;
 }
 
 .container-left ul li a:hover {
@@ -108,13 +88,9 @@ h2 {
 /* Contenedor derecho */
 .container-rigth {
   width: 100%;
-  max-height: calc(
-    100vh - 70px
-  ); /* Ajusta según tu diseño, para dejar espacio para el título o el margen */
   border: solid var(--color-primario) 2px;
   border-radius: 20px;
   padding: 25px;
-  overflow-y: auto; /* Esto agrega scroll solo en el eje vertical cuando sea necesario */
 }
 
 /* Estilo para los usuarios */
@@ -128,7 +104,6 @@ h2 {
   padding: 10px;
   width: 100%;
   border-radius: 20px;
-  margin-bottom: 20px;
 }
 
 .container-rigth input {
@@ -157,18 +132,13 @@ form {
 
 .btnCreateUser {
   position: fixed;
-  bottom: 45px;
+  bottom: 30px;
   right: 30px;
   background-color: var(--color-primario);
-  width: 52px;
-  height: 52px;
+  width: 62px;
+  height: 62px;
   border-radius: 50%;
   border: none;
   font-size: 3rem;
   color: var(--forty-color);
-  transition: transform 0s ease; /* Transición suave para el giro */
-}
-
-.btnCreateUser:hover {
-  transform: rotate(360deg);
 }
