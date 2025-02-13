@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-include_once '../functions/connection.php';
-include_once '../functions/administrator/find_vocational_trainings.php';
-include_once '../functions/administrator/load_modules.php';
+include_once '../../functions/connection.php';
+include_once '../../functions/administrator/find_vocational_trainings.php';
+include_once '../../functions/administrator/load_modules.php';
 
 $arrayVocationalTrainings = findVocationalTrainings($pdo);
 
@@ -34,7 +34,7 @@ if ( isset($_POST["btnUpdate"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrador</title>
-    <link rel="stylesheet" href="../pages/css/administrator_panel.css">
+    <link rel="stylesheet" href="../../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -53,10 +53,10 @@ if ( isset($_POST["btnUpdate"])) {
             <p><?php echo $_SESSION['user']['rol']?></p>
 
             <ul>
-                <li><a href="administrator_panel.php">ALUMNOS</a></li>
-                <li><a href="administrator_vocational_trainings.php">CICLOS</a></li>
                 <li><a href="administrator_modules.php">MODULOS</a></li>
                 <li><a href="administrator_horarios.php">HORARIOS</a></li>
+
+                
             </ul>
             <a href="../functions/user/close_session.php" class="logout">
                 <i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
@@ -160,7 +160,7 @@ if ( isset($_POST["btnUpdate"])) {
         <button name="btnCreateUser" class="btnCreateUser">+</button>
     </form>
 
-    <script src="../js/find_user.js"></script>
+    <script src="../../js/find_user.js"></script>
 
 </body>
 </html>

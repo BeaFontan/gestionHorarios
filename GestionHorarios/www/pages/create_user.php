@@ -1,9 +1,13 @@
 <?php
-include_once '../functions/connection.php';
+session_start();
 
-$sql = "SELECT * FROM users ";
-$stmt = $pdo->query($sql);
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit(); 
+}
 ?>
+
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -11,7 +15,7 @@ $stmt = $pdo->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Engadir Alumno</title>
 
     <link rel="stylesheet" href="../pages/css/administrator_panel.css">
     <!-- <link rel="stylesheet" href="../pages/css/style.css"> -->
@@ -19,7 +23,7 @@ $stmt = $pdo->query($sql);
 </head>
 
 <body>
-    <h2>Cambiar nombre con php</h2>
+    <h2>Engadir Alumno</h2>
     <div class="container">
         <!-- Contenedor izquierdo -->
         <div class="container-left">
@@ -36,21 +40,24 @@ $stmt = $pdo->query($sql);
         </div>
 
         <!-- Contenedor derecho -->
+
+        <?php
+            if (isset($_SESSION['mensaxe'])) {
+                "<p>".$_SESSION['mensaxe']."</p>";
+            }
+        ?>
         <div class="container-rigth">
-
-
         <form action="../functions/administrator/function_create_user.php" method="post">
-            <input type="text" name="txtName" placeholder="Nome" >
-            <input type="text" name="txtFirstName" placeholder="Apelido 1" >
-            <input type="text" name="txtSecondName" placeholder="Apelido 2" >
-            <input type="text" name="txtEmail" placeholder="Email" >
-            <input type="text" name="txtPhone" placeholder="Teléfono" >
-            <input type="text" name="txtDNI" placeholder="DNI" >
+            <input type="text" name="txtName" placeholder="Nome" required maxlength="50">
+            <input type="text" name="txtFirstName" placeholder="Apelido 1" required maxlength="50">
+            <input type="text" name="txtSecondName" placeholder="Apelido 2" maxlength="50">
+            <input type="email" name="txtEmail" placeholder="Email" required maxlength="100">
+            <input type="tel" name="txtPhone" placeholder="Teléfono" pattern="\d{15}" maxlength="15" required>
+            <input type="text" name="txtDNI" placeholder="DNI" required maxlength="9">
 
             <button type="submit" name="btnCreateUser" id="btnCreateUser">Guardar</button>
         </form>
-        
-            
+ 
         </div>
     </div>
 </body>

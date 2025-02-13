@@ -21,8 +21,8 @@
 
     <div class="circle"></div>
     <?php
-    if (isset($_GET['message'])) {
-        echo '<p style="color: red;">' . $_GET['message'] . '</p>';
+    if (isset($_GET['mensaxe'])) {
+        echo '<p style="color: red;">' . $_GET['mensaxe'] . '</p>';
     }
     ?>
     <form action="../functions/user/function_verify_credentials.php" method="post">
@@ -44,7 +44,7 @@
 
     <a href="#">¿Esqueceches a túa contrasinal?</a>
 
-    <script src="../js/script.js"></script>
+    <script src="../js/eye_pass.js"></script>
 </body>
 
 </html>

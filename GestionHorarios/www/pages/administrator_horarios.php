@@ -1,51 +1,111 @@
 <?php
-include_once '../functions/connection.php';
+session_start();
 
-$sql = "SELECT * FROM users ";
-$stmt = $pdo->query($sql);
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit();
+}
+
+include_once '../functions/connection.php';
+include_once '../functions/administrator/find_vocational_trainings.php';
+
+$arrayVocationalTrainings = findVocationalTrainings($pdo);
+$arrayModules = [];
+
+// Obtener los módulos según el ciclo seleccionado
+if (isset($_POST["btnMostrarCiclos"]) && !empty($_POST["ciclo"])) {
+    $vocational_training = $_POST["ciclo"];
+
+    try {
+        $query = $pdo->prepare("SELECT * FROM `modules` WHERE vocational_training_id = ?");
+        $query->execute([$vocational_training]);
+        $arrayModules = $query->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        $_SESSION['mensaxe'] = "Error al obtener módulos: " . $e->getMessage();
+    }
+}
+
+// Guardar los módulos en la tabla modules_sessions
+if (isset($_POST["btnGuardar"])) {
+    try {
+        foreach ($_POST['modules'] as $sessionId => $dayModules) {
+            foreach ($dayModules as $dayIndex => $moduleId) {
+                if (!empty($moduleId) && is_numeric($moduleId) && is_numeric($sessionId)) {
+                    
+                    // Verificar si ya existe la combinación antes de insertar
+                    $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM modules_sessions WHERE module_id = ? AND session_id = ?");
+                    $stmtCheck->execute([$moduleId, $sessionId]);
+                    $exists = $stmtCheck->fetchColumn();
+
+                    if ($exists == 0) { // Solo insertamos si no existe
+                        $stmt = $pdo->prepare("INSERT INTO modules_sessions (module_id, session_id) VALUES (?, ?)");
+                        $stmt->execute([$moduleId, $sessionId]);
+                    }
+                }
+            }
+        }
+        $_SESSION['mensaxe'] = "Datos guardados correctamente.";
+    } catch (PDOException $e) {
+        $_SESSION['mensaxe'] = "Error al guardar los datos: " . $e->getMessage();
+    }
+}
+
 ?>
 <!DOCTYPE html>
-
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>Gestión de Horarios</title>
     <link rel="stylesheet" href="../pages/css/administrator_horarios.css">
-    <!-- <link rel="stylesheet" href="../pages/css/style.css"> -->
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
-    <h2>Cambiar nombre con php</h2>
+    <h2>Gestión de Horarios</h2>
+
+    <?php if (isset($_SESSION['mensaxe'])): ?>
+        <p style="color:red;"><?php echo $_SESSION['mensaxe']; unset($_SESSION['mensaxe']); ?></p>
+    <?php endif; ?>
+
     <div class="container">
         <!-- Contenedor izquierdo -->
-        <div class="container-left">
+   <!-- Contenedor izquierdo -->
+   <div class="container-left">
             <div class="circle"></div>
-            <h3>Nombre Apellidos</h3>
-            <p>Administrador</p>
+            <h3><?php echo $_SESSION['user']['name']?></h3>
+            <p><?php echo $_SESSION['user']['rol']?></p>
 
             <ul>
-                <li><a href="#">ALUMNOS</a></li>
-                <li><a href="#">CICLOS</a></li>
-                <li><a href="#">MODULOS</a></li>
-                <li><a href="#">HORARIOS</a></li>
+                <li><a href="administrator_panel.php">ALUMNOS</a></li>
+                <li><a href="administrator_vocational_trainings.php">CICLOS</a></li>
+                <li><a href="administrator_modules.php">MODULOS</a></li>
+                <li><a href="administrator_horarios.php">HORARIOS</a></li>
             </ul>
+            <a href="../functions/user/close_session.php" class="logout">
+                <i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
         </div>
 
         <!-- Contenedor derecho -->
-        <div class="container-rigth">
-            <div style="text-align: center; margin-bottom: 20px; width: 100%;">
-                <select class="dropdownCiclo">
-                    <option value="opcion1">Opción 1</option>
-                    <option value="opcion2">Opción 2</option>
-                    <option value="opcion3">Opción 3</option>
-                    <option value="opcion4">Opción 4</option>
-                </select>
-            </div>
+        <div class="container-right">
+            <form id="filter-form" method="post">
+                <div style="text-align: center; margin-bottom: 20px; width: 100%;">
+                    <select name="ciclo" id="ciclo">
+                        <option value="">Selecciona Ciclo</option>
+                        <?php
+                        if ($arrayVocationalTrainings) {
+                            foreach ($arrayVocationalTrainings as $ciclo) {
+                                echo "<option value='" . htmlspecialchars($ciclo['id']) . "'>" . htmlspecialchars($ciclo['course_name']) . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
+                </div>
+                <button type="submit" name="btnMostrarCiclos">Mostrar módulos</button>
+            </form>
+        </div>
 
+        <!-- Tabla de horarios -->
+        <form method="post">
             <div class="timetable">
                 <table>
                     <tr>
@@ -56,490 +116,45 @@ $stmt = $pdo->query($sql);
                         <th class="cabeceraSemana">JUEVES</th>
                         <th class="cabeceraSemana">VIERNES</th>
                     </tr>
-                    <tr>
-                        <td class="horas"><b>8:45 - 9:35</b></td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="horas"><b>9:35 - 10:25</b></td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="horas"><b>10:25 - 11:15</b></td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="horas"><b>11:15 - 12:05</b></td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="horas"><b>12:05 - 12:55</b></td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="horas"><b>12:55 - 13:45</b></td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="horas"><b>13:45 - 14:35</b></td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                    </tr>
+
+                    <?php
+                    // Definir horas y sus IDs correspondientes (session_id)
+                    $sessions = [
+                        1 => "8:45 - 9:35", 2 => "9:35 - 10:25", 3 => "10:25 - 11:15", 
+                        4 => "11:15 - 12:05", 5 => "12:05 - 12:55", 6 => "12:55 - 13:45", 
+                        7 => "13:45 - 14:35", 8 => "16:00 - 16:50", 9 => "16:50 - 17:40", 
+                        10 => "17:40 - 18:30", 11 => "18:30 - 19:20"
+                    ];
+
+                    foreach ($sessions as $sessionId => $hora) {
+                        echo "<tr>";
+                        echo "<td class='horas'><b>$hora</b></td>";
+
+                        for ($i = 0; $i < 5; $i++) { // 5 columnas (Lunes a Viernes)
+                            echo "<td class='dropdownModulo'>";
+                            echo "<select name='modules[$sessionId][$i]' class='dropdownModulo'>";
+                            echo "<option value=''>Selecciona Módulo</option>";
+
+                            if (!empty($arrayModules)) {
+                                foreach ($arrayModules as $module) {
+                                    echo "<option value='" . htmlspecialchars($module['id']) . "'>" . htmlspecialchars($module['name']) . "</option>";
+                                }
+                            } else {
+                                echo "<option value=''>No hay módulos</option>";
+                            }
+                            echo "</select>";
+                            echo "</td>";
+                        }
+                        echo "</tr>";
+                    }
+                    ?>
                 </table>
-                <hr>
-                <table>
-                    <tr>
-                        <td class="horas"><b>16:00 - 16:50</b></td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="horas"><b>16:50 - 17:40</b></td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="horas"><b>17:40 - 18:30</b></td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="horas"><b>18:30 - 19:20</b></td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                        <td class="dropdownModulo">
-                            <select class="dropdownModulo">
-                                <option value="opcion1">Opción 1</option>
-                                <option value="opcion2">Opción 2</option>
-                                <option value="opcion3">Opción 3</option>
-                                <option value="opcion4">Opción 4</option>
-                            </select>
-                        </td>
-                    </tr>
-                </table>
+
+                <div style="text-align: right; width: 100%; margin-top: 30px; margin-bottom: 30px;">
+                    <button class="btnGuardar" type="submit" name="btnGuardar"><b>GUARDAR</b></button>
+                </div>
             </div>
-            <div style="text-align: right; width: 100%; margin-top: 30px; margin-bottom: 30px;">
-                <button class="btnGuardar" type="button"><b>GUARDAR</b></button>
-            </div>
-        </div>
+        </form>
     </div>
-
 </body>
-
 </html>

@@ -24,13 +24,16 @@ h2 {
 
 /* Contenedor izquierdo */
 .container-left {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 269px;
   border: solid var(--color-primario) 2px;
   border-radius: 20px;
+  padding-bottom: 50px; /* Para evitar que el icono quede pegado */
 }
+
 
 .circle {
   width: 87px;
@@ -80,6 +83,7 @@ h2 {
   width: 0; /* Comienza con el fondo invisible */
   height: 100%;
   background-color: var(--color-primario);
+  color: var(--forty-color);
   transition: width 0.3s ease-out; /* Transición para el fondo */
   z-index: -1;
 
@@ -102,6 +106,28 @@ h2 {
   text-decoration: none;
   color: var(--forty-color);
 }
+
+/* Cerrar sesión */
+.logout {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  color: var(--tertiary-color);
+  font-size: 13px;
+  display: inline-flex; 
+  align-items: center;
+  white-space: nowrap; 
+  gap: 8px;
+}
+
+
+
+.logout i {
+  font-size: 13px;
+}
+
 
 /* ----------------------------- */
 

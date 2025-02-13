@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if (!isset($_SESSION['user'])) {
+    header('Location: login.php');
+    exit(); 
+}
+
 require_once "../connection.php";
 
 if (isset($_POST["btnRessetPassword"])) {
@@ -23,11 +29,12 @@ if (isset($_POST["btnRessetPassword"])) {
             'name' => $_SESSION['user']['name']
         ]);
 
+        $_SESSION["mensaxe"] = "Contrasinal cambiado con éxito";
         header('Location: ../../pages/login.php');
         exit();
     } else {
-        $message = "As contrainais non coinciden";
-        header('Location: ../../pages/reset_password.php?message=' . $message);
+        $_SESSION["mensaxe"] = "As contrainais non coinciden";
+        header('Location: ../../pages/reset_password.php');
         exit();
     }
 }

@@ -1,5 +1,4 @@
 //funcion para controlar que se vea la pass
-
 document.getElementById("togglePassword").addEventListener("click", () => {
   const passwordInput = document.getElementById("txtPass");
   const icon = document.querySelector("#togglePassword i");
@@ -8,3 +7,8 @@ document.getElementById("togglePassword").addEventListener("click", () => {
   icon.classList.toggle("fa-eye-slash");
   icon.classList.toggle("fa-eye");
 });
+
+
+
+
+
