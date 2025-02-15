@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
-    exit(); 
+    exit();
 }
 ?>
 
@@ -42,22 +42,22 @@ if (!isset($_SESSION['user'])) {
         <!-- Contenedor derecho -->
 
         <?php
-            if (isset($_SESSION['mensaxe'])) {
-                "<p>".$_SESSION['mensaxe']."</p>";
-            }
+        if (isset($_SESSION['mensaxe'])) {
+            "<p>" . $_SESSION['mensaxe'] . "</p>";
+        }
         ?>
         <div class="container-rigth">
-        <form action="../functions/administrator/function_create_user.php" method="post">
-            <input type="text" name="txtName" placeholder="Nome" required maxlength="50">
-            <input type="text" name="txtFirstName" placeholder="Apelido 1" required maxlength="50">
-            <input type="text" name="txtSecondName" placeholder="Apelido 2" maxlength="50">
-            <input type="email" name="txtEmail" placeholder="Email" required maxlength="100">
-            <input type="tel" name="txtPhone" placeholder="Teléfono" pattern="\d{15}" maxlength="15" required>
-            <input type="text" name="txtDNI" placeholder="DNI" required maxlength="9">
+            <form action="../functions/administrator/function_create_user.php" method="post">
+                <input type="text" name="txtName" placeholder="Nome" required maxlength="50">
+                <input type="text" name="txtFirstName" placeholder="Apelido 1" required maxlength="50">
+                <input type="text" name="txtSecondName" placeholder="Apelido 2" maxlength="50">
+                <input type="email" name="txtEmail" placeholder="Email" required maxlength="100">
+                <input type="tel" name="txtPhone" placeholder="Teléfono" pattern="\d{15}" maxlength="15" required>
+                <input type="text" name="txtDNI" placeholder="DNI" required maxlength="9">
 
-            <button type="submit" name="btnCreateUser" id="btnCreateUser">Guardar</button>
-        </form>
- 
+                <button type="submit" name="btnCreateUser" id="btnCreateUser">Guardar</button>
+            </form>
+
         </div>
     </div>
 </body>

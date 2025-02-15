@@ -31,7 +31,7 @@ if (isset($_POST["btnGuardar"])) {
         foreach ($_POST['modules'] as $sessionId => $dayModules) {
             foreach ($dayModules as $dayIndex => $moduleId) {
                 if (!empty($moduleId) && is_numeric($moduleId) && is_numeric($sessionId)) {
-                    
+
                     // Verificar si ya existe la combinación antes de insertar
                     $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM modules_sessions WHERE module_id = ? AND session_id = ?");
                     $stmtCheck->execute([$moduleId, $sessionId]);
@@ -53,6 +53,7 @@ if (isset($_POST["btnGuardar"])) {
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,20 +61,21 @@ if (isset($_POST["btnGuardar"])) {
     <link rel="stylesheet" href="../pages/css/administrator_horarios.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <h2>Gestión de Horarios</h2>
+    <h2>Xestión de Horarios</h2>
 
     <?php if (isset($_SESSION['mensaxe'])): ?>
-        <p style="color:red;"><?php echo $_SESSION['mensaxe']; unset($_SESSION['mensaxe']); ?></p>
+        <p style="color:red;"><?php echo $_SESSION['mensaxe'];
+                                unset($_SESSION['mensaxe']); ?></p>
     <?php endif; ?>
 
     <div class="container">
         <!-- Contenedor izquierdo -->
-   <!-- Contenedor izquierdo -->
-   <div class="container-left">
+        <div class="container-left">
             <div class="circle"></div>
-            <h3><?php echo $_SESSION['user']['name']?></h3>
-            <p><?php echo $_SESSION['user']['rol']?></p>
+            <h3><?php echo $_SESSION['user']['name'] ?></h3>
+            <p><?php echo $_SESSION['user']['rol'] ?></p>
 
             <ul>
                 <li><a href="administrator_panel.php">ALUMNOS</a></li>
@@ -120,10 +122,17 @@ if (isset($_POST["btnGuardar"])) {
                     <?php
                     // Definir horas y sus IDs correspondientes (session_id)
                     $sessions = [
-                        1 => "8:45 - 9:35", 2 => "9:35 - 10:25", 3 => "10:25 - 11:15", 
-                        4 => "11:15 - 12:05", 5 => "12:05 - 12:55", 6 => "12:55 - 13:45", 
-                        7 => "13:45 - 14:35", 8 => "16:00 - 16:50", 9 => "16:50 - 17:40", 
-                        10 => "17:40 - 18:30", 11 => "18:30 - 19:20"
+                        1 => "8:45 - 9:35",
+                        2 => "9:35 - 10:25",
+                        3 => "10:25 - 11:15",
+                        4 => "11:15 - 12:05",
+                        5 => "12:05 - 12:55",
+                        6 => "12:55 - 13:45",
+                        7 => "13:45 - 14:35",
+                        8 => "16:00 - 16:50",
+                        9 => "16:50 - 17:40",
+                        10 => "17:40 - 18:30",
+                        11 => "18:30 - 19:20"
                     ];
 
                     foreach ($sessions as $sessionId => $hora) {
@@ -157,4 +166,5 @@ if (isset($_POST["btnGuardar"])) {
         </form>
     </div>
 </body>
+
 </html>

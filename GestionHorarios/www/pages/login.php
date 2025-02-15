@@ -18,7 +18,6 @@
         <span class="raya">Login</span> <span class="negrita">IES</span> San
         Clemente
     </h1>
-
     <div class="circle"></div>
     <?php
     if (isset($_GET['mensaxe'])) {

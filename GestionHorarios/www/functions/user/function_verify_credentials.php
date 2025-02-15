@@ -18,7 +18,7 @@ if (isset($_POST["btnLogin"])) {
             'name' => $result['name'],
             'pass' => $result['password'],
             'firstName' => $result['first_name'],
-            'rol'=>$result['rol']
+            'rol' => $result['rol']
         ];
 
         if ($result['password_reset'] != 1) {
@@ -31,7 +31,6 @@ if (isset($_POST["btnLogin"])) {
             header('Location: ../../pages/user/user_panel.php');
             exit();
         }
-        
     } else {
         $message = "Usuario ou contrasinal incorrectos";
         header('Location: ../../pages/login.php?message=' . $message);
