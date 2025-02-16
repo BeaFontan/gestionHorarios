@@ -39,7 +39,7 @@ h2 {
   width: 87px;
   height: 87px;
   border-radius: 80%;
-  border: 2px solid var(--color-primario);
+  /*border: 2px solid var(--color-primario);*/
   margin: 39px;
 }
 
@@ -107,32 +107,33 @@ h2 {
   color: var(--forty-color);
 }
 
-/* Cerrar sesión */
+/* Cerrar sesión 
 .logout {
   position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   text-decoration: none;
-  color: var(--tertiary-color);
   font-size: 13px;
   display: inline-flex; 
   align-items: center;
   white-space: nowrap; 
   gap: 8px;
+  color: var(--color-primario);
 }
 
 
 
 .logout i {
   font-size: 13px;
-}
+}*/
 
 
 /* ----------------------------- */
 
 /* Contenedor derecho */
 .container-rigth {
+  text-align: center;
   width: 100%;
   max-height: calc(
     100vh - 70px
@@ -150,6 +151,9 @@ h2 {
 }
 
 .container-user {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   border: 2px solid var(--color-primario);
   padding: 10px;
   width: 100%;
@@ -157,14 +161,30 @@ h2 {
   margin-bottom: 20px;
 }
 
-.container-rigth input {
-  width: 90%;
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
+
+/*.container-rigth input {
+  width: 90%;
+}*/
 
 .container-user .circle {
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.pic{
+  border: 3px solid var(--color-primario);
+  width: 87px;
+  height: 87px;
+  border-radius: 80%;
   margin-bottom: 10px;
 }
 
@@ -197,4 +217,199 @@ form {
 
 .btnCreateUser:hover {
   transform: rotate(360deg);
+  background-color: var(--second-color);
 }
+
+
+
+.logout{
+  color: var(--color-primario);
+}
+
+
+.logout:hover{
+  color: var(--second-color);
+}
+
+
+
+.buscador {
+  background-color: var(--forty-color);
+  border: 2px solid var(--color-primario);
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;  
+  color: var(--tertiary-color);  
+  appearance: none;  
+  cursor: pointer;  
+  width: 500px;  
+  height: 30px;
+  position: relative;
+}
+
+
+.btnFiltrar {
+  background-color: var(--color-primario);
+  padding: 5px 5px;
+  border-radius: 12px;
+  border: none;
+  font-size: 14px;  
+  color: var(--forty-color);  
+  appearance: none;  
+  cursor: pointer;  
+  width: 130px;  
+  height: 30px;
+}
+
+.btnFiltrar:hover{
+  background-color: var(--second-color);
+}
+
+
+.user-imagen{
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-texto{
+  width: 75%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+}
+
+.texto-nombre{
+  font-size: 30px;
+}
+.texto-ciclo{
+  font-size: 17px;
+}
+
+.user-botones{
+  width: 9%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn{
+  background-color: white;
+  border: 0px;
+  margin-left: 20px;
+}
+.btn-delete{
+  background-color: white;
+  border: 0px;
+  margin-left: 20px;
+}
+
+/*Botón de editar*/
+.boton-icono-edit {
+  width: 20px;  
+  height: 20px;
+}
+
+.edit-hover{
+  display: none;
+  width: 20px;  
+  height: 20px;
+}
+
+.btn:hover .edit-hover {
+  display: inline-block;
+}
+.btn:hover .boton-icono-edit {
+  display: none;
+}
+
+
+/*Boton de borrar*/
+.boton-icono-delete{
+  width: 20px;  
+  height: 20px;
+}
+
+.delete-hover{
+  display: none;
+  width: 20px;  
+  height: 20px;
+}
+
+.btn-delete:hover .delete-hover {
+  display: inline-block;
+}
+.btn-delete:hover .boton-icono-delete {
+  display: none;
+}
+
+.user-editar{
+  width: 100%;
+  display: flex;
+  /*align-items: center;
+  justify-content: center;*/
+}
+
+
+.inputs-form {
+  background-color: var(--forty-color);
+  border: 2px solid var(--color-primario);
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;  
+  color: var(--tertiary-color);  
+  appearance: none;  
+  cursor: pointer;  
+  width: 300px;  
+  height: 30px;
+  position: relative;
+  margin-right: auto;
+}
+
+.inputs-form-add {
+  background-color: var(--forty-color);
+  border: 2px solid var(--color-primario);
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;  
+  color: var(--tertiary-color);  
+  appearance: none;  
+  cursor: pointer;  
+  width: 350px;  
+  height: 30px;
+  position: relative;
+  margin: 20px;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.btnActualizar {
+  background-color: var(--color-primario);
+  padding: 5px 10px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;  
+  color: var(--forty-color);  
+  appearance: none;  
+  cursor: pointer;  
+  width: 140px;  
+  height: 40px;
+}
+
+.btnActualizar:hover {
+  background-color: var(--second-color);
+}
+
+
+
+

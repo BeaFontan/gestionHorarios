@@ -27,7 +27,9 @@ if (!isset($_SESSION['user'])) {
     <div class="container">
         <!-- Contenedor izquierdo -->
         <div class="container-left">
-            <div class="circle"></div>
+            <div class="circle">
+                <img src="/images/user.png" class="pic" alt="">
+            </div>
             <h3>Nombre Apellidos</h3>
             <p>Administrador</p>
 
@@ -37,6 +39,10 @@ if (!isset($_SESSION['user'])) {
                 <li><a href="#">MODULOS</a></li>
                 <li><a href="#">HORARIOS</a></li>
             </ul>
+
+            <br>
+            <a href="../functions/user/close_session.php" class="logout">
+                <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b></a>
         </div>
 
         <!-- Contenedor derecho -->
@@ -47,17 +53,29 @@ if (!isset($_SESSION['user'])) {
             }
         ?>
         <div class="container-rigth">
-        <form action="../functions/administrator/function_create_user.php" method="post">
-            <input type="text" name="txtName" placeholder="Nome" required maxlength="50">
-            <input type="text" name="txtFirstName" placeholder="Apelido 1" required maxlength="50">
-            <input type="text" name="txtSecondName" placeholder="Apelido 2" maxlength="50">
-            <input type="email" name="txtEmail" placeholder="Email" required maxlength="100">
-            <input type="tel" name="txtPhone" placeholder="Teléfono" pattern="\d{15}" maxlength="15" required>
-            <input type="text" name="txtDNI" placeholder="DNI" required maxlength="9">
+        <div>
+            <form action="../functions/administrator/function_create_user.php" method="post">
+                <br><br>
+                <div class='user-imagen'>
+                    <img src='/images/user.png' class='pic' alt='Usuario img'>
+                    <p style="font-size: 90px; margin-left: 10px;">+</p>
+                </div>
+                <div class="row">
+                    <input type="text" class='inputs-form-add' name="txtName" placeholder="Nome" required maxlength="50">
+                    <input type="text" class='inputs-form-add' name="txtFirstName" placeholder="Apelido 1" required maxlength="50">
+                    <input type="text" class='inputs-form-add' name="txtSecondName" placeholder="Apelido 2" maxlength="50">
+                </div>
+                <div class="row">
+                    <input type="email" class='inputs-form-add' name="txtEmail" placeholder="Email" required maxlength="100">
+                    <input type="tel" class='inputs-form-add' name="txtPhone" placeholder="Teléfono" pattern="\d{15}" maxlength="15" required>
+                    <input type="text" class='inputs-form-add' name="txtDNI" placeholder="DNI" required maxlength="9">
+                </div>
 
-            <button type="submit" name="btnCreateUser" id="btnCreateUser">Guardar</button>
-        </form>
- 
+                <div style='text-align: right; width: 100%; margin-top: 30px; margin-bottom: 30px;'>
+                    <button type='submit' class='btnActualizar' name='btnSave'><b>GUARDAR</b></button>
+                </div>
+            </form>
+        </div>
         </div>
     </div>
 </body>

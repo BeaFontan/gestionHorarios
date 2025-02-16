@@ -107,6 +107,7 @@ h2 {
 
 /* Contenedor derecho */
 .container-rigth {
+  text-align: center;
   width: 100%;
   max-height: calc(
     100vh - 70px
@@ -180,15 +181,6 @@ form {
   height: 30px;
   position: relative;
 }
-.dropdownCiclo::after {
-  content: '▼'; 
-  font-size: 14px;  
-  color: var(--tertiary-color); 
-  position: absolute; 
-  right: 10px; 
-  top: 50%;
-  transform: translateY(-50%);
-}
 
 
 
@@ -201,13 +193,13 @@ form {
   color: var(--tertiary-color);  
   appearance: none;  
   cursor: pointer;  
-  width: 135px;  
+  width: 160px;  
   height: 30px;
   position: relative;
 }
 .dropdownModulo::after {
   content: '▼'; 
-  font-size: 14px;  
+  font-size: 0.9em;  
   color: var(--tertiary-color); 
   position: absolute; 
   right: 10px; 
@@ -242,7 +234,7 @@ table, th, td{
   font-size: 14px;  
   color: var(--tertiary-color);  
   appearance: none; 
-  width: 150px;  
+  width: 160px;  
   height: 40px;
 }
 
@@ -255,7 +247,7 @@ table, th, td{
   font-size: 14px; 
   color: var(--forty-color); 
   appearance: none;  
-  width: 150px;  
+  width: 160px;  
   height: 30px;
 }
 /* Estilo base para el blanc space del título de los días de la semana */
@@ -285,7 +277,32 @@ table, th, td{
   height: 40px;
 }
 
+/* Estilo base para el botón de buscar*/
+.btnBuscar {
+  background-color: var(--color-primario);
+  padding: 5px 5px;
+  border-radius: 12px;
+  border: none;
+  font-size: 14px;  
+  color: var(--forty-color);  
+  appearance: none;  
+  cursor: pointer;  
+  width: 130px;  
+  height: 30px;
+}
+
+.btnBuscar:hover{
+  background-color: var(--second-color);
+}
+
 .btnGuardar:active {
   background-color: var(--second-color);
 }
 
+.logout{
+  color: var(--color-primario);
+}
+
+.logout:hover{
+  color: var(--second-color);
+}
