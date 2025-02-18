@@ -8,24 +8,27 @@ if (!isset($_SESSION['user'])) {
 
 include('../connection.php');
 
+
 if (isset($_POST["btnSave"])) {
 
-    $editModules = $_POST['id'];
-    $module_code = $_POST['module_code'];
-    $name = $_POST['name'];
+    $idModuleToEdit = $_POST['id'];
+    $professor_id = $_POST["selectProfessor"];
+    $module_code = $_POST['txtModule_code'];
+    $name = $_POST['txtModule_name'];
     $selectCourse = $_POST['selectCourse'];
-    $sessions_number = $_POST['sessions_number'];
+    $sessions_number = $_POST['txtSessions_number'];
 
     try {
 
-        $query = $pdo->prepare("UPDATE `modules` SET `professor_id`=?,`vocational_training_id`=?,`module_code`=?,`name`='?,`course`=?,`sessions_number`=? WHERE id LIKE id");
-        $query->execute([$professor_id, $vocational_training_id, $module_code, $name, $course, $sessions_number, editModules]);
+        $query = $pdo->prepare("UPDATE `modules` SET `professor_id`=?,`module_code`=?,`name`=?,`course`=?,`sessions_number`=? WHERE id like ?");
+        $query->execute([$professor_id, $module_code, $name, $selectCourse, $sessions_number, $idModuleToEdit]);
 
         $_SESSION['mensaxe'] = "Módulo actualizado correctamente";
 
         header('Location: ../../pages/administrator_modules.php');
         exit();
     } catch (PDOException $e) {
+        echo "$e";
         $_SESSION['mensaxe'] = "Erro na actuación de datos" . $e->getMessage();
     }
 }

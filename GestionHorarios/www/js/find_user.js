@@ -87,14 +87,42 @@ document.getElementById("buscar").addEventListener("input", function(event) {
             let div = document.createElement("div");
             div.classList.add("container-user");
             div.innerHTML = `
-                        <div class="circle"></div>
-                        <p>${item.name} ${item.first_name}</p>
-                        <p>ciclo</p>
-                        <form>
-                            <button name="btnUpdate">editar</button>
-                            <button name="btnDelete">borrar</button>
-                        </form>
-                    `;
+            <div class='row'>
+                    <div class='user-imagen'>
+                        <img src='/images/user.png' class='pic' alt='Usuario img'>
+                    </div>
+                    <div class='user-texto'>
+                        <p class='texto-nombre'>${item.name} ${item.first_name} </p>
+                        <p class='texto-ciclo'>ciclo</p>
+                    </div>
+
+            <div class='user-botones'>
+                <form method='post'>
+                    <input type='hidden' name='id' value='${item.id}'>
+                    <input type='hidden' name='name' value='${item.name}'>
+                    <input type='hidden' name='first_name' value='${item.first_name}'>
+                    <input type='hidden' name='second_name' value='${item.second_name}'>
+                    <input type='hidden' name='email' value='${item.email}'>
+                    <input type='hidden' name='telephone' value='${item.telephone}'>
+                    <input type='hidden' name='dni' value='${item.dni}'>
+                
+                    
+                    <button type='submit' class='btn' name='btnUpdate'>
+                        <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
+                        <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
+                    </button>
+                </form>
+                <form method='post' action='../functions/administrator/function_delete_user.php'>
+                    <input type='hidden' name='id' value='${item.id}'>
+                    <button type='submit' class='btn-delete' name='btnDelete'>    
+                        <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
+                        <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
+                    </button>
+                </form>
+            </div>
+        </div>
+        </div>
+        `;
             resultadosDiv.appendChild(div); // Agregamos el div con el resultado
           });
         } else {

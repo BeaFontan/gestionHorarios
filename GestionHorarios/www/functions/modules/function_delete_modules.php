@@ -13,14 +13,14 @@ if (isset($_POST["btnDelete"])) {
     $id = $_POST["id"];
 
     try {
-        $query = $pdo->prepare("DELETE FROM `vocational_trainings` WHERE id LIKE ?");
+        $query = $pdo->prepare("DELETE FROM `modules` WHERE id LIKE ?");
         $query->execute([$id]);
 
-        $_SESSION['mensaxe'] = "Ciclo eliminado correctamente";
+        $_SESSION['mensaxe'] = "Módulo eliminado correctamente";
 
-        header('Location: ../../pages/administrator_vocational_trainings.php');
+        header('Location: ../../pages/administrator_modules.php');
         exit();
     } catch (PDOException $e) {
-        $_SESSION['mensaxe'] = "Erro na eliminación de datos" . $e->getMessage();
+        $_SESSION['mensaxe'] = "Erro na eliminación de módulo" . $e->getMessage();
     }
 }

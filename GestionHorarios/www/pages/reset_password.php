@@ -15,11 +15,11 @@
     </h1>
 
     <div class="circle"></div>
-    <?php
-    if (isset($_GET['message'])) {
-        echo '<p style="color: red;">' . $_GET['message'] . '</p>';
-    }
-    ?>
+    <?php if (isset($_SESSION['mensaxe'])): ?>
+        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
+        unset($_SESSION['mensaxe']); ?></p>
+    <?php endif; ?>
+
 
 
     <form action="../functions/user/function_reset_password.php" method="post">

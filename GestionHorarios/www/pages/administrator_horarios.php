@@ -63,30 +63,31 @@ if (isset($_POST["btnGuardar"])) {
 </head>
 
 <body>
-    <h2>Xestión de Horarios</h2>
-
     <?php if (isset($_SESSION['mensaxe'])): ?>
-        <p style="color:red;"><?php echo $_SESSION['mensaxe'];
-                                unset($_SESSION['mensaxe']); ?></p>
+        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
+        unset($_SESSION['mensaxe']); ?></p>
     <?php endif; ?>
+
+    <h2>Xestión de Horarios</h2>
 
     <div class="container">
         <!-- Contenedor izquierdo -->
-   <!-- Contenedor izquierdo -->
-        <div class="container-left">
-                <div class="circle"></div>
-                <h3><?php echo $_SESSION['user']['name']?></h3>
-                <p><?php echo $_SESSION['user']['rol']?></p>
+        <!-- No puedo poner el include, no me aplica el estilo de la foto -->
 
-                <ul>
-                    <li><a href="administrator_panel.php">ALUMNOS</a></li>
-                    <li><a href="administrator_vocational_trainings.php">CICLOS</a></li>
-                    <li><a href="administrator_modules.php">MODULOS</a></li>
-                    <li><a href="administrator_horarios.php">HORARIOS</a></li>
-                </ul>
-                <br>
-                <a href="../functions/user/close_session.php" class="logout">
-                    <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión </b></a>
+        <div class="container-left">
+            <div class="circle"></div>
+            <h3><?php echo $_SESSION['user']['name'] ?></h3>
+            <p><?php echo $_SESSION['user']['rol'] ?></p>
+
+            <ul>
+                <li><a href="administrator_panel.php">ALUMNOS</a></li>
+                <li><a href="administrator_vocational_trainings.php">CICLOS</a></li>
+                <li><a href="administrator_modules.php">MODULOS</a></li>
+                <li><a href="administrator_horarios.php">HORARIOS</a></li>
+            </ul>
+            <br>
+            <a href="../functions/user/close_session.php" class="logout">
+                <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión </b></a>
         </div>
 
         <!-- Contenedor derecho -->
@@ -106,7 +107,7 @@ if (isset($_POST["btnGuardar"])) {
                     <button class="btnBuscar" type="submit" name="btnMostrarCiclos">Mostrar módulos</button>
                 </div>
             </form>
-        
+
 
             <!-- Tabla de horarios -->
             <form method="post">
@@ -124,10 +125,17 @@ if (isset($_POST["btnGuardar"])) {
                         <?php
                         // Definir horas y sus IDs correspondientes (session_id)
                         $sessions = [
-                            1 => "8:45 - 9:35", 2 => "9:35 - 10:25", 3 => "10:25 - 11:15", 
-                            4 => "11:15 - 12:05", 5 => "12:05 - 12:55", 6 => "12:55 - 13:45", 
-                            7 => "13:45 - 14:35", 8 => "16:00 - 16:50", 9 => "16:50 - 17:40", 
-                            10 => "17:40 - 18:30", 11 => "18:30 - 19:20"
+                            1 => "8:45 - 9:35",
+                            2 => "9:35 - 10:25",
+                            3 => "10:25 - 11:15",
+                            4 => "11:15 - 12:05",
+                            5 => "12:05 - 12:55",
+                            6 => "12:55 - 13:45",
+                            7 => "13:45 - 14:35",
+                            8 => "16:00 - 16:50",
+                            9 => "16:50 - 17:40",
+                            10 => "17:40 - 18:30",
+                            11 => "18:30 - 19:20"
                         ];
 
                         foreach ($sessions as $sessionId => $hora) {
@@ -160,65 +168,6 @@ if (isset($_POST["btnGuardar"])) {
                 </div>
             </form>
         </div>
-
-        <!-- Tabla de horarios -->
-        <form method="post">
-            <div class="timetable">
-                <table>
-                    <tr>
-                        <th class="cabeceraSemanaBlanc"></th>
-                        <th class="cabeceraSemana">LUNES</th>
-                        <th class="cabeceraSemana">MARTES</th>
-                        <th class="cabeceraSemana">MIÉRCOLES</th>
-                        <th class="cabeceraSemana">JUEVES</th>
-                        <th class="cabeceraSemana">VIERNES</th>
-                    </tr>
-
-                    <?php
-                    // Definir horas y sus IDs correspondientes (session_id)
-                    $sessions = [
-                        1 => "8:45 - 9:35",
-                        2 => "9:35 - 10:25",
-                        3 => "10:25 - 11:15",
-                        4 => "11:15 - 12:05",
-                        5 => "12:05 - 12:55",
-                        6 => "12:55 - 13:45",
-                        7 => "13:45 - 14:35",
-                        8 => "16:00 - 16:50",
-                        9 => "16:50 - 17:40",
-                        10 => "17:40 - 18:30",
-                        11 => "18:30 - 19:20"
-                    ];
-
-                    foreach ($sessions as $sessionId => $hora) {
-                        echo "<tr>";
-                        echo "<td class='horas'><b>$hora</b></td>";
-
-                        for ($i = 0; $i < 5; $i++) { // 5 columnas (Lunes a Viernes)
-                            echo "<td class='dropdownModulo'>";
-                            echo "<select name='modules[$sessionId][$i]' class='dropdownModulo'>";
-                            echo "<option value=''>Selecciona Módulo</option>";
-
-                            if (!empty($arrayModules)) {
-                                foreach ($arrayModules as $module) {
-                                    echo "<option value='" . htmlspecialchars($module['id']) . "'>" . htmlspecialchars($module['name']) . "</option>";
-                                }
-                            } else {
-                                echo "<option value=''>No hay módulos</option>";
-                            }
-                            echo "</select>";
-                            echo "</td>";
-                        }
-                        echo "</tr>";
-                    }
-                    ?>
-                </table>
-
-                <div style="text-align: right; width: 100%; margin-top: 30px; margin-bottom: 30px;">
-                    <button class="btnGuardar" type="submit" name="btnGuardar"><b>GUARDAR</b></button>
-                </div>
-            </div>
-        </form>
     </div>
 </body>
 

@@ -12,6 +12,6 @@ function loadModules($pdo, $vocational_training)
             echo "";
         }
     } catch (PDOException $e) {
-        $_SESSION['mensaxe'] = "Erro na eliminación de datos" . $e->getMessage();
+        $_SESSION['mensaxe'] = "Erro na cargando módulos" . $e->getMessage();
     }
 }
