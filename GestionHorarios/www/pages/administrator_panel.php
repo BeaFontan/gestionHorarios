@@ -17,7 +17,7 @@ $firstName = "";
 $secondName = "";
 
 // Si se ha presionado el botón "Editar"
-if ( isset($_POST["btnUpdate"])) {
+if (isset($_POST["btnUpdate"])) {
     $editUserId = $_POST["id"];
     $name = $_POST["name"];
     $firstName = $_POST["first_name"];
@@ -30,6 +30,7 @@ if ( isset($_POST["btnUpdate"])) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,14 +38,15 @@ if ( isset($_POST["btnUpdate"])) {
     <link rel="stylesheet" href="../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <h2>Cambiar nombre con PHP</h2>
+    <h2>Alumnos</h2>
     <div class="container">
 
         <?php
-            if (isset($_SESSION['mensaxe'])) {
-                "<p>".$_SESSION['mensaxe']."</p>";
-            }
+        if (isset($_SESSION['mensaxe'])) {
+            "<p>" . $_SESSION['mensaxe'] . "</p>";
+        }
         ?>
         <!-- Contenedor izquierdo -->
         <div class="container-left">
@@ -75,27 +77,27 @@ if ( isset($_POST["btnUpdate"])) {
                 <button class="btnFiltrar" type="button" onclick="toggleFilters()"><i class="fa fa-filter" style="margin-right: 5px;" aria-hidden="true"></i> Filtros</button>
             </div>
 
-<!-- Contenedor de los filtros, inicialmente oculto -->
-<div id="filters" style="display:none;">
-    <form id="filter-form">
-        <label for="ciclo">Selecciona Ciclo</label>
-        <select name="ciclo" id="ciclo" onchange="loadModulos(this.value)">
-            <option value="">Selecciona Ciclo</option>
-            <?php
-            if ($arrayVocationalTrainings) {
-                foreach ($arrayVocationalTrainings as $ciclo) {
-                    echo "<option value='".$ciclo['vocational_training_id']."'>".$ciclo["course_name"]."</option>";
-                }
-            }
-            ?>
-        </select>
+            <!-- Contenedor de los filtros, inicialmente oculto -->
+            <div id="filters" style="display:none;">
+                <form id="filter-form">
+                    <label for="ciclo">Selecciona Ciclo</label>
+                    <select name="ciclo" id="ciclo" onchange="loadModulos(this.value)">
+                        <option value="">Selecciona Ciclo</option>
+                        <?php
+                        if ($arrayVocationalTrainings) {
+                            foreach ($arrayVocationalTrainings as $ciclo) {
+                                echo "<option value='" . $ciclo['vocational_training_id'] . "'>" . $ciclo["course_name"] . "</option>";
+                            }
+                        }
+                        ?>
+                    </select>
 
-        <label for="modulo">Selecciona Módulo</label>
-        <select name="modulo" id="modulo">
-            <option value="">Selecciona Módulo</option>
-        </select>
-    </form>
-</div>
+                    <label for="modulo">Selecciona Módulo</label>
+                    <select name="modulo" id="modulo">
+                        <option value="">Selecciona Módulo</option>
+                    </select>
+                </form>
+            </div>
             <div class="mostrar-users">
                 <?php
                 while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -191,7 +193,7 @@ if ( isset($_POST["btnUpdate"])) {
                         </form>
                     </div>";*/
 
-                    echo "</div>"; 
+                    echo "</div>";
                 }
                 ?>
             </div>
@@ -205,4 +207,5 @@ if ( isset($_POST["btnUpdate"])) {
     <script src="../js/find_user.js"></script>
 
 </body>
+
 </html>

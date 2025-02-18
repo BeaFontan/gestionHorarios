@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
-    exit(); 
+    exit();
 }
 ?>
 
@@ -48,9 +48,9 @@ if (!isset($_SESSION['user'])) {
         <!-- Contenedor derecho -->
 
         <?php
-            if (isset($_SESSION['mensaxe'])) {
-                "<p>".$_SESSION['mensaxe']."</p>";
-            }
+        if (isset($_SESSION['mensaxe'])) {
+            "<p>" . $_SESSION['mensaxe'] . "</p>";
+        }
         ?>
         <div class="container-rigth">
         <div>

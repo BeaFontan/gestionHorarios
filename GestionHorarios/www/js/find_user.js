@@ -60,16 +60,50 @@ document.getElementById("buscar").addEventListener("input", function(event) {
                     </div>
                     </div>
                     `;
-                    resultadosDiv.appendChild(div); // Agregamos el div con el resultado
-                });
-            } else {
-                // Si no se encuentran resultados, mostramos un mensaje
-                resultadosDiv.innerHTML = "<p>No se encontraron resultados.</p>";
-            }
-        })
-        .catch(error => console.error('Error al obtener los resultados:', error));
-    } else {
-        // Si el campo de búsqueda está vacío, limpiamos los resultados
-        document.querySelector(".mostrar-users").innerHTML = "";
-    }
-  });
+            resultadosDiv.appendChild(div); // Agregamos el div con el resultado
+          });
+        } else {
+          // Si no se encuentran resultados, mostramos un mensaje
+          resultadosDiv.innerHTML = "<p>No se encontraron resultados.</p>";
+        }
+      })
+      .catch((error) =>
+        console.error("Error al obtener los resultados:", error)
+      );
+  } else {
+    // Si el campo de búsqueda está vacío, realizamos una solicitud para obtener todos los usuarios
+    fetch("../functions/administrator/function_panel_administrator.php", {
+      method: "POST",
+      body: new FormData(), // Enviamos un FormData vacío para obtener todos los registros
+    })
+      .then((response) => response.json()) // Esperamos una respuesta JSON
+      .then((data) => {
+        let resultadosDiv = document.querySelector(".mostrar-users"); // Seleccionamos el contenedor de resultados
+        resultadosDiv.innerHTML = ""; // Limpiamos los resultados anteriores
+
+        if (data.length > 0) {
+          // Si se encontraron resultados, los mostramos
+          data.forEach((item) => {
+            let div = document.createElement("div");
+            div.classList.add("container-user");
+            div.innerHTML = `
+                        <div class="circle"></div>
+                        <p>${item.name} ${item.first_name}</p>
+                        <p>ciclo</p>
+                        <form>
+                            <button name="btnUpdate">editar</button>
+                            <button name="btnDelete">borrar</button>
+                        </form>
+                    `;
+            resultadosDiv.appendChild(div); // Agregamos el div con el resultado
+          });
+        } else {
+          // Si no se encuentran resultados, mostramos un mensaje
+          resultadosDiv.innerHTML = "<p>No se encontraron resultados.</p>";
+        }
+      })
+      .catch((error) =>
+        console.error("Error al obtener los resultados:", error)
+      );
+  }
+});

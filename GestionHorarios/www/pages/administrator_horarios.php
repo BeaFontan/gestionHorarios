@@ -31,7 +31,7 @@ if (isset($_POST["btnGuardar"])) {
         foreach ($_POST['modules'] as $sessionId => $dayModules) {
             foreach ($dayModules as $dayIndex => $moduleId) {
                 if (!empty($moduleId) && is_numeric($moduleId) && is_numeric($sessionId)) {
-                    
+
                     // Verificar si ya existe la combinación antes de insertar
                     $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM modules_sessions WHERE module_id = ? AND session_id = ?");
                     $stmtCheck->execute([$moduleId, $sessionId]);
@@ -53,6 +53,7 @@ if (isset($_POST["btnGuardar"])) {
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,11 +61,13 @@ if (isset($_POST["btnGuardar"])) {
     <link rel="stylesheet" href="../pages/css/administrator_horarios.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-    <h2>Gestión de Horarios</h2>
+    <h2>Xestión de Horarios</h2>
 
     <?php if (isset($_SESSION['mensaxe'])): ?>
-        <p style="color:red;"><?php echo $_SESSION['mensaxe']; unset($_SESSION['mensaxe']); ?></p>
+        <p style="color:red;"><?php echo $_SESSION['mensaxe'];
+                                unset($_SESSION['mensaxe']); ?></p>
     <?php endif; ?>
 
     <div class="container">
@@ -159,4 +162,5 @@ if (isset($_POST["btnGuardar"])) {
         </div>
     </div>
 </body>
+
 </html>

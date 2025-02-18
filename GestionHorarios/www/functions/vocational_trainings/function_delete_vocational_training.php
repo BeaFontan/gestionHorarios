@@ -13,12 +13,12 @@ if (isset($_POST["btnDelete"])) {
     $id = $_POST["id"];
 
     try {
-        $query = $pdo->prepare("DELETE FROM `users` WHERE id LIKE ?");
+        $query = $pdo->prepare("DELETE FROM `vocational_trainings` WHERE id LIKE ?");
         $query->execute([$id]);
 
-        $_SESSION['mensaxe'] = "Usuario eliminado correctamente";
+        $_SESSION['mensaxe'] = "Ciclo eliminado correctamente";
 
-        header('Location: ../../pages/administrator_panel.php');
+        header('Location: ../../pages/administrator_vocational_trainings.php');
         exit();
     } catch (PDOException $e) {
         $_SESSION['mensaxe'] = "Erro na eliminación de datos" . $e->getMessage();

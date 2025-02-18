@@ -3,7 +3,7 @@ session_start();
 
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
-    exit(); 
+    exit();
 }
 
 include('../connection.php');
@@ -23,16 +23,12 @@ if (isset($_POST["btnSave"])) {
                                 SET `email`=?,`name`=?,`first_name`=?,`second_name`=?,`telephone`=?,`dni`=?
                                 WHERE id like ?");
         $query->execute([$email, $name, $firstName, $secondName, $phone, $dni, $id]);
-       
+
         $_SESSION['mensaxe'] = "Usuario actualizado correctamente";
 
-         header('Location: ../../pages/administrator_panel.php');
-         exit();
-
+        header('Location: ../../pages/administrator_panel.php');
+        exit();
     } catch (PDOException $e) {
         $_SESSION['mensaxe'] = "Erro na insercción de datos" . $e->getMessage();
     }
 }
-
-?>
-

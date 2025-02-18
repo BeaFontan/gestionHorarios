@@ -3,10 +3,10 @@ session_start();
 
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
-    exit(); 
+    exit();
 }
 
-include('../connection.php'); 
+include('../connection.php');
 
 if (isset($_POST["btnCreateUser"])) {
     $name = $_POST["txtName"];
@@ -27,12 +27,10 @@ if (isset($_POST["btnCreateUser"])) {
 
         $_SESSION['mensaxe'] = "Usuario insertado correctamente";
         header('Location: ../../pages/administrator_panel.php');
-        exit(); 
-
+        exit();
     } catch (PDOException $e) {
-       $_SESSION['mensaxe'] = "Error en la inserción de datos: " . $e->getMessage();
-       header('Location: ../../pages/administrator_panel.php');
-       exit(); 
+        $_SESSION['mensaxe'] = "Error en la inserción de datos: " . $e->getMessage();
+        header('Location: ../../pages/administrator_panel.php');
+        exit();
     }
 }
-?>
