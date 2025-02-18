@@ -49,7 +49,9 @@ if (isset($_POST["btnUpdate"])) {
         ?>
         <!-- Contenedor izquierdo -->
         <div class="container-left">
-            <div class="circle"></div>
+            <div class="circle">
+                <img src="/images/user.png" class="pic" alt="">
+            </div>
             <h3><?php echo $_SESSION['user']['name'] ?></h3>
             <p><?php echo $_SESSION['user']['rol'] ?></p>
 
@@ -59,18 +61,21 @@ if (isset($_POST["btnUpdate"])) {
                 <li><a href="administrator_modules.php">MODULOS</a></li>
                 <li><a href="administrator_horarios.php">HORARIOS</a></li>
             </ul>
+            <br>
             <a href="../functions/user/close_session.php" class="logout">
-                <i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b></a>
         </div>
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
-            <form method="post" action="../functions/administrator/function_panel_administrator.php" id="search-form">
-                <input type="text" id="buscar" placeholder="Buscar alumno" name="txtFindVocationalTraining">
-            </form>
+            <div style="text-align: center; margin-bottom: 20px; width: 100%;">
+                <form method="post" action="../functions/administrator/function_panel_administrator.php" id="search-form">
+                    <input class="buscador" type="text" id="buscar" placeholder="Buscar ciclo" name="txtFindVocationalTraining">
+                </form>
 
-            <!-- Botón de Filtros -->
-            <button type="button" onclick="toggleFilters()">Filtros</button>
+                <!-- Botón de Filtros -->
+                <button class="btnFiltrar" type="button" onclick="toggleFilters()"><i class="fa fa-filter" style="margin-right: 5px;" aria-hidden="true"></i> Filtros</button>
+            </div>
 
             <!-- Contenedor de los filtros, inicialmente oculto -->
             <div id="filters" style="display:none;">
@@ -107,52 +112,85 @@ if (isset($_POST["btnUpdate"])) {
                     $modality = $fila['modality'];
                     $type = $fila['type'];
 
-
-                    echo "<div class='container-user'>";
-                    echo "<div class='circle'></div>";
-                    echo "<p>$name</p>";
-                    echo "<p>$modality</p>";
+                    echo "<div class='container-user'>
+                            <div class='row'>
+                                <div class='user-imagen'>
+                                    <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                                </div>
+                                <div class='user-texto'>
+                                    <p class='texto-nombre'>$name </p>
+                                    <p class='texto-ciclo'>$modality</p>
+                                </div>";
 
                     if ($editVocationalTrainingId == $id) {
                         echo "
-                        <form action='../functions/vocational_trainings/function_update_vocational_trainings.php' method='post'>
-                            <input type='hidden' name='id' value='$id'>
-                            <input type='text' name='txtName' value='$name' required><br>
-                            <input type='text' name='txtCourse_code' value='$course_code' placeholder='Código ciclo' required><br>
-                            <input type='text' name='txtAcronym' value='$acronym' placeholder='Siglas' ><br>
-                            <input type='text' name='txtCourse_name' value='$course_name' placeholder='Nome' ><br>
-                            <input type='text' name='txtModality' value='$modality' placeholder='Modalidade' ><br>
-                            <input type='text' name='txtType' value='$type' placeholder='Tipo' required><br>
+                                <div class='user-botones'>
+                                    <form method='post' action='../functions/administrator/function_delete_user.php'>
+                                        <input type='hidden' name='id' value='$id'>
+                                        <button type='submit' class='btn-delete' name='btnDelete'>    
+                                            <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
+                                            <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        <div class='user-editar'>
+                            <form action='../functions/vocational_trainings/function_update_vocational_trainings.php' method='post'>
+                                <div class='row' style='margin-left: 50px;'>
+                                    <input class='inputs-form' type='hidden' name='id' value='$id'>
+                                    <input class='inputs-form' type='text' name='txtName' value='$name' required><br>
+                                    <input class='inputs-form' type='text' name='txtCourse_code' value='$course_code' placeholder='Código ciclo' required><br>
+                                    <input class='inputs-form' type='text' name='txtAcronym' value='$acronym' placeholder='Siglas' ><br>
+                                </div>
+                                <div class='row' style='margin-left: 50px;'>
+                                    <input class='inputs-form' type='text' name='txtCourse_name' value='$course_name' placeholder='Nome' ><br>
+                                    <input class='inputs-form' type='text' name='txtModality' value='$modality' placeholder='Modalidade' ><br>
+                                    <input class='inputs-form' type='text' name='txtType' value='$type' placeholder='Tipo' required><br>
+                                </div>
 
-                            <button type='submit' name='btnSave'>Actualizar</button>
-                        </form>
+                                <div style='text-align: right; width: 100%; margin-top: 30px; margin-bottom: 30px;'>
+                                    <button type='submit' class='btnActualizar' name='btnSave'>Actualizar</button>
+                                </div>
+                            </form>
+                        </div>
                         ";
                     } else {
                         echo "
-                        <form method='post'>
-                            <input type='hidden' name='id' value='$id'>
-                            <input type='hidden' name='name' value='$name'>
-                            <input type='hidden' name='course_code' value='$course_code'>
-                            <input type='hidden' name='acronym' value='$acronym'>
-                            <input type='hidden' name='course_name' value='$course_name'>
-                            <input type='hidden' name='modality' value='$modality'>
-                            <input type='hidden' name='type' value='$type'>
-                        
-                            <button type='submit' name='btnUpdate'>
-                                <i class='fas fa-edit'></i> 
-                            </button>
-                        </form>
+                        <div class='user-botones'>
+                            <form method='post'>
+                                <input type='hidden' name='id' value='$id'>
+                                <input type='hidden' name='name' value='$name'>
+                                <input type='hidden' name='course_code' value='$course_code'>
+                                <input type='hidden' name='acronym' value='$acronym'>
+                                <input type='hidden' name='course_name' value='$course_name'>
+                                <input type='hidden' name='modality' value='$modality'>
+                                <input type='hidden' name='type' value='$type'>
+                            
+                                <button type='submit' class='btn' name='btnUpdate'>
+                                    <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
+                                    <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
+                                </button>
+                            </form>
+                            <form method='post' action='../functions/administrator/function_delete_user.php'>
+                                <input type='hidden' name='id' value='$id'>
+                                <button type='submit' class='btn-delete' name='btnDelete'>    
+                                    <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
+                                    <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
+                                </button>
+                            </form>
+                        </div>
+                        </div>
                         ";
                     }
 
                     // Botón "Borrar"
-                    echo "
+                    /*echo "
                     <form method='post' action='../functions/vocational_trainings/functiodelete_vocational_training.php'>
                         <input type='hidden' name='id' value='$id'>
                         <button type='submit' name='btnDelete'>    
                             <i class='fas fa-trash'></i> 
                         </button>
-                    </form>";
+                    </form>";*/
 
                     echo "</div>";
                 }

@@ -55,8 +55,9 @@ if (isset($_POST["btnUpdate"])) {
                 <li><a href="administrator_modules.php">MODULOS</a></li>
                 <li><a href="administrator_horarios.php">HORARIOS</a></li>
             </ul>
+            <br>
             <a href="../functions/user/close_session.php" class="logout">
-                <i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b></a>
         </div>
 
         <!-- Contenedor derecho -->

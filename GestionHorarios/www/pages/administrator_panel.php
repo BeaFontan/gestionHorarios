@@ -109,12 +109,12 @@ if (isset($_POST["btnUpdate"])) {
                     $dni = $fila['dni'];
                     $email = $fila['email'];
 
-                    echo "<div class='container-user'>";
-                    echo "  <div class='row'>
+                    echo "<div class='container-user'>
+                            <div class='row'>
                                 <div class='user-imagen'>
                                     <img src='/images/user.png' class='pic' alt='Usuario img'>
-                                </div>";
-                    echo "      <div class='user-texto'>
+                                </div>
+                              <div class='user-texto'>
                                     <p class='texto-nombre'>$name $firstName </p>
                                     <p class='texto-ciclo'>ciclo</p>
                                 </div>";

@@ -25,28 +25,39 @@ document.getElementById("buscar").addEventListener("input", function (event) {
             let div = document.createElement("div");
             div.classList.add("container-user");
             div.innerHTML = `
-                <div class="circle"></div>
-                <p>${item.course_name}</p> <!-- Aquí mostramos el nombre del curso -->
-                <p>${item.modality}</p> <!-- Mostramos la modalidad -->
-                <form method='post'>
-                  <input type='hidden' name='id' value='${item.id}'>
-                  <input type='hidden' name='name' value='${item.course_name}'>
-                  <input type='hidden' name='course_code' value='${item.course_code}'>
-                  <input type='hidden' name='acronym' value='${item.acronym}'>
-                  <input type='hidden' name='course_name' value='${item.course_name}'>
-                  <input type='hidden' name='modality' value='${item.modality}'>
-                  <input type='hidden' name='type' value='${item.type}'>
-                  
-                  <button type='submit' name='btnUpdate'>
-                    <i class='fas fa-edit'></i> 
-                  </button>
-                </form>
-                <form method='post' action='../functions/administrator/function_delete_user.php'>
-                  <input type='hidden' name='id' value='${item.id}'>
-                  <button type='submit' name='btnDelete'>
-                    <i class='fas fa-trash'></i> 
-                  </button>
-                </form>
+                <div class='row'>
+                  <div class='user-imagen'>
+                    <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                  </div>
+                  <div class='user-texto'>
+                    <p class='texto-nombre'>${item.course_name} ${item.modality} </p>
+                    <p class='texto-ciclo'>ciclo</p>
+                  </div>
+
+                  <div class='user-botones'>
+                    <form method='post'>
+                      <input type='hidden' name='id' value='${item.id}'>
+                      <input type='hidden' name='name' value='${item.course_name}'>
+                      <input type='hidden' name='course_code' value='${item.course_code}'>
+                      <input type='hidden' name='acronym' value='${item.acronym}'>
+                      <input type='hidden' name='course_name' value='${item.course_name}'>
+                      <input type='hidden' name='modality' value='${item.modality}'>
+                      <input type='hidden' name='type' value='${item.type}'>
+                          
+                      <button type='submit' class='btn' name='btnUpdate'>
+                        <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
+                        <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
+                      </button>
+                    </form>
+                    <form method='post' action='../functions/administrator/function_delete_user.php'>
+                      <input type='hidden' name='id' value='${item.id}'>
+                        <button type='submit' class='btn-delete' name='btnDelete'>    
+                          <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
+                          <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
+                        </button>
+                    </form>
+                  </div>
+                </div>
               `;
             resultadosDiv.appendChild(div); // Agregamos el div con el resultado
           });
@@ -75,28 +86,39 @@ document.getElementById("buscar").addEventListener("input", function (event) {
             let div = document.createElement("div");
             div.classList.add("container-user");
             div.innerHTML = `
-                <div class="circle"></div>
-                <p>${item.course_name}</p> <!-- Aquí mostramos el nombre del curso -->
-                <p>${item.modality}</p> <!-- Mostramos la modalidad -->
-                <form method='post'>
-                  <input type='hidden' name='id' value='${item.id}'>
-                  <input type='hidden' name='name' value='${item.course_name}'>
-                  <input type='hidden' name='course_code' value='${item.course_code}'>
-                  <input type='hidden' name='acronym' value='${item.acronym}'>
-                  <input type='hidden' name='course_name' value='${item.course_name}'>
-                  <input type='hidden' name='modality' value='${item.modality}'>
-                  <input type='hidden' name='type' value='${item.type}'>
-                  
-                  <button type='submit' name='btnUpdate'>
-                    <i class='fas fa-edit'></i> 
-                  </button>
-                </form>
-                <form method='post' action='../functions/administrator/function_delete_user.php'>
-                  <input type='hidden' name='id' value='${item.id}'>
-                  <button type='submit' name='btnDelete'>
-                    <i class='fas fa-trash'></i> 
-                  </button>
-                </form>
+                <div class='row'>
+                  <div class='user-imagen'>
+                    <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                  </div>
+                  <div class='user-texto'>
+                    <p class='texto-nombre'>${item.course_name} ${item.modality} </p>
+                    <p class='texto-ciclo'>ciclo</p>
+                  </div>
+
+                  <div class='user-botones'>
+                    <form method='post'>
+                      <input type='hidden' name='id' value='${item.id}'>
+                      <input type='hidden' name='name' value='${item.course_name}'>
+                      <input type='hidden' name='course_code' value='${item.course_code}'>
+                      <input type='hidden' name='acronym' value='${item.acronym}'>
+                      <input type='hidden' name='course_name' value='${item.course_name}'>
+                      <input type='hidden' name='modality' value='${item.modality}'>
+                      <input type='hidden' name='type' value='${item.type}'>
+                          
+                      <button type='submit' class='btn' name='btnUpdate'>
+                        <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
+                        <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
+                      </button>
+                    </form>
+                    <form method='post' action='../functions/administrator/function_delete_user.php'>
+                      <input type='hidden' name='id' value='${item.id}'>
+                        <button type='submit' class='btn-delete' name='btnDelete'>    
+                          <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
+                          <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
+                        </button>
+                    </form>
+                  </div>
+                </div>
               `;
             resultadosDiv.appendChild(div); // Agregamos el div con el resultado
           });

@@ -31,11 +31,11 @@ if (!isset($_SESSION['user'])) {
                                     unset($_SESSION['mensaxe']); ?></p>
         <?php endif; ?>
 
-        <div class="container">
-
             <!-- Contenedor izquierdo -->
             <div class="container-left">
-                <div class="circle"></div>
+                <div class="circle">
+                    <img src="/images/user.png" class="pic" alt="">
+                </div>
                 <h3><?php echo $_SESSION['user']['name'] ?></h3>
                 <p><?php echo $_SESSION['user']['rol'] ?></p>
 
@@ -45,8 +45,9 @@ if (!isset($_SESSION['user'])) {
                     <li><a href="administrator_modules.php">MODULOS</a></li>
                     <li><a href="administrator_horarios.php">HORARIOS</a></li>
                 </ul>
+                <br>
                 <a href="../functions/user/close_session.php" class="logout">
-                    <i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
+                    <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b></a>
             </div>
 
 
@@ -57,23 +58,34 @@ if (!isset($_SESSION['user'])) {
             }
             ?>
             <div class="container-rigth">
-                <form action="../functions/vocational_trainings/function_create_vocational_training.php" method="post">
-                    <input type="text" name="txtCourse_code" placeholder="Código ciclo" required maxlength="50">
-                    <input type="text" name="txtAcronym" placeholder="Siglas" required maxlength="5">
-                    <input type="text" name="txtName" placeholder="Nombre del Ciclo" maxlength="100">
-                    <select name="selectModality" required>
-                        <option value="ordinary">Ordinario</option>
-                        <option value="modular">Modular</option>
-                        <option value="dual">Dual</option>
-                    </select>
-                    <select name="selectType" required>
-                        <option value="medium">Medio</option>
-                        <option value="higher">Superior</option>
-                    </select>
-                    <button type="submit" name="btnCreateVocationalTraining" id="btnCreateUser">Guardar</button>
-                </form>
-
-            </div>
+                <div>
+                    <form action="../functions/vocational_trainings/function_create_vocational_training.php" method="post">
+                        <br><br>
+                        <div class='user-imagen'>
+                            <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                            <p style="font-size: 90px; margin-left: 10px;">+</p>
+                        </div>
+                        <div class="row">
+                            <input class='inputs-form-add' type="text" name="txtCourse_code" placeholder="Código ciclo" required maxlength="50">
+                            <input class='inputs-form-add' type="text" name="txtAcronym" placeholder="Siglas" required maxlength="5">
+                            <input class='inputs-form-add' type="text" name="txtName" placeholder="Nombre del Ciclo" maxlength="100">
+                        </div>
+                        <div class="row">
+                            <select class='inputs-form-add' name="selectModality" required>
+                                <option value="ordinary">Ordinario</option>
+                                <option value="modular">Modular</option>
+                                <option value="dual">Dual</option>
+                            </select>
+                            <select class='inputs-form-add' name="selectType" required>
+                                <option value="medium">Medio</option>
+                                <option value="higher">Superior</option>
+                            </select>
+                        </div>
+                        <div style='text-align: right; width: 100%; margin-top: 30px; margin-bottom: 30px;'>
+                            <button type="submit" class='btnActualizar' name="btnCreateVocationalTraining" id="btnCreateUser">Guardar</button>
+                        </div>
+                    </form>
+                </div>
         </div>
 </body>
 

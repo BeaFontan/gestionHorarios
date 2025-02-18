@@ -39,7 +39,6 @@ if (!isset($_SESSION['user'])) {
                 <li><a href="#">MODULOS</a></li>
                 <li><a href="#">HORARIOS</a></li>
             </ul>
-
             <br>
             <a href="../functions/user/close_session.php" class="logout">
                 <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b></a>
