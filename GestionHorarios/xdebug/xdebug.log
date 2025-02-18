@@ -36766,3 +36766,99 @@
 [22] [Step Debug] ERR: Could not connect to debugging client. Tried: 172.19.0.1:9003 (from REMOTE_ADDR HTTP header), localhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(
 [22] Log closed at 2025-02-18 19:58:28.353888
 
+[25] Log opened at 2025-02-18 20:02:06.111924
+[25] [Step Debug] INFO: Checking remote connect back address.
+[25] [Step Debug] INFO: Checking header 'HTTP_X_FORWARDED_FOR'.
+[25] [Step Debug] INFO: Checking header 'REMOTE_ADDR'.
+[25] [Step Debug] INFO: Client host discovered through HTTP header, connecting to 172.19.0.1:9003.
+[25] [Step Debug] WARN: Creating socket for '172.19.0.1:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Could not connect to client host discovered through HTTP headers, connecting to configured address/port: localhost:9003. :-|
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] ERR: Could not connect to debugging client. Tried: 172.19.0.1:9003 (from REMOTE_ADDR HTTP header), localhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(
+[25] Log closed at 2025-02-18 20:02:06.151998
+
+[25] Log opened at 2025-02-18 20:02:08.314538
+[25] [Step Debug] INFO: Checking remote connect back address.
+[25] [Step Debug] INFO: Checking header 'HTTP_X_FORWARDED_FOR'.
+[25] [Step Debug] INFO: Checking header 'REMOTE_ADDR'.
+[25] [Step Debug] INFO: Client host discovered through HTTP header, connecting to 172.19.0.1:9003.
+[25] [Step Debug] WARN: Creating socket for '172.19.0.1:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Could not connect to client host discovered through HTTP headers, connecting to configured address/port: localhost:9003. :-|
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] ERR: Could not connect to debugging client. Tried: 172.19.0.1:9003 (from REMOTE_ADDR HTTP header), localhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(
+[25] Log closed at 2025-02-18 20:02:08.332421
+
+[25] Log opened at 2025-02-18 20:02:09.075811
+[25] [Step Debug] INFO: Checking remote connect back address.
+[25] [Step Debug] INFO: Checking header 'HTTP_X_FORWARDED_FOR'.
+[25] [Step Debug] INFO: Checking header 'REMOTE_ADDR'.
+[25] [Step Debug] INFO: Client host discovered through HTTP header, connecting to 172.19.0.1:9003.
+[25] [Step Debug] WARN: Creating socket for '172.19.0.1:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Could not connect to client host discovered through HTTP headers, connecting to configured address/port: localhost:9003. :-|
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] ERR: Could not connect to debugging client. Tried: 172.19.0.1:9003 (from REMOTE_ADDR HTTP header), localhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(
+[25] Log closed at 2025-02-18 20:02:09.090714
+
+[25] Log opened at 2025-02-18 20:02:10.315691
+[25] [Step Debug] INFO: Checking remote connect back address.
+[25] [Step Debug] INFO: Checking header 'HTTP_X_FORWARDED_FOR'.
+[25] [Step Debug] INFO: Checking header 'REMOTE_ADDR'.
+[25] [Step Debug] INFO: Client host discovered through HTTP header, connecting to 172.19.0.1:9003.
+[25] [Step Debug] WARN: Creating socket for '172.19.0.1:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Could not connect to client host discovered through HTTP headers, connecting to configured address/port: localhost:9003. :-|
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] ERR: Could not connect to debugging client. Tried: 172.19.0.1:9003 (from REMOTE_ADDR HTTP header), localhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(
+[25] Log closed at 2025-02-18 20:02:10.332426
+
+[25] Log opened at 2025-02-18 20:02:10.750917
+[25] [Step Debug] INFO: Checking remote connect back address.
+[25] [Step Debug] INFO: Checking header 'HTTP_X_FORWARDED_FOR'.
+[25] [Step Debug] INFO: Checking header 'REMOTE_ADDR'.
+[25] [Step Debug] INFO: Client host discovered through HTTP header, connecting to 172.19.0.1:9003.
+[25] [Step Debug] WARN: Creating socket for '172.19.0.1:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Could not connect to client host discovered through HTTP headers, connecting to configured address/port: localhost:9003. :-|
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] ERR: Could not connect to debugging client. Tried: 172.19.0.1:9003 (from REMOTE_ADDR HTTP header), localhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(
+[25] Log closed at 2025-02-18 20:02:10.767494
+
+[25] Log opened at 2025-02-18 20:02:11.071797
+[25] [Step Debug] INFO: Checking remote connect back address.
+[25] [Step Debug] INFO: Checking header 'HTTP_X_FORWARDED_FOR'.
+[25] [Step Debug] INFO: Checking header 'REMOTE_ADDR'.
+[25] [Step Debug] INFO: Client host discovered through HTTP header, connecting to 172.19.0.1:9003.
+[25] [Step Debug] WARN: Creating socket for '172.19.0.1:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Could not connect to client host discovered through HTTP headers, connecting to configured address/port: localhost:9003. :-|
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] ERR: Could not connect to debugging client. Tried: 172.19.0.1:9003 (from REMOTE_ADDR HTTP header), localhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(
+[25] Log closed at 2025-02-18 20:02:11.084856
+
+[25] Log opened at 2025-02-18 20:02:12.219384
+[25] [Step Debug] INFO: Checking remote connect back address.
+[25] [Step Debug] INFO: Checking header 'HTTP_X_FORWARDED_FOR'.
+[25] [Step Debug] INFO: Checking header 'REMOTE_ADDR'.
+[25] [Step Debug] INFO: Client host discovered through HTTP header, connecting to 172.19.0.1:9003.
+[25] [Step Debug] WARN: Creating socket for '172.19.0.1:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Could not connect to client host discovered through HTTP headers, connecting to configured address/port: localhost:9003. :-|
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] ERR: Could not connect to debugging client. Tried: 172.19.0.1:9003 (from REMOTE_ADDR HTTP header), localhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(
+[25] Log closed at 2025-02-18 20:02:12.238739
+
+[25] Log opened at 2025-02-18 20:02:13.550815
+[25] [Step Debug] INFO: Checking remote connect back address.
+[25] [Step Debug] INFO: Checking header 'HTTP_X_FORWARDED_FOR'.
+[25] [Step Debug] INFO: Checking header 'REMOTE_ADDR'.
+[25] [Step Debug] INFO: Client host discovered through HTTP header, connecting to 172.19.0.1:9003.
+[25] [Step Debug] WARN: Creating socket for '172.19.0.1:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Could not connect to client host discovered through HTTP headers, connecting to configured address/port: localhost:9003. :-|
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] WARN: Creating socket for 'localhost:9003', poll success, but error: Operation now in progress (29).
+[25] [Step Debug] ERR: Could not connect to debugging client. Tried: 172.19.0.1:9003 (from REMOTE_ADDR HTTP header), localhost:9003 (fallback through xdebug.client_host/xdebug.client_port) :-(
+[25] Log closed at 2025-02-18 20:02:13.569987
+
