@@ -20,8 +20,8 @@
     </h1>
     <div class="circle"></div>
     <?php
-    if (isset($_GET['mensaxe'])) {
-        echo '<p style="color: red;">' . $_GET['mensaxe'] . '</p>';
+    if (isset($_GET['message'])) {
+        echo '<p style="color: red;">' . $_GET['message'] . '</p>';
     }
     ?>
     <form action="../functions/user/function_verify_credentials.php" method="post">

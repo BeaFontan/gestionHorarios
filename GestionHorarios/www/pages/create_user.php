@@ -23,34 +23,20 @@ if (!isset($_SESSION['user'])) {
 </head>
 
 <body>
-    <h2>Engadir Alumno</h2>
-    <div class="container">
-        <!-- Contenedor izquierdo -->
-        <div class="container-left">
-            <div class="circle">
-                <img src="/images/user.png" class="pic" alt="">
-            </div>
-            <h3>Nombre Apellidos</h3>
-            <p>Administrador</p>
+    <?php if (isset($_SESSION['mensaxe'])): ?>
+        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
+        unset($_SESSION['mensaxe']); ?></p>
+    <?php endif; ?>
 
-            <ul>
-                <li><a href="#">ALUMNOS</a></li>
-                <li><a href="#">CICLOS</a></li>
-                <li><a href="#">MODULOS</a></li>
-                <li><a href="#">HORARIOS</a></li>
-            </ul>
-            <br>
-            <a href="../functions/user/close_session.php" class="logout">
-                <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b></a>
-        </div>
+    <h2>Engadir Alumno</h2>
+
+    <div class="container">
+
+        <!-- Contenedor izquierdo -->
+        <?php include_once('partials/container_left.php') ?>
+
 
         <!-- Contenedor derecho -->
-
-        <?php
-        if (isset($_SESSION['mensaxe'])) {
-            "<p>" . $_SESSION['mensaxe'] . "</p>";
-        }
-        ?>
         <div class="container-rigth">
         <div>
             <form action="../functions/administrator/function_create_user.php" method="post">

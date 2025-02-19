@@ -8,24 +8,27 @@ if (!isset($_SESSION['user'])) {
 
 include('../connection.php');
 
-if (isset($_POST["btnCreateVocationalTraining"])) {
-    $course_code = $_POST['txtCourse_code'];
-    $acronym = $_POST['txtAcronym'];
-    $course_name = $_POST['txtName'];
-    $modality = $_POST['selectModality'];
-    $type = $_POST['selectType'];
+if (isset($_POST["btnFormCreateModule"])) {
+
+    $proffesor_id = $_POST['selectProfessor'];
+    $vocational_training_id = $_POST['selectVocationTraining'];
+    $module_code = $_POST['txtModuleCode'];
+    $name = $_POST['txtName'];
+    $course = $_POST['selectCourse'];
+    $session_numbers = $_POST['txtSessions'];
+
 
     try {
-        $query = $pdo->prepare("INSERT INTO `vocational_trainings`(`course_code`, `acronym`, `course_name`, `modality`, `type`) 
-                                VALUES (?,?,?,?,?)");
-        $query->execute([$course_code, $acronym, $course_name, $modality, $type]);
+        $query = $pdo->prepare("INSERT INTO `modules`(`professor_id`, `vocational_training_id`, `module_code`, `name`, `course`, `sessions_number`) 
+                            VALUES (?,?,?,?,?,?)");
+        $query->execute([$proffesor_id, $vocational_training_id, $module_code, $name, $course, $session_numbers]);
 
-        $_SESSION['mensaxe'] = "Ciclo insertado correctamente";
-        header('Location: ../../pages/administrator_vocational_trainings.php');
+        $_SESSION['mensaxe'] = "Módulo insertado correctamente";
+        header('Location: ../../pages/administrator_modules.php');
         exit();
     } catch (PDOException $e) {
-        $_SESSION['mensaxe'] = "Error en la inserción de datos: " . $e->getMessage();
-        header('Location: ../../pages/administrator_panel.php');
+        $_SESSION['mensaxe'] = "Error en la inserción de módulo: " . $e->getMessage();
+        header('Location: ../../pages/administrator_modules.php');
         exit();
     }
 }

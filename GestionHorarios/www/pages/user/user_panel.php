@@ -40,29 +40,18 @@ if (isset($_POST["btnUpdate"])) {
 </head>
 
 <body>
+    <?php if (isset($_SESSION['mensaxe'])): ?>
+        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
+        unset($_SESSION['mensaxe']); ?></p>
+    <?php endif; ?>
+
     <h2>Cambiar nombre con PHP</h2>
+
     <div class="container">
 
-        <?php
-        if (isset($_SESSION['mensaxe'])) {
-            "<p>" . $_SESSION['mensaxe'] . "</p>";
-        }
-        ?>
         <!-- Contenedor izquierdo -->
-        <div class="container-left">
-            <div class="circle"></div>
-            <h3><?php echo $_SESSION['user']['name'] ?></h3>
-            <p><?php echo $_SESSION['user']['rol'] ?></p>
+        <?php include_once('partials/container_left.php') ?>
 
-            <ul>
-                <li><a href="administrator_modules.php">MODULOS</a></li>
-                <li><a href="administrator_horarios.php">HORARIOS</a></li>
-
-
-            </ul>
-            <a href="../functions/user/close_session.php" class="logout">
-                <i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
-        </div>
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
