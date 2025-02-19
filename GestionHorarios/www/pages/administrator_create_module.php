@@ -47,10 +47,12 @@ function get_vocational_trainings($pdo)
 </head>
 
 <body>
-    <?php if (isset($_SESSION['mensaxe'])): ?>
-        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
-        unset($_SESSION['mensaxe']); ?></p>
-    <?php endif; ?>
+<?php if (isset($_SESSION['mensaxe'])): ?>
+    <div class="tooltip-container">
+        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+    </div>
+    <?php unset($_SESSION['mensaxe']); ?>
+<?php endif; ?>
 
     <h2>Engadir Módulo</h2>
     
@@ -93,7 +95,7 @@ function get_vocational_trainings($pdo)
                     <option value="second">Segundo</option>
                 </select>
                 <input type="number" name="txtSessions" placeholder="Nº de sesións">
-
+                <input type="color" name="colorModule">
                 <button type="submit" name="btnFormCreateModule" id="btnCreateUser">Guardar</button>
             </form>
 

@@ -13,6 +13,7 @@ if (isset($_POST["btnSave"])) {
 
     $idModuleToEdit = $_POST['id'];
     $professor_id = $_POST["selectProfessor"];
+    $vocational_training_id = $_POST["selectVocationalTraining"];
     $module_code = $_POST['txtModule_code'];
     $name = $_POST['txtModule_name'];
     $selectCourse = $_POST['selectCourse'];
@@ -20,8 +21,8 @@ if (isset($_POST["btnSave"])) {
 
     try {
 
-        $query = $pdo->prepare("UPDATE `modules` SET `professor_id`=?,`module_code`=?,`name`=?,`course`=?,`sessions_number`=? WHERE id like ?");
-        $query->execute([$professor_id, $module_code, $name, $selectCourse, $sessions_number, $idModuleToEdit]);
+        $query = $pdo->prepare("UPDATE `modules` SET `professor_id`=?, `vocational_training_id`=?,`module_code`=?,`name`=?,`course`=?,`sessions_number`=? WHERE id like ?");
+        $query->execute([$professor_id, $vocational_training_id, $module_code, $name, $selectCourse, $sessions_number, $idModuleToEdit]);
 
         $_SESSION['mensaxe'] = "Módulo actualizado correctamente";
 

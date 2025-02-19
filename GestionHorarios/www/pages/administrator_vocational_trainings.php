@@ -39,10 +39,12 @@ if (isset($_POST["btnUpdate"])) {
 </head>
 
 <body>
-    <?php if (isset($_SESSION['mensaxe'])): ?>
-        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
-        unset($_SESSION['mensaxe']); ?></p>
-    <?php endif; ?>
+<?php if (isset($_SESSION['mensaxe'])): ?>
+    <div class="tooltip-container">
+        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+    </div>
+    <?php unset($_SESSION['mensaxe']); ?>
+<?php endif; ?>
 
     <h2>Ciclos</h2>
 
@@ -189,6 +191,7 @@ if (isset($_POST["btnUpdate"])) {
     </form>
 
     <script src="../js/find_vocationalTraining.js"></script>
+    <script src="../js/selector_menu.js"></script>
 
 </body>
 

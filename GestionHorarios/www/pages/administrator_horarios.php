@@ -17,7 +17,7 @@ if (isset($_POST["btnMostrarCiclos"]) && !empty($_POST["ciclo"])) {
     $vocational_training = $_POST["ciclo"];
 
     try {
-        $query = $pdo->prepare("SELECT * FROM `modules` WHERE vocational_training_id = ?");
+        $query = $pdo->prepare("SELECT id, name, color FROM `modules` WHERE vocational_training_id = ?");
         $query->execute([$vocational_training]);
         $arrayModules = $query->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
@@ -63,19 +63,20 @@ if (isset($_POST["btnGuardar"])) {
 </head>
 
 <body>
-    <?php if (isset($_SESSION['mensaxe'])): ?>
-        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
-        unset($_SESSION['mensaxe']); ?></p>
-    <?php endif; ?>
+<?php if (isset($_SESSION['mensaxe'])): ?>
+    <div class="tooltip-container">
+        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+    </div>
+    <?php unset($_SESSION['mensaxe']); ?>
+<?php endif; ?>
 
     <h2>Xestión de Horarios</h2>
 
     <div class="container">
-        <!-- Contenedor izquierdo -->
         <div class="container-left">
-                <div class="circle"></div>
-                <h3><?php echo $_SESSION['user']['name']?></h3>
-                <p><?php echo $_SESSION['user']['rol']?></p>
+            <div class="circle"></div>
+            <h3><?php echo $_SESSION['user']['name']?></h3>
+            <p><?php echo $_SESSION['user']['rol']?></p>
 
             <ul>
                 <li><a href="administrator_panel.php">ALUMNOS</a></li>
@@ -88,7 +89,6 @@ if (isset($_POST["btnGuardar"])) {
                 <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión </b></a>
         </div>
 
-        <!-- Contenedor derecho -->
         <div class="container-rigth">
             <form id="filter-form" method="post">
                 <div style="text-align: center; margin-bottom: 20px; width: 100%;">
@@ -106,8 +106,6 @@ if (isset($_POST["btnGuardar"])) {
                 </div>
             </form>
 
-
-            <!-- Tabla de horarios -->
             <form method="post">
                 <div class="timetable">
                     <table>
@@ -147,7 +145,7 @@ if (isset($_POST["btnGuardar"])) {
 
                                 if (!empty($arrayModules)) {
                                     foreach ($arrayModules as $module) {
-                                        echo "<option value='" . htmlspecialchars($module['id']) . "'>" . htmlspecialchars($module['name']) . "</option>";
+                                        echo "<option value='" . htmlspecialchars($module['id']) . "' data-color='" . htmlspecialchars($module['color']) . "'>" . htmlspecialchars($module['name']) . "</option>";
                                     }
                                 } else {
                                     echo "<option value=''>No hay módulos</option>";
@@ -167,6 +165,9 @@ if (isset($_POST["btnGuardar"])) {
             </form>
         </div>
     </div>
+
+   <script src="../js/option_color.js"></script>
+   <script src="../js/selector_menu.js"></script>
 </body>
 
 </html>

@@ -32,6 +32,7 @@ h2 {
   border: solid var(--color-primario) 2px;
   border-radius: 20px;
   padding-bottom: 50px; /* Para evitar que el icono quede pegado */
+  height: auto;
 }
 
 
@@ -107,6 +108,46 @@ h2 {
   color: var(--forty-color);
 }
 
+.container-left ul li a.active {
+  position: relative; /* Necesario para que funcione el pseudo-elemento */
+  color: var(--forty-color); /* Asegura que el texto tenga el mismo color */
+  font-weight: bold; /* Si quieres que resalte más */
+  z-index: 1; /* Para que el texto quede encima del fondo */
+}
+
+.container-left ul li a.active::after {
+  content: "";
+  position: absolute;
+  top: 50%; /* Centra el fondo verticalmente */
+  left: 0;
+  width: 90%; /* Expande más en ancho */
+  height: 146%; /* Reduce el crecimiento en altura */
+  background-color: var(--color-primario); /* Usa el color del hover */
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  transform: translateY(-50%); /* Asegura que se mantenga centrado */
+  z-index: -1; /* Envía el fondo detrás del texto */
+  transition: all 0.3s ease-out; /* Suaviza la animación */
+}
+
+.menu a {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-decoration: none;
+  color: #333;
+  background-color: transparent; /* Color por defecto */
+  transition: background-color 0.3s ease;
+}
+
+.menu a:hover,
+.menu a.active { /* Aplica el hover y la clase activa */
+  background-color: #007BFF; /* Color del hover y del enlace activo */
+  color: white;
+}
+
+
+
 /* Cerrar sesión 
 .logout {
   position: absolute;
@@ -142,6 +183,7 @@ h2 {
   border-radius: 20px;
   padding: 25px;
   overflow-y: auto; /* Esto agrega scroll solo en el eje vertical cuando sea necesario */
+  height: auto;
 }
 
 /* Estilo para los usuarios */
@@ -424,4 +466,33 @@ p {
 
 
 
+/* toltip de errores */
+.tooltip-container {
+  position: fixed; /* Fijo en pantalla */
+  left: 20%;
+  top: 80px; /* Ajusta la distancia desde arriba */
+  transform: translateX(-50%);
+  z-index: 9999; /* Aparece por encima de todo */
+}
 
+.error-tooltip {
+  background-color: var(--color-primario);
+  color: white;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 1;
+  transition: opacity 3s ease-in-out;
+}
+
+/* Animación de desaparición */
+.tooltip-container {
+  animation: fadeOut 5s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}

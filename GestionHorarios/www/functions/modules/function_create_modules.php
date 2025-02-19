@@ -16,12 +16,13 @@ if (isset($_POST["btnFormCreateModule"])) {
     $name = $_POST['txtName'];
     $course = $_POST['selectCourse'];
     $session_numbers = $_POST['txtSessions'];
+    $color = $_POST["colorModule"];
 
 
     try {
-        $query = $pdo->prepare("INSERT INTO `modules`(`professor_id`, `vocational_training_id`, `module_code`, `name`, `course`, `sessions_number`) 
-                            VALUES (?,?,?,?,?,?)");
-        $query->execute([$proffesor_id, $vocational_training_id, $module_code, $name, $course, $session_numbers]);
+        $query = $pdo->prepare("INSERT INTO `modules`(`professor_id`, `vocational_training_id`, `module_code`, `name`, `course`, `sessions_number`, `color`) 
+                            VALUES (?,?,?,?,?,?,?)");
+        $query->execute([$proffesor_id, $vocational_training_id, $module_code, $name, $course, $session_numbers, $color]);
 
         $_SESSION['mensaxe'] = "Módulo insertado correctamente";
         header('Location: ../../pages/administrator_modules.php');

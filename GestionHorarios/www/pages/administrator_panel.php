@@ -41,12 +41,14 @@ if (isset($_POST["btnUpdate"])) {
 
 <body>
     <?php if (isset($_SESSION['mensaxe'])): ?>
-        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
-            unset($_SESSION['mensaxe']); ?></p>
+        <div class="tooltip-container">
+            <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+        </div>
+        <?php unset($_SESSION['mensaxe']); ?>
     <?php endif; ?>
 
     <h2>Alumnos</h2>
-    
+
     <div class="container">
 
         <!-- Contenedor izquierdo -->
@@ -176,6 +178,9 @@ if (isset($_POST["btnUpdate"])) {
     </form>
 
     <script src="../js/find_user.js"></script>
+
+    <script src="../js/selector_menu.js"></script>
+
 
 </body>
 

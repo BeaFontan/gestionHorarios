@@ -16,9 +16,11 @@
 
     <div class="circle"></div>
     <?php if (isset($_SESSION['mensaxe'])): ?>
-        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
-        unset($_SESSION['mensaxe']); ?></p>
-    <?php endif; ?>
+    <div class="tooltip-container">
+        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+    </div>
+    <?php unset($_SESSION['mensaxe']); ?>
+<?php endif; ?>
 
 
 
