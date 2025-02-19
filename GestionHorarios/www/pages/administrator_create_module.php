@@ -60,11 +60,6 @@ function get_vocational_trainings($pdo)
         <?php include_once('partials/container_left.php') ?>
 
         <!-- Contenedor derecho -->
-        <?php
-        if (isset($_SESSION['mensaxe'])) {
-            "<p>" . $_SESSION['mensaxe'] . "</p>";
-        }
-        ?>
         <div class="container-rigth">
             <form action="../functions/modules/function_create_modules.php" method="post">
                 
