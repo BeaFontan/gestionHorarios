@@ -156,6 +156,12 @@ h2 {
   flex-wrap: wrap;
 }
 
+/* Estilo para los módulos */
+.mostrar-modulos{
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .container-user {
   display: flex;
   flex-direction: column;
@@ -175,6 +181,13 @@ h2 {
   width: 100%;
   margin-top: 15px;
   margin-bottom: 15px;
+}
+
+.row-crear{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: -30px;
 }
 
 /*.container-rigth input {
@@ -387,7 +400,7 @@ form {
   color: var(--tertiary-color);  
   appearance: none;  
   cursor: pointer;  
-  width: 350px;  
+  width: 30%;  
   height: 30px;
   position: relative;
   margin: 20px;

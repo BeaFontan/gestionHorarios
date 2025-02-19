@@ -100,7 +100,7 @@ if (isset($_POST["btnUpdate"])) {
                     echo "<div class='container-user'>
                             <div class='row'>
                                 <div class='user-imagen'>
-                                    <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                                    <img src='/images/ciclo.png' class='pic' alt='Ciclo img'>
                                 </div>
                                 <div class='user-texto'>
                                     <p class='texto-nombre'>$name </p>

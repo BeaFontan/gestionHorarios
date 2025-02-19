@@ -25,6 +25,9 @@ document.getElementById("buscar").addEventListener("input", function (event) {
             div.classList.add("container-user");
             div.innerHTML = `
                 <div class='row'>
+                    <div class='user-imagen'>
+                      <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                    </div>
                     <div class='user-texto'>
                         <p class='texto-nombre'>${item.name} (${item.module_code})</p>
                         <p class='texto-ciclo'>${item.course === "first" ? "1º Ciclo Formativo" : "2º Ciclo Formativo"}</p>
@@ -79,6 +82,9 @@ document.getElementById("buscar").addEventListener("input", function (event) {
             div.classList.add("container-user");
             div.innerHTML = `
                 <div class='row'>
+                    <div class='user-imagen'>
+                      <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                    </div>
                     <div class='user-texto'>
                         <p class='texto-nombre'>${item.name} (${item.module_code})</p>
                         <p class='texto-ciclo'>${item.course === "first" ? "1º Ciclo Formativo" : "2º Ciclo Formativo"}</p>

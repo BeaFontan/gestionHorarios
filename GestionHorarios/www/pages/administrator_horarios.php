@@ -73,7 +73,9 @@ if (isset($_POST["btnGuardar"])) {
     <div class="container">
         <!-- Contenedor izquierdo -->
         <div class="container-left">
-                <div class="circle"></div>
+                <div class="circle">
+                    <img src="/images/user.png" class="pic" alt="Usuario">
+                </div>
                 <h3><?php echo $_SESSION['user']['name']?></h3>
                 <p><?php echo $_SESSION['user']['rol']?></p>
 

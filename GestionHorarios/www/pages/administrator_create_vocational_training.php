@@ -42,7 +42,7 @@ if (!isset($_SESSION['user'])) {
                 <form action="../functions/vocational_trainings/function_create_vocational_training.php" method="post">
                     <br><br>
                     <div class='user-imagen'>
-                        <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                        <img src='/images/ciclo.png' class='pic' alt='Usuario img'>
                         <p style="font-size: 90px; margin-left: 10px;">+</p>
                     </div>
                     <div class="row">

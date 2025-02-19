@@ -60,12 +60,14 @@ if (isset($_POST["btnUpdate"])) {
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
-            <form method="post" action="../functions/administrator/function_panel_administrator.php" id="search-form">
-                <input type="text" id="buscar" placeholder="Buscar módulo" name="txtFindModules">
-            </form>
+            <div style="text-align: center; margin-bottom: 20px; width: 100%;">
+                <form method="post" action="../functions/administrator/function_panel_administrator.php" id="search-form">
+                    <input class="buscador" type="text" id="buscar" placeholder="Buscar módulo" name="txtFindModules">
+                </form>
 
-            <!-- Botón de Filtros -->
-            <button type="button" onclick="toggleFilters()">Filtros</button>
+                <!-- Botón de Filtros -->
+                <button class="btnFiltrar" type="button" onclick="toggleFilters()"><i class="fa fa-filter" style="margin-right: 5px;" aria-hidden="true"></i> Filtros</button>
+            </div>
 
             <!-- Contenedor de los filtros, inicialmente oculto -->
             <div id="filters" style="display:none;">
@@ -104,77 +106,112 @@ if (isset($_POST["btnUpdate"])) {
                     $sessions_number = $fila['sessions_number'];
                     $course_name = "";
 
-                    echo "<div class='container-user'>";
-                    echo "<div class='circle'></div>";
-                    echo "<p>$name</p>";
+                    echo "<div class='container-user'>
+                            <div class='row'>
+                                <div class='user-imagen'>
+                                    <img src='/images/asignatura.png' class='pic' alt='Asignatura img'>
+                                </div>
+                                <div class='user-texto'>
+                                    <p class='texto-nombre'>$name </p>";
 
                     if (!empty($arrayProfessors)) {
                         foreach ($arrayProfessors as $professor) {
                             if ($professor["id"] === $professor_id) {
                                 if ($course == "first") {
 
-                                    echo '<p>'.$professor["name"]. ' '. $professor["first_name"].' - 1º Ciclo formativo</p>';
+                                    echo "<p class='texto-ciclo'>".$professor["name"]. ' '. $professor["first_name"].' - 1º Ciclo formativo</p>';
                                 } else {
-                                    echo '<p>'.$professor["name"]. ' '. $professor["first_name"].' - 2º Ciclo formativo</p>';
+                                    echo "<p class='texto-ciclo'>".$professor["name"]. ' '. $professor["first_name"].' - 2º Ciclo formativo</p>';
                                 }
                             }
                         }
-                    } 
+                    }
+
+                    echo "</div>";
 
                     if ($editModules == $id) {
                         echo "
-                        <form action='../functions/modules/function_update_modules.php' method='post'>
-                            <input type='hidden' name='id' value='$id'>
+                                <div class='user-botones'>
+                                    <form method='post' action='../functions/modules/function_delete_modules.php'>
+                                        <input type='hidden' name='id' value='$id'>
+                                        <button type='submit' class='btn-delete' name='btnDelete'>    
+                                            <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
+                                            <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        <div class='user-editar'>
+                            <form action='../functions/modules/function_update_modules.php' method='post'>
+                                <input type='hidden' name='id' value='$id'>
+                                
+                                <div class='row' style='margin-left: 50px;'>
+                                    <select class='inputs-form' name='selectProfessor' id='selectProfessor' required onchange='updateHiddenProfessor()'>";
+                                    if (!empty($arrayProfessors)) {
+                                        foreach ($arrayProfessors as $professor) {
+                                            echo "<option value='{$professor['id']}'>" . htmlspecialchars($professor['name'] . ' ' . $professor['first_name']) . "</option>";
+                                        }
+                                    } else {
+                                        echo "<option value=''>No hay profesores disponibles</option>";
+                                    }
+                                    echo "</select>
 
-                            <select name='selectProfessor' id='selectProfessor' required onchange='updateHiddenProfessor()'>";
-                            if (!empty($arrayProfessors)) {
-                                foreach ($arrayProfessors as $professor) {
-                                    echo "<option value='{$professor['id']}'>" . htmlspecialchars($professor['name'] . ' ' . $professor['first_name']) . "</option>";
-                                }
-                            } else {
-                                echo "<option value=''>No hay profesores disponibles</option>";
-                            }
-                            echo "</select>
+                                    <select class='inputs-form' name='selectCourse' >
+                                        <option value='first' " . (isset($selectCourse) && $selectCourse == 'first' ? 'selected' : '') . ">Primeiro</option>
+                                        <option value='second' " . (isset($selectCourse) && $selectCourse == 'second' ? 'selected' : '') . ">Segundo</option>
+                                    </select>
+                                </div>
 
-                            <input type='text' name='txtModule_code' value='$module_code' required><br>
-                    
-                            <input type='text' name='txtModule_name' value='$name' placeholder='Nome'><br>
-
-                            <select name='selectCourse' >
-                                <option value='first' " . (isset($selectCourse) && $selectCourse == 'first' ? 'selected' : '') . ">Primeiro</option>
-                                <option value='second' " . (isset($selectCourse) && $selectCourse == 'second' ? 'selected' : '') . ">Segundo</option>
-                            </select>
-
-                            <input type='text' name='txtSessions_number' value='$sessions_number' placeholder='Modalidade'><br>
-                    
-                            <button type='submit' name='btnSave'>Actualizar</button>
-                        </form>
+                                <div class='row' style='margin-left: 50px;'>
+                                    <input class='inputs-form' type='text' name='txtModule_code' value='$module_code' required><br>
+                                    <input class='inputs-form' type='text' name='txtModule_name' value='$name' placeholder='Nome'><br>
+                                    <input class='inputs-form' type='text' name='txtSessions_number' value='$sessions_number' placeholder='Modalidade'><br>
+                                </div>
+                        
+                                <div style='text-align: right; width: 100%; margin-top: 30px; margin-bottom: 30px;'>
+                                    <button type='submit' class='btnActualizar' name='btnSave'>Actualizar</button>
+                                </div>
+                            </form>
+                        </div>
                         ";
                     } else {
                         echo "
-                        <form method='post'>
-                            <input type='hidden' name='id' value='$id'>
-                            <input type='hidden' name='professor_id' id='professor_id'>
-                            <input type='hidden' name='module_code' value='$module_code'>
-                            <input type='hidden' name='name' value='$name'>
-                            <input type='hidden' name='selectCourse' value='" . (isset($selectCourse) ? $selectCourse : '') . "'>  <!-- Asegúrate de pasar el valor aquí -->
-                            <input type='hidden' name='sessions_number' value='$sessions_number'>
-                    
-                            <button type='submit' name='btnUpdate'>
-                                <i class='fas fa-edit'></i>
-                            </button>
-                        </form>
+                        <div class='user-botones'>
+                            <form method='post'>
+                                <input type='hidden' name='id' value='$id'>
+                                <input type='hidden' name='professor_id' id='professor_id'>
+                                <input type='hidden' name='module_code' value='$module_code'>
+                                <input type='hidden' name='name' value='$name'>
+                                <input type='hidden' name='selectCourse' value='" . (isset($selectCourse) ? $selectCourse : '') . "'>  <!-- Asegúrate de pasar el valor aquí -->
+                                <input type='hidden' name='sessions_number' value='$sessions_number'>
+                        
+                                <button type='submit' class='btn' name='btnUpdate'>
+                                    <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
+                                    <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
+                                </button>
+                            </form>
+
+                            <form method='post' action='../functions/modules/function_delete_modules.php'>
+                                <input type='hidden' name='id' value='$id'>
+                                <button type='submit' class='btn-delete' name='btnDelete'>    
+                                    <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
+                                    <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
+                                </button>
+                            </form>
+                        </div>
+                        </div>
                     ";
                     }
 
                     // Botón "Borrar"
-                    echo "
+                    /*echo "
                     <form method='post' action='../functions/modules/function_delete_modules.php'>
                         <input type='hidden' name='id' value='$id'>
-                        <button type='submit' name='btnDelete'>    
-                            <i class='fas fa-trash'></i> 
+                        <button type='submit' class='btn-delete' name='btnDelete'>    
+                            <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
+                            <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
                         </button>
-                    </form>";
+                    </form>";*/
 
                     echo "</div>";
                 }
