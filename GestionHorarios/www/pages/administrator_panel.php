@@ -50,7 +50,23 @@ if (isset($_POST["btnUpdate"])) {
     <div class="container">
 
         <!-- Contenedor izquierdo -->
-        <?php include_once('partials/container_left.php') ?>
+        <div class="container-left">
+            <div class="circle">
+                <img src="/images/user.png" class="pic" alt="">
+            </div>
+            <h3><?php echo $_SESSION['user']['name']?></h3>
+            <p><?php echo $_SESSION['user']['rol']?></p>
+
+            <ul>
+                <li><a href="administrator_panel.php">ALUMNOS</a></li>
+                <li><a href="administrator_vocational_trainings.php">CICLOS</a></li>
+                <li><a href="administrator_modules.php">MODULOS</a></li>
+                <li><a href="administrator_horarios.php">HORARIOS</a></li>
+            </ul>
+            <br>
+            <a href="../functions/user/close_session.php" class="logout">
+                <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b></a>
+        </div>
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
@@ -94,12 +110,12 @@ if (isset($_POST["btnUpdate"])) {
                     $dni = $fila['dni'];
                     $email = $fila['email'];
 
-                    echo "<div class='container-user'>";
-                    echo "  <div class='row'>
+                    echo "<div class='container-user'>
+                            <div class='row'>
                                 <div class='user-imagen'>
                                     <img src='/images/user.png' class='pic' alt='Usuario img'>
-                                </div>";
-                    echo "      <div class='user-texto'>
+                                </div>
+                              <div class='user-texto'>
                                     <p class='texto-nombre'>$name $firstName </p>
                                     <p class='texto-ciclo'>ciclo</p>
                                 </div>";

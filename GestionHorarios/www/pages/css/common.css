@@ -13,6 +13,11 @@
   box-sizing: border-box;
 }
 
+body{
+  padding-right: 6%;
+  padding-left: 6%;
+}
+
 /* estilos para ver o no las pass */
 .password-container {
   position: relative;

@@ -35,6 +35,16 @@ if (!isset($_SESSION['user'])) {
         <!-- Contenedor izquierdo -->
         <?php include_once('partials/container_left.php') ?>
 
+            <ul>
+                <li><a href="#">ALUMNOS</a></li>
+                <li><a href="#">CICLOS</a></li>
+                <li><a href="#">MODULOS</a></li>
+                <li><a href="#">HORARIOS</a></li>
+            </ul>
+            <br>
+            <a href="../functions/user/close_session.php" class="logout">
+                <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b></a>
+        </div>
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">

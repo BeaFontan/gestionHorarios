@@ -72,12 +72,11 @@ if (isset($_POST["btnGuardar"])) {
 
     <div class="container">
         <!-- Contenedor izquierdo -->
-        <!-- No puedo poner el include, no me aplica el estilo de la foto -->
-
+   <!-- Contenedor izquierdo -->
         <div class="container-left">
-            <div class="circle"></div>
-            <h3><?php echo $_SESSION['user']['name'] ?></h3>
-            <p><?php echo $_SESSION['user']['rol'] ?></p>
+                <div class="circle"></div>
+                <h3><?php echo $_SESSION['user']['name']?></h3>
+                <p><?php echo $_SESSION['user']['rol']?></p>
 
             <ul>
                 <li><a href="administrator_panel.php">ALUMNOS</a></li>
