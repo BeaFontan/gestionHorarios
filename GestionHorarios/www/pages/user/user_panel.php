@@ -52,7 +52,7 @@ if (isset($_POST["btnUpdate"])) {
     <div class="container">
 
         <!-- Contenedor izquierdo -->
-        <?php include_once('partials/container_left.php') ?>
+        <?php include_once('../partials/container_left.php') ?>
 
 
         <!-- Contenedor derecho -->
