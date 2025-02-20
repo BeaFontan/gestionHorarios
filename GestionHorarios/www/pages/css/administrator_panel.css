@@ -188,6 +188,7 @@ h2 {
   flex-wrap: wrap;
   width: 100%;
   margin-top: -30px;
+  justify-content: center;
 }
 
 /*.container-rigth input {
@@ -400,7 +401,7 @@ form {
   color: var(--tertiary-color);  
   appearance: none;  
   cursor: pointer;  
-  width: 30%;  
+  width: 40%;  
   height: 30px;
   position: relative;
   margin: 20px;

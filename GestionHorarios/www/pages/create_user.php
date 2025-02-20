@@ -38,13 +38,15 @@ if (!isset($_SESSION['user'])) {
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
-            <div style="display: flex; flex-wrap: wrap; width: 80%">
-                <form action="../functions/administrator/function_create_user.php" method="post">
+                <form style="width: 100%;" action="../functions/administrator/function_create_user.php" method="post">
                     <br><br>
                     <div>
                         <img src='/images/user.png' class='pic' alt='Usuario img'>
-                        <p style="font-size: 90px; margin-left: 10px;">+</p>
+                        <!-- <p style="font-size: 90px; margin-left: 10px;">+</p> -->
                     </div>
+
+                    <br><br>
+                    
                     <div class="row-crear">
                         <input type="text" class='inputs-form-add' name="txtName" placeholder="Nome" required maxlength="50">
                         <input type="text" class='inputs-form-add' name="txtFirstName" placeholder="Apelido 1" required maxlength="50">
@@ -62,7 +64,6 @@ if (!isset($_SESSION['user'])) {
                         <button type='submit' class='btnActualizar' name='btnSave'><b>GUARDAR</b></button>
                     </div>
                 </form>
-            </div>
         </div>
     </div>
 </body>

@@ -183,14 +183,20 @@ form {
   border-radius: 12px;
   font-size: 14px;  
   color: var(--tertiary-color);  
-  appearance: none;  
   cursor: pointer;  
   width: 500px;  
   height: 30px;
   position: relative;
 }
 
+.dropdownCiclo::after {
+  content: '▼'; 
 
+  font-size: 0.9em;  
+  color: var(--tertiary-color); 
+  position: absolute; 
+  transform: translateY(-50%);
+}
 
 /* Estilo base para el dropdown */
 .dropdownModulo {
