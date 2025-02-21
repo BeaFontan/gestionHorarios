@@ -18,6 +18,18 @@ function getProfessors($pdo)
     }
 }
 
+
+function getVocationalTrainings($pdo)
+{
+    try {
+        $query = $pdo->query("Select * from vocational_trainings");
+        $query->execute();
+        return $query->fetchAll();
+    } catch (PDOException $e) {
+        $_SESSION['mensaxe'] = "Erro listando Ciblos" . $e->getMessage();
+    }
+}
+
 // Inicializamos variables
 $editModules = null;
 $name = "";
@@ -27,6 +39,7 @@ $name = "";
 if (isset($_POST["btnUpdate"])) {
     $editModules = $_POST['id'];
     $professor_id = $_POST["professor_id"];
+    $vocational_training_id = $_POST["vocational_training_id"];
     $module_code = $_POST['module_code'];
     $name = $_POST['name'];
     $selectCourse = $_POST['selectCourse'];
@@ -43,13 +56,21 @@ if (isset($_POST["btnUpdate"])) {
     <title>Panel Administrador</title>
     <link rel="stylesheet" href="../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
+
+    <style>
+
+
+</style>
 </head>
 
 <body>
-    <?php if (isset($_SESSION['mensaxe'])): ?>
-        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
-                                                    unset($_SESSION['mensaxe']); ?></p>
-    <?php endif; ?>
+<?php if (isset($_SESSION['mensaxe'])): ?>
+    <div class="tooltip-container">
+        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+    </div>
+    <?php unset($_SESSION['mensaxe']); ?>
+<?php endif; ?>
+
 
     <h2>Módulos</h2>
 
@@ -95,6 +116,8 @@ if (isset($_POST["btnUpdate"])) {
                 <?php
                 $arrayProfessors = getProfessors($pdo);
 
+                $arrayVocationalTrainings = getVocationalTrainings($pdo);
+
                 while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
                     $id = $fila['id'];
@@ -116,12 +139,14 @@ if (isset($_POST["btnUpdate"])) {
 
                     if (!empty($arrayProfessors)) {
                         foreach ($arrayProfessors as $professor) {
-                            if ($professor["id"] === $professor_id) {
-                                if ($course == "first") {
-
-                                    echo "<p class='texto-ciclo'>".$professor["name"]. ' '. $professor["first_name"].' - 1º Ciclo formativo</p>';
-                                } else {
-                                    echo "<p class='texto-ciclo'>".$professor["name"]. ' '. $professor["first_name"].' - 2º Ciclo formativo</p>';
+                            foreach ($arrayVocationalTrainings as $vocationalTrining) {
+                                if ($professor["id"] === $professor_id && $vocationalTrining["id"] === $vocational_training_id) {
+                                    if ($course == "first" ) {
+    
+                                        echo '<p>'.$professor["name"]. ' '. $professor["first_name"].' - 1º '.$vocationalTrining["course_name"].'</p>';
+                                    } else {
+                                        echo '<p>'.$professor["name"]. ' '. $professor["first_name"].' - 2º ' .$vocationalTrining["course_name"].'</p>';
+                                    }
                                 }
                             }
                         }
@@ -145,22 +170,25 @@ if (isset($_POST["btnUpdate"])) {
                             <form action='../functions/modules/function_update_modules.php' style='all:initial; width: 100%;' method='post'>
                                 <input type='hidden' name='id' value='$id'>
 
-                                <div class='row' style='margin-left: 3.5%;'>
-                                    <input class='inputs-form' type='text' name='txtModule_code' value='$module_code' required><br>
-                                    <input class='inputs-form' type='text' name='txtModule_name' value='$name' placeholder='Nome'><br>
-                                    <input class='inputs-form' type='text' name='txtSessions_number' value='$sessions_number' placeholder='Modalidade'><br>
-                                </div>
+                            <select name='selectProfessor' id='selectProfessor' required onchange='updateHiddenProfessor()'>";
+                            if (!empty($arrayProfessors)) {
+                                foreach ($arrayProfessors as $professor) {
+                                    echo "<option value='{$professor['id']}'>" . htmlspecialchars($professor['name'] . ' ' . $professor['first_name']) . "</option>";
+                                }
+                            } else {
+                                echo "<option value=''>No hay profesores disponibles</option>";
+                            }
+                            echo "</select>
 
-                                <div class='row' style='margin-left: 3.5%;'>
-                                    <select class='inputs-form-select' name='selectProfessor' id='selectProfessor' required onchange='updateHiddenProfessor()'>";
-                                    if (!empty($arrayProfessors)) {
-                                        foreach ($arrayProfessors as $professor) {
-                                            echo "<option value='{$professor['id']}'>" . htmlspecialchars($professor['name'] . ' ' . $professor['first_name']) . "</option>";
-                                        }
-                                    } else {
-                                        echo "<option value=''>No hay profesores disponibles</option>";
-                                    }
-                                    echo "</select>
+                            <select name='selectVocationalTraining' id='selectVocationalTraining' required onchange='updateHiddenVocationalTrining()'>";
+                            if (!empty($arrayVocationalTrainings)) {
+                                foreach ($arrayVocationalTrainings as $vocationalTrining) {
+                                    echo "<option value='{$vocationalTrining['id']}'>" . htmlspecialchars($vocationalTrining['course_name']) . "</option>";
+                                }
+                            } else {
+                                echo "<option value=''>No hay ciclos disponibles</option>";
+                            }
+                            echo "</select>
 
                                     <select class='inputs-form-select' name='selectCourse' >
                                         <option value='first' " . (isset($selectCourse) && $selectCourse == 'first' ? 'selected' : '') . ">Primeiro</option>
@@ -176,30 +204,19 @@ if (isset($_POST["btnUpdate"])) {
                         ";
                     } else {
                         echo "
-                        <div class='user-botones'>
-                            <form method='post'>
-                                <input type='hidden' name='id' value='$id'>
-                                <input type='hidden' name='professor_id' id='professor_id'>
-                                <input type='hidden' name='module_code' value='$module_code'>
-                                <input type='hidden' name='name' value='$name'>
-                                <input type='hidden' name='selectCourse' value='" . (isset($selectCourse) ? $selectCourse : '') . "'>  <!-- Asegúrate de pasar el valor aquí -->
-                                <input type='hidden' name='sessions_number' value='$sessions_number'>
-                        
-                                <button type='submit' class='btn' name='btnUpdate'>
-                                    <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
-                                    <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
-                                </button>
-                            </form>
-
-                            <form method='post' action='../functions/modules/function_delete_modules.php'>
-                                <input type='hidden' name='id' value='$id'>
-                                <button type='submit' class='btn-delete' name='btnDelete'>    
-                                    <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
-                                    <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
-                                </button>
-                            </form>
-                        </div>
-                        </div>
+                        <form method='post'>
+                            <input type='hidden' name='id' value='$id'>
+                            <input type='hidden' name='professor_id' id='professor_id'>
+                            <input type='hidden' name='vocational_training_id' id='vocational_training_id'>
+                            <input type='hidden' name='module_code' value='$module_code'>
+                            <input type='hidden' name='name' value='$name'>
+                            <input type='hidden' name='selectCourse' value='" . (isset($selectCourse) ? $selectCourse : '') . "'>  <!-- Asegúrate de pasar el valor aquí -->
+                            <input type='hidden' name='sessions_number' value='$sessions_number'>
+                    
+                            <button type='submit' name='btnUpdate'>
+                                <i class='fas fa-edit'></i>
+                            </button>
+                        </form>
                     ";
                     }
 
@@ -231,9 +248,17 @@ if (isset($_POST["btnUpdate"])) {
 
             hiddenInput.value = select.value;
         }
+
+        function updateHiddenVocationalTrining() {
+            let select = document.getElementById("selectVocationalTraining");
+            let hiddenInput = document.getElementById("vocational_training_id");
+
+            hiddenInput.value = select.value;
+        }
     </script>
 
     <script src="../js/find_modules.js"></script>
+    <script src="../js/selector_menu.js"></script>
 </body>
 
 </html>

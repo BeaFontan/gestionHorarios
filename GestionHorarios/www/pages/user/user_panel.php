@@ -40,17 +40,19 @@ if (isset($_POST["btnUpdate"])) {
 </head>
 
 <body>
-    <?php if (isset($_SESSION['mensaxe'])): ?>
-        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
-        unset($_SESSION['mensaxe']); ?></p>
-    <?php endif; ?>
+<?php if (isset($_SESSION['mensaxe'])): ?>
+    <div class="tooltip-container">
+        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+    </div>
+    <?php unset($_SESSION['mensaxe']); ?>
+<?php endif; ?>
 
     <h2>Cambiar nombre con PHP</h2>
 
     <div class="container">
 
         <!-- Contenedor izquierdo -->
-        <?php include_once('partials/container_left.php') ?>
+        <?php include_once('../partials/container_left.php') ?>
 
 
         <!-- Contenedor derecho -->

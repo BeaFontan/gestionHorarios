@@ -47,10 +47,12 @@ function get_vocational_trainings($pdo)
 </head>
 
 <body>
-    <?php if (isset($_SESSION['mensaxe'])): ?>
-        <p style="color:red; align-items: center;"><?php echo $_SESSION['mensaxe'];
-        unset($_SESSION['mensaxe']); ?></p>
-    <?php endif; ?>
+<?php if (isset($_SESSION['mensaxe'])): ?>
+    <div class="tooltip-container">
+        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+    </div>
+    <?php unset($_SESSION['mensaxe']); ?>
+<?php endif; ?>
 
     <h2>Engadir Módulo</h2>
     
@@ -101,18 +103,21 @@ function get_vocational_trainings($pdo)
                         <?php
                         $arrayCiclos = get_vocational_trainings($pdo);
 
-                        if (!empty($arrayCiclos)) {
-                            foreach ($arrayCiclos as $ciclo) {
-                                echo '<option value="'.$ciclo["id"].'">'.$ciclo["course_name"].'</option>';
-                            }
-                        } ?>
-                    </select>
-                </div>
-
-                <div class="row-crear-guardar">
-                    <button type="submit" class='btnActualizar' name="btnFormCreateModule" id="btnCreateUser">Guardar</button>
-                </div>
-                
+                    if (!empty($arrayCiclos)) {
+                        foreach ($arrayCiclos as $ciclo) {
+                            echo '<option value="'.$ciclo["id"].'">'.$ciclo["course_name"].'</option>';
+                        }
+                    } ?>
+                </select>
+                <input type="text" name="txtModuleCode" placeholder="Código módulo" required maxlength="50">
+                <input type="text" name="txtName" placeholder="Nombre do módulo" maxlength="50">
+                <select name="selectCourse">
+                    <option value="first">Primeiro</option>
+                    <option value="second">Segundo</option>
+                </select>
+                <input type="number" name="txtSessions" placeholder="Nº de sesións">
+                <input type="color" name="colorModule">
+                <button type="submit" name="btnFormCreateModule" id="btnCreateUser">Guardar</button>
             </form>
 
         </div>
