@@ -103,21 +103,21 @@ function get_vocational_trainings($pdo)
                         <?php
                         $arrayCiclos = get_vocational_trainings($pdo);
 
-                    if (!empty($arrayCiclos)) {
-                        foreach ($arrayCiclos as $ciclo) {
-                            echo '<option value="'.$ciclo["id"].'">'.$ciclo["course_name"].'</option>';
-                        }
-                    } ?>
-                </select>
-                <input type="text" name="txtModuleCode" placeholder="Código módulo" required maxlength="50">
-                <input type="text" name="txtName" placeholder="Nombre do módulo" maxlength="50">
-                <select name="selectCourse">
-                    <option value="first">Primeiro</option>
-                    <option value="second">Segundo</option>
-                </select>
-                <input type="number" name="txtSessions" placeholder="Nº de sesións">
-                <input type="color" name="colorModule">
-                <button type="submit" name="btnFormCreateModule" id="btnCreateUser">Guardar</button>
+                        if (!empty($arrayCiclos)) {
+                            foreach ($arrayCiclos as $ciclo) {
+                                echo '<option value="'.$ciclo["id"].'">'.$ciclo["course_name"].'</option>';
+                            }
+                        } ?>
+                    </select>
+                </div>
+
+                <div class="row-crear">
+                    <input class='inputs-form-color' type="color" name="colorModule">
+                </div>
+
+                <div class="row-crear-guardar">
+                    <button type="submit" class='btnActualizar' name="btnFormCreateModule" id="btnCreateUser">Guardar</button>
+                </div>
             </form>
 
         </div>

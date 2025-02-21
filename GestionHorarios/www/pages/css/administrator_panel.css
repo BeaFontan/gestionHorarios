@@ -289,7 +289,7 @@ form {
 .btnCreateUser {
   position: fixed;
   bottom: 10%;
-  right: 12%;
+  right: 16%;
   background-color: var(--color-primario);
   width: 80px;
   height: 80px;
@@ -455,6 +455,22 @@ form {
   margin-right: 3%;
 }
 
+.inputs-form-color {
+  background-color: var(--forty-color);
+  border: 2px solid var(--color-primario);
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;  
+  color: var(--tertiary-color);  
+  appearance: none;  
+  cursor: pointer;  
+  width: 25%;  
+  height: 40px;
+  position: relative;
+  margin: 20px;
+}
+
+
 .inputs-form-select {
   background-color: var(--forty-color);
   border: 2px solid var(--color-primario);
@@ -483,6 +499,9 @@ form {
   position: relative;
   margin: 20px;
 }
+
+
+
 
 .inputs-form-add-select {
   background-color: var(--forty-color);
@@ -567,13 +586,10 @@ p {
   width: 20px;
 }
 
-::-webkit-scrollbar:horizontal {
-  height: 20px;
-}
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: white;
+  background: none;
   border-color: var(--color-primario);
   border-radius: 10px;
   margin: 5%;

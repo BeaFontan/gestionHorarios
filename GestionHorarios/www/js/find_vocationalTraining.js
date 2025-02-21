@@ -27,7 +27,7 @@ document.getElementById("buscar").addEventListener("input", function (event) {
             div.innerHTML = `
                 <div class='row'>
                   <div class='user-imagen'>
-                    <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                    <img src='/images/ciclo.png' class='pic' alt='Usuario img'>
                   </div>
                   <div class='user-texto'>
                     <p class='texto-nombre'>${item.course_name} ${item.modality} </p>
