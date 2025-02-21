@@ -184,18 +184,21 @@ h2 {
   padding: 25px;
   overflow-y: auto; /* Esto agrega scroll solo en el eje vertical cuando sea necesario */
   height: auto;
+
 }
 
 /* Estilo para los usuarios */
 .mostrar-users {
   display: flex;
   flex-wrap: wrap;
+
 }
 
 /* Estilo para los ciclos */
 .mostrar-ciclos {
   display: flex;
   flex-wrap: wrap;
+
 }
 
 .container-user {

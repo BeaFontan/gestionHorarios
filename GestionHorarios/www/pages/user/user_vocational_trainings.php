@@ -33,38 +33,10 @@ if (isset($_POST["btnUpdate"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administrador</title>
+    <title>Panel Estudiandte</title>
     <link rel="stylesheet" href="../../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .ciclo-card {
-            display: flex;
-            align-items: center;
-            width: 400px;
-            padding: 10px;
-            border: 2px solid #0088cc;
-            border-radius: 10px;
-            position: relative;
-            background-color: white;
-            justify-content: space-between;
-        }
-
-        .ciclo-card:hover {
-            background-color: #f0f8ff;
-        }
-
         .ciclo-card img {
             width: 50px;
             height: 50px;
@@ -83,53 +55,49 @@ if (isset($_POST["btnUpdate"])) {
         .ciclo-card input {
             display: none;
         }
+/* Ocultar el checkbox pero mantener su funcionalidad */
+input[type="checkbox"] {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    opacity: 0; /* Oculta el checkbox pero sigue siendo clickeable */
+    cursor: pointer;
+}
 
-        /* Estilo del icono de + y - */
-        .toggle-icon {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            font-size: 20px;
-            font-weight: bold;
-            color: white;
-            background-color: green;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+/* Hacer que el ícono actúe como checkbox */
+.toggle-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    background-color: #468dae;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out, transform 0.2s ease-in-out;
+    margin-top: 25px;
+}
 
-        /* Cuando el checkbox está marcado, cambia el color a rojo */
-        .ciclo-card input:checked + .toggle-icon {
-            background-color: red;
-        }
+/* Cuando el checkbox está marcado, cambiar el color a rojo con transición */
+input[type="checkbox"]:checked + .toggle-icon {
+    background-color: #c12b2e;
+    transform: scale(1); /* Efecto ligero de escala */
+}
 
-        .save-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            color: white;
-            background-color: #0088cc;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .save-btn:hover {
-            background-color: #005f99;
-        }
     </style>
 </head>
 
 <body>
-<?php if (isset($_SESSION['mensaxe'])): ?>
-    <div class="tooltip-container">
-        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
-    </div>
-    <?php unset($_SESSION['mensaxe']); ?>
-<?php endif; ?>
+    <?php if (isset($_SESSION['mensaxe'])): ?>
+        <div class="tooltip-container">
+            <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+        </div>
+        <?php unset($_SESSION['mensaxe']); ?>
+    <?php endif; ?>
 
     <h2>Ciclos</h2>
 
@@ -139,58 +107,49 @@ if (isset($_POST["btnUpdate"])) {
         <?php include_once('../partials/container_left.php') ?>
 
         <!-- Contenedor derecho -->
-     
-        <div class="container-right">
+        <div class="container-rigth">
             <div class="mostrar-ciclos">
-
                 <form action="guardar_ciclos.php" method="POST">
                     <?php 
                     while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)): 
                         $_SESSION["ciclo"] = ['course_name' => $fila['course_name']];
                     ?>
-                        <div class="ciclo-card">
-                            <img src="/images/asignatura.png" alt="Icono">
-                            <div class="texto">
-                                <p><strong><?= htmlspecialchars($fila['course_name']) ?></strong></p>
-                                <p><?= htmlspecialchars($fila['modality']) ?></p>
+                        <div class='container-user container-check'>
+                            <div class='row'>
+                                <div class='user-imagen'>
+                                    <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                                </div>
+                                <div class='user-texto'>
+                                    <p class='texto-nombre'><strong><?= htmlspecialchars($fila['course_name']) ?></strong></p>
+                                    <p class='texto-ciclo'><?= htmlspecialchars($fila['modality']) ?></p>
+                                </div>
+                                <!-- Checkbox oculto -->
+                                <input type="checkbox" id="ciclo<?= $fila['id'] ?>" name="ciclos[]" value="<?= $fila['id'] ?>" onchange="toggleIcon(this)">
+                                <!-- Label que funciona como checkbox -->
+                                <label for="ciclo<?= $fila['id'] ?>" class="toggle-icon" id="icono<?= $fila['id'] ?>">+</label>
                             </div>
-                            <!-- Checkbox oculto -->
-                            <input type="checkbox" id="ciclo<?= $fila['id'] ?>" name="ciclos[]" value="<?= $fila['id'] ?>" onchange="toggleIcon(this)">
-                            <!-- Label que funciona como checkbox -->
-                            <label for="ciclo<?= $fila['id'] ?>" class="toggle-icon" id="icono<?= $fila['id'] ?>">+</label>
                         </div>
                     <?php endwhile; ?>
-                    <button type="submit" class="save-btn">Guardar</button>
+                    <button type="submit" class="btnActualizar">Guardar</button>
                 </form>
-             </div>  
-        </div>
-    </div>
-    
-<script>
-    function toggleIcon(checkbox) {
-        let checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
-
-        if (checkedBoxes.length > 2) {
-            checkbox.checked = false; // Desmarca el último intento
-            return;
-        }
-
-        let icon = document.getElementById("icono" + checkbox.id.replace("ciclo", ""));
-        icon.textContent = checkbox.checked ? "-" : "+";
-    }
-</script>
-
             </div>
-            
-        </div>
+        </div>  
     </div>
 
-    <form action="administrator_create_vocational_training.php">
-        <button name="btnCreateVocationalTraining" class="btnCreateUser">+</button>
-    </form>
+    
+    <script>
+        function toggleIcon(checkbox) {
+            let checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
 
-    <script src="../js/find_vocationalTraining.js"></script>
-    <script src="../js/selector_menu.js"></script>
+            if (checkedBoxes.length > 2) {
+                checkbox.checked = false; // Desmarca el último intento
+                return;
+            }
+
+            let icon = document.getElementById("icono" + checkbox.id.replace("ciclo", ""));
+            icon.textContent = checkbox.checked ? "-" : "+";
+        }
+    </script>
 
 </body>
 
