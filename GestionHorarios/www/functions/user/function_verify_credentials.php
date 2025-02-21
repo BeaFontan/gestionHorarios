@@ -15,6 +15,7 @@ if (isset($_POST["btnLogin"])) {
     // Verificar si el usuario existe y la contraseña es válida
     if ($result && password_verify($pass, $result['password'])) {
         $_SESSION['user'] = [
+            'id' => $result['id'],
             'name' => $result['name'],
             'pass' => $result['password'],
             'firstName' => $result['first_name'],
@@ -28,7 +29,7 @@ if (isset($_POST["btnLogin"])) {
             header('Location: ../../pages/administrator_panel.php');
             exit();
         } else {
-            header('Location: ../../pages/user/user_panel.php');
+            header('Location: ../../pages/student/student_vocational_trainings.php');
             exit();
         }
     } else {
