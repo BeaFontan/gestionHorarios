@@ -92,7 +92,7 @@ if (isset($_POST["btnGuardar"])) {
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
-            <form id="filter-form" method="post">
+            <form id="filter-form" style="all:initial;" method="post">
                 <div style="text-align: center; margin-bottom: 20px; width: 100%;">
                     <select class="dropdownCiclo" name="ciclo" id="ciclo">
                         <option value="">Selecciona Ciclo</option>

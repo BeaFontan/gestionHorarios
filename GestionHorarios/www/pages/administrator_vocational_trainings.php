@@ -54,7 +54,7 @@ if (isset($_POST["btnUpdate"])) {
         <!-- Contenedor derecho -->
         <div class="container-rigth">
             <div style="text-align: center; margin-bottom: 20px; width: 100%;">
-                <form method="post" action="../functions/administrator/function_panel_administrator.php" id="search-form">
+                <form method="post" style="all:initial;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar ciclo" name="txtFindVocationalTraining">
                 </form>
 
@@ -120,20 +120,20 @@ if (isset($_POST["btnUpdate"])) {
                                 </div>
                             </div>
                         <div class='user-editar'>
-                            <form action='../functions/vocational_trainings/function_update_vocational_trainings.php' method='post'>
-                                <div class='row' style='margin-left: 50px;'>
+                            <form action='../functions/vocational_trainings/function_update_vocational_trainings.php' style='all:initial; width: 100%;' method='post'>
+                                <div class='row' style='margin-left: 3.5%;'>
                                     <input class='inputs-form' type='hidden' name='id' value='$id'>
                                     <input class='inputs-form' type='text' name='txtName' value='$name' required><br>
                                     <input class='inputs-form' type='text' name='txtCourse_code' value='$course_code' placeholder='Código ciclo' required><br>
                                     <input class='inputs-form' type='text' name='txtAcronym' value='$acronym' placeholder='Siglas' ><br>
                                 </div>
-                                <div class='row' style='margin-left: 50px;'>
+                                <div class='row' style='margin-left: 3.5%;'>
                                     <input class='inputs-form' type='text' name='txtCourse_name' value='$course_name' placeholder='Nome' ><br>
                                     <input class='inputs-form' type='text' name='txtModality' value='$modality' placeholder='Modalidade' ><br>
                                     <input class='inputs-form' type='text' name='txtType' value='$type' placeholder='Tipo' required><br>
                                 </div>
 
-                                <div style='text-align: right; width: 100%; margin-top: 30px; margin-bottom: 30px;'>
+                                <div class='row-guardar'>
                                     <button type='submit' class='btnActualizar' name='btnSave'>Actualizar</button>
                                 </div>
                             </form>

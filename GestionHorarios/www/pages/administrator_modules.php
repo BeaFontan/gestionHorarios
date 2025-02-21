@@ -61,7 +61,7 @@ if (isset($_POST["btnUpdate"])) {
         <!-- Contenedor derecho -->
         <div class="container-rigth">
             <div style="text-align: center; margin-bottom: 20px; width: 100%;">
-                <form method="post" action="../functions/administrator/function_panel_administrator.php" id="search-form">
+                <form method="post" style="all:initial;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar módulo" name="txtFindModules">
                 </form>
 
@@ -142,11 +142,17 @@ if (isset($_POST["btnUpdate"])) {
                                 </div>
                             </div>
                         <div class='user-editar'>
-                            <form action='../functions/modules/function_update_modules.php' method='post'>
+                            <form action='../functions/modules/function_update_modules.php' style='all:initial; width: 100%;' method='post'>
                                 <input type='hidden' name='id' value='$id'>
-                                
-                                <div class='row' style='margin-left: 50px;'>
-                                    <select class='inputs-form' name='selectProfessor' id='selectProfessor' required onchange='updateHiddenProfessor()'>";
+
+                                <div class='row' style='margin-left: 3.5%;'>
+                                    <input class='inputs-form' type='text' name='txtModule_code' value='$module_code' required><br>
+                                    <input class='inputs-form' type='text' name='txtModule_name' value='$name' placeholder='Nome'><br>
+                                    <input class='inputs-form' type='text' name='txtSessions_number' value='$sessions_number' placeholder='Modalidade'><br>
+                                </div>
+
+                                <div class='row' style='margin-left: 3.5%;'>
+                                    <select class='inputs-form-select' name='selectProfessor' id='selectProfessor' required onchange='updateHiddenProfessor()'>";
                                     if (!empty($arrayProfessors)) {
                                         foreach ($arrayProfessors as $professor) {
                                             echo "<option value='{$professor['id']}'>" . htmlspecialchars($professor['name'] . ' ' . $professor['first_name']) . "</option>";
@@ -156,19 +162,13 @@ if (isset($_POST["btnUpdate"])) {
                                     }
                                     echo "</select>
 
-                                    <select class='inputs-form' name='selectCourse' >
+                                    <select class='inputs-form-select' name='selectCourse' >
                                         <option value='first' " . (isset($selectCourse) && $selectCourse == 'first' ? 'selected' : '') . ">Primeiro</option>
                                         <option value='second' " . (isset($selectCourse) && $selectCourse == 'second' ? 'selected' : '') . ">Segundo</option>
                                     </select>
                                 </div>
-
-                                <div class='row' style='margin-left: 50px;'>
-                                    <input class='inputs-form' type='text' name='txtModule_code' value='$module_code' required><br>
-                                    <input class='inputs-form' type='text' name='txtModule_name' value='$name' placeholder='Nome'><br>
-                                    <input class='inputs-form' type='text' name='txtSessions_number' value='$sessions_number' placeholder='Modalidade'><br>
-                                </div>
                         
-                                <div style='text-align: right; width: 100%; margin-top: 30px; margin-bottom: 30px;'>
+                                <div class='row-guardar'>
                                     <button type='submit' class='btnActualizar' name='btnSave'>Actualizar</button>
                                 </div>
                             </form>

@@ -55,7 +55,7 @@ if (isset($_POST["btnUpdate"])) {
         <!-- Contenedor derecho -->
         <div class="container-rigth">
             <div style="text-align: center; margin-bottom: 20px; width: 100%;">
-                <form method="post" action="../functions/administrator/function_panel_administrator.php" id="search-form">
+                <form method="post" style="all:initial;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar alumno" name="txtFindUser">
                 </form>
                 <!-- Botón de Filtros -->
@@ -117,20 +117,20 @@ if (isset($_POST["btnUpdate"])) {
                                 </div>
                             </div>
                         <div class='user-editar'>
-                            <form action='../functions/administrator/function_update_user.php' method='post'>
-                                <div class='row' style='margin-left: 50px;'>
+                            <form action='../functions/administrator/function_update_user.php' style='all:initial; width: 100%;' method='post'>
+                                <div class='row' style='margin-left: 3.5%;'>
                                     <input type='hidden' class='inputs-form' name='id' value='$id'>
                                     <input type='text' class='inputs-form' name='txtName' value='$name' required><br>
                                     <input type='text' class='inputs-form' name='txtFirstName' value='$firstName' placeholder='Primeiro Apelido' required><br>
                                     <input type='text' class='inputs-form' name='txtSecondName' value='$secondName' placeholder='Segundo Apelido' ><br>
                                 </div>
-                                <div class='row' style='margin-left: 50px;'>
+                                <div class='row' style='margin-left: 3.5%;'>
                                     <input type='number' class='inputs-form' name='txtTelephone' value='$telephone' placeholder='Teléfono' ><br>
                                     <input type='email' class='inputs-form' name='txtEmail' value='$email' placeholder='Email' ><br>
                                     <input type='text' class='inputs-form' name='txtDNI' value='$dni' placeholder='DNI' required><br>
                                 </div>
 
-                                <div style='text-align: right; width: 100%; margin-top: 30px; margin-bottom: 30px;'>
+                                <div class='row-guardar'>
                                     <button type='submit' class='btnActualizar' name='btnSave'>Actualizar</button>
                                 </div>
                             </form>

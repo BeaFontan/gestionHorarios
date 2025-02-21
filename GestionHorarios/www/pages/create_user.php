@@ -60,7 +60,7 @@ if (!isset($_SESSION['user'])) {
                         <input type="tel" class='inputs-form-add' name="txtPhone" placeholder="Teléfono" pattern="\d{15}" maxlength="15" required>
                     </div>
 
-                    <div style='text-align: right; width: 100%; margin-top: 30px; margin-bottom: 30px;'>
+                    <div class="row-crear-guardar">
                         <button type='submit' class='btnActualizar' name='btnSave'><b>GUARDAR</b></button>
                     </div>
                 </form>

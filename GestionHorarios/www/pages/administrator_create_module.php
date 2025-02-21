@@ -61,40 +61,58 @@ function get_vocational_trainings($pdo)
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
-            <form action="../functions/modules/function_create_modules.php" method="post">
+            <form style="width: 100%;" action="../functions/modules/function_create_modules.php" method="post">
+                <br><br>
+                <div>
+                    <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                    <!-- <p style="font-size: 90px; margin-left: 10px;">+</p> -->
+                </div>
+
+                <br><br>
+
+                <div class="row-crear">
+                    <input class='inputs-form-add' type="text" name="txtModuleCode" placeholder="Código módulo" required maxlength="50">
+                    <input class='inputs-form-add' type="text" name="txtName" placeholder="Nombre do módulo" maxlength="50">
+                </div>
+
+                <div class="row-crear">
+                    <select class='inputs-form-add-select' name="selectCourse">
+                        <option value="first">Primeiro</option>
+                        <option value="second">Segundo</option>
+                    </select>
+                    <input class='inputs-form-add' type="number" name="txtSessions" placeholder="Nº de sesións">
+                </div>
+
+                <div class="row-crear">
+                    <select class='inputs-form-add-select' name="selectProfessor" required>
+                        <option>Selecciona o profesor</option>
+                        <?php
+                        $arrayProfessors = getProfessors($pdo);
+
+                        if (!empty($arrayProfessors)) {
+                            foreach ($arrayProfessors as $professor) {
+                                echo '<option value="'.$professor["id"].'">'.$professor["name"].' '.$professor["second_name"].'</option>';
+                            }
+                        } ?>
+                    </select>
+
+                    <select class='inputs-form-add-select' name="selectVocationTraining" required>
+                        <option>Selecciona o Ciclo</option>
+                        <?php
+                        $arrayCiclos = get_vocational_trainings($pdo);
+
+                        if (!empty($arrayCiclos)) {
+                            foreach ($arrayCiclos as $ciclo) {
+                                echo '<option value="'.$ciclo["id"].'">'.$ciclo["course_name"].'</option>';
+                            }
+                        } ?>
+                    </select>
+                </div>
+
+                <div class="row-crear-guardar">
+                    <button type="submit" class='btnActualizar' name="btnFormCreateModule" id="btnCreateUser">Guardar</button>
+                </div>
                 
-                <select name="selectProfessor" required>
-                    <option>Selecciona o profesor</option>
-                    <?php
-                    $arrayProfessors = getProfessors($pdo);
-
-                    if (!empty($arrayProfessors)) {
-                        foreach ($arrayProfessors as $professor) {
-                            echo '<option value="'.$professor["id"].'">'.$professor["name"].' '.$professor["second_name"].'</option>';
-                        }
-                    } ?>
-                </select>
-
-                <select name="selectVocationTraining" required>
-                    <option>Selecciona o Ciclo</option>
-                    <?php
-                    $arrayCiclos = get_vocational_trainings($pdo);
-
-                    if (!empty($arrayCiclos)) {
-                        foreach ($arrayCiclos as $ciclo) {
-                            echo '<option value="'.$ciclo["id"].'">'.$ciclo["course_name"].'</option>';
-                        }
-                    } ?>
-                </select>
-                <input type="text" name="txtModuleCode" placeholder="Código módulo" required maxlength="50">
-                <input type="text" name="txtName" placeholder="Nombre do módulo" maxlength="50">
-                <select name="selectCourse">
-                    <option value="first">Primeiro</option>
-                    <option value="second">Segundo</option>
-                </select>
-                <input type="number" name="txtSessions" placeholder="Nº de sesións">
-
-                <button type="submit" name="btnFormCreateModule" id="btnCreateUser">Guardar</button>
             </form>
 
         </div>
