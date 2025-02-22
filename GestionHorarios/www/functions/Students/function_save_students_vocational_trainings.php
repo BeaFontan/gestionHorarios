@@ -31,14 +31,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $query->execute([$userId, $cicloId]);
             echo "Ciclo añadido";
         } elseif ($action === "remove") {
-            // Eliminar el ciclo
+            // Eliminar primero los módulos relacionados con este ciclo
+            $queryModules = $pdo->prepare("
+                DELETE um FROM users_modules um
+                INNER JOIN modules m ON um.module_id = m.id
+                INNER JOIN vocational_trainings v ON m.vocational_training_id = v.id
+                WHERE um.user_id = ? AND v.id = ?
+            ");
+            $queryModules->execute([$userId, $cicloId]);
+
+            // Ahora eliminar el ciclo de la tabla users_vocational_trainings
             $query = $pdo->prepare("DELETE FROM users_vocational_trainings WHERE user_id = ? AND vocational_training_id = ?");
             $query->execute([$userId, $cicloId]);
-            echo "Ciclo eliminado";
+
+            echo "Ciclo y módulos relacionados eliminados";
         }
     } catch (PDOException $e) {
         $_SESSION['mensaxe'] = "Error en la base de datos.";
         echo "error: " . $_SESSION['mensaxe'];
     }
 }
-?>

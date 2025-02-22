@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: db
--- Tiempo de generación: 04-02-2025 a las 17:36:14
--- Versión del servidor: 9.1.0
--- Versión de PHP: 8.2.24
+-- Host: db
+-- Generation Time: Feb 22, 2025 at 08:08 AM
+-- Server version: 9.1.0
+-- PHP Version: 8.2.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `Gestion_Horarios`
+-- Database: `Gestion_Horarios`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `modules`
+-- Table structure for table `modules`
 --
 
 CREATE TABLE `modules` (
@@ -35,26 +35,27 @@ CREATE TABLE `modules` (
   `name` varchar(50) NOT NULL,
   `course` enum('first','second') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `sessions_number` int NOT NULL,
+  `color` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `time_Stamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Volcado de datos para la tabla `modules`
+-- Dumping data for table `modules`
 --
 
-INSERT INTO `modules` (`id`, `professor_id`, `vocational_training_id`, `module_code`, `name`, `course`, `sessions_number`, `time_Stamp`) VALUES
-(1, 3, 2, 'MP0612', 'Desarrollo Web en Entorno Cliente', 'second', 40, '2025-01-29 06:57:16'),
-(2, 1, 2, 'MP0613', 'Desarrollo Web en Entorno Servidor', 'second', 50, '2025-01-29 06:57:16'),
-(3, 4, 2, 'MP0615', 'Diseño de Interfaces Web', 'second', 35, '2025-01-29 06:57:16'),
-(4, 5, 2, 'EXTRA', 'Lengua estranjera profesional II', 'second', 20, '2025-01-29 06:57:16'),
-(5, 2, 2, 'MP0618', 'Empresa e Iniciativa Emprendedora', 'second', 30, '2025-01-29 06:57:16'),
-(6, 6, 1, 'MP0156', 'Inglés profesional', 'first', 20, '2025-01-29 06:57:16'),
-(7, 2, 1, 'MP0618', 'Empresa e Iniciativa Emprendedora', 'second', 30, '2025-01-29 06:57:16');
+INSERT INTO `modules` (`id`, `professor_id`, `vocational_training_id`, `module_code`, `name`, `course`, `sessions_number`, `color`, `time_Stamp`) VALUES
+(3, 2, 1, 'MP0615', 'Diseño de Interfaces Web', 'first', 60, '#e91c93', '2025-01-29 06:57:16'),
+(4, 2, 1, 'EXTRA', 'Lengua estranjera profesional II', 'second', 20, '#e91c93', '2025-01-29 06:57:16'),
+(5, 2, 2, 'MP0618', 'Empresa e Iniciativa Emprendedora', 'second', 30, '#e91c93', '2025-01-29 06:57:16'),
+(6, 6, 1, 'MP0156', 'Inglés profesional', 'first', 20, '#e91c93', '2025-01-29 06:57:16'),
+(7, 2, 1, 'MP0618', 'Empresa e Iniciativa Emprendedora', 'first', 30, '#e91c93', '2025-01-29 06:57:16'),
+(9, 2, 1, 'nuevo color', 'Manuel', 'second', 5, '#e91c93', '2025-02-19 18:33:03'),
+(10, 3, 3, 'sgfh', 'sdfg', 'second', 44, '#ce4646', '2025-02-19 18:33:37');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `modules_sessions`
+-- Table structure for table `modules_sessions`
 --
 
 CREATE TABLE `modules_sessions` (
@@ -63,17 +64,20 @@ CREATE TABLE `modules_sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Volcado de datos para la tabla `modules_sessions`
+-- Dumping data for table `modules_sessions`
 --
 
 INSERT INTO `modules_sessions` (`module_id`, `session_id`) VALUES
-(4, 43),
-(4, 44);
+(3, 1),
+(6, 1),
+(6, 2),
+(6, 3),
+(6, 8);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `professors`
+-- Table structure for table `professors`
 --
 
 CREATE TABLE `professors` (
@@ -86,7 +90,7 @@ CREATE TABLE `professors` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Volcado de datos para la tabla `professors`
+-- Dumping data for table `professors`
 --
 
 INSERT INTO `professors` (`id`, `name`, `first_name`, `second_name`, `email`, `time_stamp`) VALUES
@@ -100,7 +104,7 @@ INSERT INTO `professors` (`id`, `name`, `first_name`, `second_name`, `email`, `t
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `sessions`
+-- Table structure for table `sessions`
 --
 
 CREATE TABLE `sessions` (
@@ -112,7 +116,7 @@ CREATE TABLE `sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Volcado de datos para la tabla `sessions`
+-- Dumping data for table `sessions`
 --
 
 INSERT INTO `sessions` (`id`, `start_time`, `end_time`, `day`, `time_stamp`) VALUES
@@ -211,7 +215,7 @@ INSERT INTO `sessions` (`id`, `start_time`, `end_time`, `day`, `time_stamp`) VAL
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -229,21 +233,21 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Volcado de datos para la tabla `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `password_reset`, `rol`, `name`, `first_name`, `second_name`, `telephone`, `dni`, `time_stamp`) VALUES
-(1, 'admin@admin.com', 'admin', 0, 'admin', 'admin', '', '', '', '', '2025-01-28 17:55:37'),
-(2, 'ana.rodriguez@example.com', 'ana5678', 0, 'admin', 'Ana', 'Rodríguez', '', '600333444', '87654321B', '2025-01-28 17:55:37'),
+(1, 'admin@admin.com', 'admin', 0, 'admin', 'admin ', 'admin', '', '', 'dddd', '2025-01-28 17:55:37'),
+(2, 'ana.rodriguez@example.com', '$2y$10$wlCxJUnym8D7wF0/cmMt0ePaYFMZXmgL/MObop8y1IuDJ/zhUHFxK', 1, 'admin', 'ana', 'Rodríguez  ', 'Fernández', '', '87654321B', '2025-01-28 17:55:37'),
 (3, 'carlos.martin@example.com', 'carlospass', 0, 'student', 'Carlos', 'Martín', 'Fernández', '600555666', '11223344C', '2025-01-28 17:55:37'),
-(4, 'maria.lopez@example.com', 'mariapass', 0, 'student', 'María', 'López', 'Sánchez', '600777888', '44556677D', '2025-01-28 17:55:37'),
-(5, 'pedro.garcia@example.com', '$2y$10$pZb6Vwc9p.lUyamEVaksSuqo0fHiS54fCYiOFdl7okKFGoCFxLnxG', 0, 'student', 'pedro', 'García', 'Ramírez', '600999000', '55667788E', '2025-01-28 17:55:37'),
-(6, 'lolo@example.com', '$2y$10$Z8fXwWxZl.XRzkhptM4mTeonU5auL6q3mpgmjzxlq3WX6h7xyqZSC', 0, 'admin', 'lolo', 'Lolo', '', '600111222', '12345678A', '2025-02-04 12:00:00');
+(4, 'maria.lopez@example.com', 'mariapass', 0, 'student', 'María', 'López d', 'Sánchez', '', '44556677D', '2025-01-28 17:55:37'),
+(7, 'paco@pago.com', '$2y$10$XDM8rMmTX062vNxJNzof1esXHJthbEu4LL1fcS/dp5CQ1Ts/NU3xG', 1, 'student', 'Ana mod', 'Rodríguez mod', 'adsfdsf', '45452554', 'fadsfdsf', '2025-02-11 20:05:01'),
+(8, 'bea@bea', '$2y$10$l5Y90/6KQxCpnLwXsjssReEHBA7SzwcI/EdkmNYOO3zNW6YyNElia', 1, 'student', 'Ana mod', 'Rodríguez mod', 'adsfdsf', '45452554', 'fadsfdsf', '2025-02-11 20:05:19');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users_modules`
+-- Table structure for table `users_modules`
 --
 
 CREATE TABLE `users_modules` (
@@ -251,22 +255,10 @@ CREATE TABLE `users_modules` (
   `module_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Volcado de datos para la tabla `users_modules`
---
-
-INSERT INTO `users_modules` (`user_id`, `module_id`) VALUES
-(3, 1),
-(3, 2),
-(3, 3),
-(3, 4),
-(4, 6),
-(4, 7);
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `users_vocational_trainings`
+-- Table structure for table `users_vocational_trainings`
 --
 
 CREATE TABLE `users_vocational_trainings` (
@@ -275,17 +267,17 @@ CREATE TABLE `users_vocational_trainings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Volcado de datos para la tabla `users_vocational_trainings`
+-- Dumping data for table `users_vocational_trainings`
 --
 
 INSERT INTO `users_vocational_trainings` (`user_id`, `vocational_training_id`) VALUES
-(4, 1),
-(3, 2);
+(2, 1),
+(2, 2);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `vocational_trainings`
+-- Table structure for table `vocational_trainings`
 --
 
 CREATE TABLE `vocational_trainings` (
@@ -299,21 +291,23 @@ CREATE TABLE `vocational_trainings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Volcado de datos para la tabla `vocational_trainings`
+-- Dumping data for table `vocational_trainings`
 --
 
 INSERT INTO `vocational_trainings` (`id`, `course_code`, `acronym`, `course_name`, `modality`, `type`, `time_stamp`) VALUES
-(1, 'ASIR_ORD', '', 'Administración de Sistemas Informáticos en Red', 'ordinary', 'higher', '2025-01-28 18:09:03'),
+(1, 'ASIR_ORDd', 'mod', 'Administración de Sistemas Informáticos en Red', 'ordinary', 'higher', '2025-01-28 18:09:03'),
 (2, 'DAW_MOD', '', 'Desarrollo de Aplicaciones Web', 'modular', 'higher', '2025-01-28 18:09:03'),
 (3, 'DAM_DUAL', '', 'Desarrollo de Aplicaciones Multiplataforma', 'dual', 'higher', '2025-01-28 18:09:03'),
-(4, 'SMR_ORD', '', 'Sistemas Microinformáticos y Redes', 'ordinary', 'medium', '2025-01-28 18:09:03');
+(4, 'SMR_ORD', '', 'Sistemas Microinformáticos y Redes', 'ordinary', 'medium', '2025-01-28 18:09:03'),
+(5, 'asdf', 'sadf', 'asdfadf', 'ordinary', 'medium', '2025-02-18 16:21:45'),
+(6, 'nuevo', 'nuevo', 'nuevo', 'ordinary', 'medium', '2025-02-18 17:50:12');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `modules`
+-- Indexes for table `modules`
 --
 ALTER TABLE `modules`
   ADD PRIMARY KEY (`id`),
@@ -321,111 +315,111 @@ ALTER TABLE `modules`
   ADD KEY `fk_vocational_training_modules` (`vocational_training_id`);
 
 --
--- Indices de la tabla `modules_sessions`
+-- Indexes for table `modules_sessions`
 --
 ALTER TABLE `modules_sessions`
   ADD PRIMARY KEY (`module_id`,`session_id`),
   ADD KEY `fk_time_tables` (`session_id`);
 
 --
--- Indices de la tabla `professors`
+-- Indexes for table `professors`
 --
 ALTER TABLE `professors`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `sessions`
+-- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `users_modules`
+-- Indexes for table `users_modules`
 --
 ALTER TABLE `users_modules`
   ADD PRIMARY KEY (`user_id`,`module_id`),
   ADD KEY `fk_module_id` (`module_id`);
 
 --
--- Indices de la tabla `users_vocational_trainings`
+-- Indexes for table `users_vocational_trainings`
 --
 ALTER TABLE `users_vocational_trainings`
   ADD PRIMARY KEY (`user_id`,`vocational_training_id`),
   ADD KEY `fk_vocational_training` (`vocational_training_id`);
 
 --
--- Indices de la tabla `vocational_trainings`
+-- Indexes for table `vocational_trainings`
 --
 ALTER TABLE `vocational_trainings`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `modules`
+-- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT de la tabla `professors`
+-- AUTO_INCREMENT for table `professors`
 --
 ALTER TABLE `professors`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `sessions`
+-- AUTO_INCREMENT for table `sessions`
 --
 ALTER TABLE `sessions`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
--- AUTO_INCREMENT de la tabla `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `vocational_trainings`
+--
+ALTER TABLE `vocational_trainings`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `vocational_trainings`
---
-ALTER TABLE `vocational_trainings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `modules`
+-- Constraints for table `modules`
 --
 ALTER TABLE `modules`
   ADD CONSTRAINT `fk_professor_modules` FOREIGN KEY (`professor_id`) REFERENCES `professors` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fk_vocational_training_modules` FOREIGN KEY (`vocational_training_id`) REFERENCES `vocational_trainings` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Filtros para la tabla `modules_sessions`
+-- Constraints for table `modules_sessions`
 --
 ALTER TABLE `modules_sessions`
   ADD CONSTRAINT `fk_modules` FOREIGN KEY (`module_id`) REFERENCES `modules` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fk_time_tables` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Filtros para la tabla `users_modules`
+-- Constraints for table `users_modules`
 --
 ALTER TABLE `users_modules`
   ADD CONSTRAINT `fk_module_id` FOREIGN KEY (`module_id`) REFERENCES `modules` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
--- Filtros para la tabla `users_vocational_trainings`
+-- Constraints for table `users_vocational_trainings`
 --
 ALTER TABLE `users_vocational_trainings`
   ADD CONSTRAINT `fk_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
