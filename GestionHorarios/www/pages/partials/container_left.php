@@ -3,7 +3,7 @@ if (strcmp($_SESSION["user"]["rol"], "admin") == 0) {
     echo '<!-- Contenedor izquierdo -->
             <div class="container-left">
                 <div class="circle">
-                    <img src="/images/user.png" class="pic" alt="Usuario">
+                    <img src="/images/user.png" class="pic-user" alt="Usuario">
                 </div>
                 
                 <h3>'.$_SESSION['user']['name'].'</h3>
@@ -17,16 +17,17 @@ if (strcmp($_SESSION["user"]["rol"], "admin") == 0) {
                 </ul>
 
                 <br>
-
-                <a href="../functions/user/close_session.php" class="logout">
-                    <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b>
-                </a>
+                <div style="margin-top: auto;">
+                    <a href="../functions/user/close_session.php" class="logout">
+                        <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b>
+                    </a>
+                </div>
             </div>';
 }else {
     echo '<!-- Contenedor izquierdo -->
             <div class="container-left">
                 <div class="circle">
-                    <img src="/images/user.png" class="pic" alt="Usuario">
+                    <img src="/images/user.png" class="pic-user" alt="Usuario">
                 </div>
                 
                 <h3>'.$_SESSION['user']['name'].'</h3>
@@ -40,9 +41,11 @@ if (strcmp($_SESSION["user"]["rol"], "admin") == 0) {
 
                 <br>
 
-                <a href="../../functions/user/close_session.php" class="logout">
-                    <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b>
-                </a>
+                <div style="margin-top: auto;">
+                    <a href="../functions/user/close_session.php" class="logout">
+                        <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b>
+                    </a>
+                </div>
             </div>';
     
 }

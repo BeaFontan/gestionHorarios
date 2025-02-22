@@ -123,13 +123,13 @@ if (isset($_POST["btnUpdate"])) {
                             </div>
                         <div class='user-editar'>
                             <form action='../functions/vocational_trainings/function_update_vocational_trainings.php' style='all:initial; width: 100%;' method='post'>
-                                <div class='row' style='margin-left: 3.5%;'>
+                                <div class='row-edit' style='margin-left: 3.5%;'>
                                     <input class='inputs-form' type='hidden' name='id' value='$id'>
                                     <input class='inputs-form' type='text' name='txtName' value='$name' required><br>
                                     <input class='inputs-form' type='text' name='txtCourse_code' value='$course_code' placeholder='Código ciclo' required><br>
                                     <input class='inputs-form' type='text' name='txtAcronym' value='$acronym' placeholder='Siglas' ><br>
                                 </div>
-                                <div class='row' style='margin-left: 3.5%;'>
+                                <div class='row-edit' style='margin-left: 3.5%;'>
                                     <input class='inputs-form' type='text' name='txtCourse_name' value='$course_name' placeholder='Nome' ><br>
                                     <input class='inputs-form' type='text' name='txtModality' value='$modality' placeholder='Modalidade' ><br>
                                     <input class='inputs-form' type='text' name='txtType' value='$type' placeholder='Tipo' required><br>

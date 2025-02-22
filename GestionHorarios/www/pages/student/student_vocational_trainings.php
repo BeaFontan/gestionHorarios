@@ -28,6 +28,7 @@ $stmt = $pdo->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Estudiante</title>
     <link rel="stylesheet" href="../../pages/css/administrator_panel.css">
+    <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 
     <style>
         /* Estilos del icono que actúa como checkbox */
@@ -73,8 +74,8 @@ $stmt = $pdo->query($sql);
 
 
         <div class="container-rigth">
-            <div class="mostrar-ciclos">
-                <form id="ciclos-form">
+            
+                <form class="mostrar-ciclos" id="ciclos-form">
                     <?php while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                         <?php $isChecked = in_array($fila['id'], $userCiclos) ? 'checked' : ''; ?>
                         <div class='container-user container-check'>
@@ -83,20 +84,23 @@ $stmt = $pdo->query($sql);
                                     <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
                                 </div>
                                 <div class='user-texto'>
-                                    <p class='texto-nombre'><strong><?= htmlspecialchars($fila['course_name']) ?></strong></p>
+                                    <p class='texto-nombre'><?= htmlspecialchars($fila['course_name']) ?></p>
                                     <p class='texto-ciclo'><?= htmlspecialchars($fila['modality']) ?></p>
                                 </div>
                                 <!-- Checkbox oculto -->
+                                <div class='user-botones'>
                                 <input type="checkbox" id="ciclo<?= $fila['id'] ?>" name="ciclos[]" value="<?= $fila['id'] ?>" <?= $isChecked ?> onchange="toggleCiclo(this)">
                                 <!-- Label que funciona como checkbox -->
-                                <label for="ciclo<?= $fila['id'] ?>" class="toggle-icon" id="icono<?= $fila['id'] ?>">
-                                    <?= $isChecked ? '-' : '+' ?>
-                                </label>
+                                
+                                    <label for="ciclo<?= $fila['id'] ?>" class="toggle-icon" id="icono<?= $fila['id'] ?>">
+                                        <?= $isChecked ? '-' : '+' ?>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     <?php endwhile; ?>
                 </form>
-            </div>
+            
         </div>
     </div>
 

@@ -4,7 +4,7 @@ body {
   font-family: Arial, sans-serif;
   height: 100vh;
   overflow: hidden; /* Esto evita que la página tenga scroll */
-  margin: 0 20px;
+  margin: 2.5% 20px;
   width: calc(100% - 40px); /* Compensa el ancho para evitar overflow */
 }
 
@@ -26,6 +26,9 @@ h2 {
 .container-left {
   position: relative;
   display: flex;
+  max-height: calc(
+    95vh - 70px
+  );
   flex-direction: column;
   align-items: center;
   width: 269px;
@@ -36,8 +39,7 @@ h2 {
 }
 
 .circle {
-  width: 87px;
-  height: 87px;
+  width: 40%;
   border-radius: 80%;
   /*border: 2px solid var(--color-primario);*/
   margin: 39px;
@@ -174,7 +176,7 @@ h2 {
   text-align: center;
   width: 100%;
   max-height: calc(
-    100vh - 70px
+    95vh - 70px
   ); /* Ajusta según tu diseño, para dejar espacio para el título o el margen */
   border: solid var(--color-primario) 2px;
   border-radius: 20px;
@@ -222,6 +224,14 @@ h2 {
   margin-bottom: 15px;
 }
 
+.row-edit{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .row-crear {
   display: flex;
   flex-wrap: wrap;
@@ -259,8 +269,14 @@ h2 {
 
 .pic {
   border: 3px solid var(--color-primario);
-  width: 87px;
-  height: 87px;
+  width: 60%;
+  border-radius: 80%;
+  margin-bottom: 10px;
+}
+
+.pic-user {
+  border: 3px solid var(--color-primario);
+  width: 100%;
   border-radius: 80%;
   margin-bottom: 10px;
 }
@@ -375,10 +391,10 @@ form {
 }
 
 .texto-nombre {
-  font-size: 27px;
+  font-size: 1.7vw;
 }
 .texto-ciclo {
-  font-size: 17px;
+  font-size: 1vw;
 }
 
 .user-botones {
@@ -450,7 +466,7 @@ form {
   border: 2px solid var(--color-primario);
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 0.8vw;
   color: var(--tertiary-color);
   appearance: none;
   cursor: pointer;
@@ -480,7 +496,7 @@ form {
   border: 2px solid var(--color-primario);
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 0.8vw;
   color: var(--tertiary-color);
   cursor: pointer;
   width: 29%;
@@ -602,4 +618,98 @@ p {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #ebeeeb;
+}
+
+@media(max-width: 500px){
+  body{
+    margin: 0;
+    padding: 2% 2%;
+    width: 100%;
+  }
+  .container-left{
+    display: none;
+  }
+
+  .container-rigth{
+    padding: 1%;
+    overflow-x: hidden;
+  }
+
+  .container{
+    gap: 0;
+  }
+
+  .container-user{
+    margin-right: 0;
+    margin-left: 0;
+    padding: 1%;
+  }
+
+  .texto-nombre{
+    font-size: 5vw;
+  }
+
+  .texto-ciclo{
+    font-size: 3.5vw;
+  }
+
+  .row-guardar{
+    justify-content: center;
+    margin-top: 5%;
+    margin-bottom: 3%;
+  }
+
+  .user-botones{
+    width: 10%;
+    flex-direction: column;
+  }
+
+  .user-texto{
+    width: 68%;
+    margin-right: 2%;
+  }
+
+  .btnFiltrar{
+    display: none;
+  }
+
+  .buscador{
+    width: 100%;
+    margin-top: 2%;
+  }
+
+  .row-edit{
+    flex-direction: column;
+    margin: 0;
+  }
+
+  .inputs-form{
+    width: 90%;
+    margin-right: 0;
+    font-size: 2.9vw;
+  }
+
+  .inputs-form-select{
+    width: 90%;
+    margin-right: 0;
+    margin-top: 4.5%;
+    font-size: 2.9vw;
+  }
+
+  .pic{
+    border: 2px solid var(--color-primario);
+  }
+
+  .btn-delete{
+    margin-top: 5%;
+    margin-left: 0;
+  }
+
+  .btn{
+    margin-left: 0;
+  }
+
+  .user-imagen{
+    width: 20%;
+  }
 }

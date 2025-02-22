@@ -87,8 +87,10 @@ if (isset($_POST["btnGuardar"])) {
                 <li><a href="administrator_horarios.php">HORARIOS</a></li>
             </ul>
             <br>
-            <a href="../functions/user/close_session.php" class="logout">
-                <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión </b></a>
+            <div style="margin-top: auto;">
+                <a href="../functions/user/close_session.php" class="logout">
+                    <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión </b></a>
+            </div>
         </div>
 
         <div class="container-rigth">

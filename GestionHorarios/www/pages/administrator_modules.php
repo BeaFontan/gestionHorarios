@@ -71,7 +71,6 @@ if (isset($_POST["btnUpdate"])) {
     <?php unset($_SESSION['mensaxe']); ?>
 <?php endif; ?>
 
-
     <h2>Módulos</h2>
 
     <div class="container">
@@ -170,13 +169,13 @@ if (isset($_POST["btnUpdate"])) {
                             <form action='../functions/modules/function_update_modules.php' style='all:initial; width: 100%;' method='post'>
                                 <input type='hidden' name='id' value='$id'>
 
-                                <div class='row' style='margin-left: 3.5%;'>
+                                <div class='row-edit' style='margin-left: 3.5%;'>
                                     <input class='inputs-form' type='text' name='txtModule_code' value='$module_code' required><br>
                                     <input class='inputs-form' type='text' name='txtModule_name' value='$name' placeholder='Nome'><br>
                                     <input class='inputs-form' type='text' name='txtSessions_number' value='$sessions_number' placeholder='Modalidade'><br>
                                 </div>
                             
-                                <div class='row' style='margin-left: 3.5%;'>
+                                <div class='row-edit' style='margin-left: 3.5%;'>
                                     <select class='inputs-form-select' name='selectProfessor' id='selectProfessor' required onchange='updateHiddenProfessor()'>";
                                         if (!empty($arrayProfessors)) {
                                             foreach ($arrayProfessors as $professor) {

@@ -120,13 +120,13 @@ if (isset($_POST["btnUpdate"])) {
                             </div>
                         <div class='user-editar'>
                             <form action='../functions/administrator/function_update_user.php' style='all:initial; width: 100%;' method='post'>
-                                <div class='row' style='margin-left: 3.5%;'>
+                                <div class='row-edit' style='margin-left: 3.5%;'>
                                     <input type='hidden' class='inputs-form' name='id' value='$id'>
                                     <input type='text' class='inputs-form' name='txtName' value='$name' required><br>
                                     <input type='text' class='inputs-form' name='txtFirstName' value='$firstName' placeholder='Primeiro Apelido' required><br>
                                     <input type='text' class='inputs-form' name='txtSecondName' value='$secondName' placeholder='Segundo Apelido' ><br>
                                 </div>
-                                <div class='row' style='margin-left: 3.5%;'>
+                                <div class='row-edit' style='margin-left: 3.5%;'>
                                     <input type='number' class='inputs-form' name='txtTelephone' value='$telephone' placeholder='Teléfono' ><br>
                                     <input type='email' class='inputs-form' name='txtEmail' value='$email' placeholder='Email' ><br>
                                     <input type='text' class='inputs-form' name='txtDNI' value='$dni' placeholder='DNI' required><br>
