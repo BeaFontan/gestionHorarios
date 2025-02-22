@@ -137,7 +137,7 @@ $stmt = $pdo->query($sql);
     </script>
     <script src="../../js/selector_menu.js"></script>
 
-  
+
 </body>
 
 </html>
