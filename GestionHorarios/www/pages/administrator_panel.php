@@ -7,7 +7,7 @@ include_once '../functions/administrator/load_modules.php';
 
 $arrayVocationalTrainings = findVocationalTrainings($pdo);
 
-$sql = "SELECT * FROM users";
+$sql = "SELECT * FROM users WHERE rol LIKE 'student'";
 $stmt = $pdo->query($sql);
 
 // Inicializamos variables

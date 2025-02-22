@@ -193,14 +193,12 @@ h2 {
 .mostrar-ciclos {
   display: flex;
   flex-wrap: wrap;
-
 }
 
 /* Estilo para los módulos */
-.mostrar-modulos{
+.mostrar-modulos {
   display: flex;
   flex-wrap: wrap;
-
 }
 
 .container-user {
@@ -224,7 +222,7 @@ h2 {
   margin-bottom: 15px;
 }
 
-.row-crear{
+.row-crear {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -232,7 +230,7 @@ h2 {
   justify-content: center;
 }
 
-.row-crear-guardar{
+.row-crear-guardar {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -240,8 +238,7 @@ h2 {
   justify-content: right;
 }
 
-
-.row-guardar{
+.row-guardar {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -295,9 +292,25 @@ form {
   transition: transform 0s ease; /* Transición suave para el giro */
 }
 
+.btnCreateUser {
+  position: fixed;
+  bottom: 10%;
+  right: 16%;
+  background-color: var(--color-primario);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: none;
+  font-size: 3rem;
+  color: var(--forty-color);
+  transition: transform 0.5s ease, background-color 0.3s ease; /* Transición suave para rotación y color de fondo */
+}
+
 .btnCreateUser:hover {
-  transform: rotate(360deg);
-  background-color: var(--second-color);
+  transform: rotate(180deg); /* Rota el botón 180 grados cuando hace hover */
+  background-color: var(
+    --second-color
+  ); /* Cambia el color de fondo al hacer hover */
 }
 
 .logout {
@@ -313,13 +326,19 @@ form {
   border: 2px solid var(--color-primario);
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 14px;  
-  color: var(--tertiary-color);  
-  appearance: none;  
-  cursor: pointer;  
-  width: 78%;  
+  font-size: 14px;
+  color: var(--tertiary-color);
+  appearance: none;
+  cursor: pointer;
+  width: 78%;
   height: 30px;
   position: relative;
+}
+
+.buscador:focus {
+  background-color: #f0f8ff4a; /* Cambia el color de fondo cuando se selecciona */
+  border-color: var(--second-color);
+  outline: none;
 }
 
 .btnFiltrar {
@@ -327,11 +346,11 @@ form {
   padding: 5px 5px;
   border-radius: 12px;
   border: none;
-  font-size: 14px;  
-  color: var(--forty-color);  
-  appearance: none;  
-  cursor: pointer;  
-  width: 10%;  
+  font-size: 14px;
+  color: var(--forty-color);
+  appearance: none;
+  cursor: pointer;
+  width: 10%;
   height: 30px;
 }
 
@@ -355,7 +374,7 @@ form {
   justify-content: center;
 }
 
-.texto-nombre{
+.texto-nombre {
   font-size: 27px;
 }
 .texto-ciclo {
@@ -431,11 +450,11 @@ form {
   border: 2px solid var(--color-primario);
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 14px;  
-  color: var(--tertiary-color);  
-  appearance: none;  
-  cursor: pointer;  
-  width: 29%;  
+  font-size: 14px;
+  color: var(--tertiary-color);
+  appearance: none;
+  cursor: pointer;
+  width: 29%;
   height: 30px;
   position: relative;
   margin-right: 3%;
@@ -446,26 +465,25 @@ form {
   border: 2px solid var(--color-primario);
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 14px;  
-  color: var(--tertiary-color);  
-  appearance: none;  
-  cursor: pointer;  
-  width: 25%;  
+  font-size: 14px;
+  color: var(--tertiary-color);
+  appearance: none;
+  cursor: pointer;
+  width: 25%;
   height: 40px;
   position: relative;
   margin: 20px;
 }
-
 
 .inputs-form-select {
   background-color: var(--forty-color);
   border: 2px solid var(--color-primario);
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 14px;  
+  font-size: 14px;
   color: var(--tertiary-color);
-  cursor: pointer;  
-  width: 29%;  
+  cursor: pointer;
+  width: 29%;
   height: 30px;
   position: relative;
   margin-right: 3%;
@@ -476,28 +494,25 @@ form {
   border: 2px solid var(--color-primario);
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 14px;  
-  color: var(--tertiary-color);  
-  appearance: none;  
-  cursor: pointer;  
-  width: 40%;  
+  font-size: 14px;
+  color: var(--tertiary-color);
+  appearance: none;
+  cursor: pointer;
+  width: 40%;
   height: 30px;
   position: relative;
   margin: 20px;
 }
-
-
-
 
 .inputs-form-add-select {
   background-color: var(--forty-color);
   border: 2px solid var(--color-primario);
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 14px;  
+  font-size: 14px;
   color: var(--tertiary-color);
-  cursor: pointer;  
-  width: 40%;  
+  cursor: pointer;
+  width: 40%;
   height: 30px;
   position: relative;
   margin: 20px;
@@ -521,7 +536,6 @@ input::-webkit-inner-spin-button {
   width: 140px;
   height: 40px;
 }
-
 
 .btnActualizar:hover {
   background-color: var(--second-color);
@@ -566,12 +580,10 @@ p {
   }
 }
 
-
 /* width */
 ::-webkit-scrollbar {
   width: 20px;
 }
-
 
 /* Track */
 ::-webkit-scrollbar-track {
@@ -580,14 +592,14 @@ p {
   border-radius: 10px;
   margin: 5%;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #ebeeeb; 
+  background: #ebeeeb;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #ebeeeb; 
+  background: #ebeeeb;
 }
