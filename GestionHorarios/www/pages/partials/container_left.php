@@ -42,7 +42,7 @@ if (strcmp($_SESSION["user"]["rol"], "admin") == 0) {
                 <br>
 
                 <div style="margin-top: auto;">
-                    <a href="../functions/user/close_session.php" class="logout">
+                    <a href="../../functions/user/close_session.php" class="logout">
                         <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b>
                     </a>
                 </div>

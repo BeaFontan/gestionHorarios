@@ -59,6 +59,7 @@ if (isset($_POST["btnGuardar"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Horarios</title>
     <link rel="stylesheet" href="../pages/css/administrator_horarios.css">
+    <link rel="stylesheet" href="../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 </head>
 
@@ -73,25 +74,8 @@ if (isset($_POST["btnGuardar"])) {
     <h2>Xestión de Horarios</h2>
 
     <div class="container">
-        <div class="container-left">
-                <div class="circle">
-                    <img src="/images/user.png" class="pic" alt="Usuario">
-                </div>
-                <h3><?php echo $_SESSION['user']['name']?></h3>
-                <p><?php echo $_SESSION['user']['rol']?></p>
-
-            <ul>
-                <li><a href="administrator_panel.php">ALUMNOS</a></li>
-                <li><a href="administrator_vocational_trainings.php">CICLOS</a></li>
-                <li><a href="administrator_modules.php">MODULOS</a></li>
-                <li><a href="administrator_horarios.php">HORARIOS</a></li>
-            </ul>
-            <br>
-            <div style="margin-top: auto;">
-                <a href="../functions/user/close_session.php" class="logout">
-                    <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión </b></a>
-            </div>
-        </div>
+        <!-- Contenedor izquierdo -->
+        <?php include_once('partials/container_left.php') ?>
 
         <div class="container-rigth">
             <form id="filter-form" style="all:initial;" method="post">
