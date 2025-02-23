@@ -10,23 +10,33 @@ include_once '../functions/connection.php';
 
 $arrayModules = [];
 
-// Obtener los módulos según el ciclo seleccionado
-if (isset($_POST["btnMostrarCiclos"]) && !empty($_POST["ciclo"])) {
-    $vocational_training = $_POST["ciclo"];
-    $curso = $_POST["curso"] ?? "first"; // Por defecto, "first"
-
-    try {
-        $query = $pdo->prepare("SELECT id, name, color, sessions_number FROM `modules` WHERE vocational_training_id = ? AND course = ?");
-        $query->execute([$vocational_training, $curso]);
-        $arrayModules = $query->fetchAll(PDO::FETCH_ASSOC);
-    } catch (PDOException $e) {
-        $_SESSION['mensaxe'] = "Error al obtener módulos: " . $e->getMessage();
-    }
-}
-
 // Guardar los módulos en la tabla modules_sessions
 if (isset($_POST["btnGuardar"])) {
     try {
+        $ciclo = $_POST['ciclo'] ?? null;
+        $curso = $_POST['curso'] ?? null;
+
+        if ($ciclo && $curso) {
+            // 1️⃣ 🔥 Obtener los módulos asociados al ciclo y curso seleccionados
+            $stmtModules = $pdo->prepare("SELECT id FROM modules WHERE vocational_training_id = ? AND course = ?");
+            $stmtModules->execute([$ciclo, $curso]);
+            $modulesIds = $stmtModules->fetchAll(PDO::FETCH_COLUMN); // Array con los IDs de los módulos
+
+            if (!empty($modulesIds)) {
+                $idsString = implode(',', $modulesIds); // Convertir el array en una lista de valores separados por coma
+            
+                // 🔥 Ejecutar el DELETE de forma directa sin prepare()
+                $sql = "DELETE FROM modules_sessions WHERE module_id IN ($idsString)";
+                $rowsAffected = $pdo->exec($sql); // Usamos exec() en lugar de execute()
+            
+                // 🔥 Verificar si quedaron registros después del DELETE
+                $stmtCheckRemaining = $pdo->query("SELECT * FROM modules_sessions WHERE module_id IN ($idsString)");
+                $remainingRecords = $stmtCheckRemaining->fetchAll(PDO::FETCH_ASSOC);
+
+            }
+        }
+
+        // 3️⃣ 🔹 Guardar los módulos en la tabla modules_sessions
         foreach ($_POST['modules'] as $sessionId => $moduleId) {
             if (!empty($moduleId) && is_numeric($moduleId) && is_numeric($sessionId)) {
 
@@ -41,8 +51,8 @@ if (isset($_POST["btnGuardar"])) {
                     $exists = $stmtCheck->fetchColumn();
 
                     if ($exists == 0) { // Solo insertamos si no existe
-                        $stmt = $pdo->prepare("INSERT INTO modules_sessions (module_id, session_id) VALUES (?, ?)");
-                        $stmt->execute([$moduleId, $sessionId]);
+                        $stmtInsert = $pdo->prepare("INSERT INTO modules_sessions (module_id, session_id) VALUES (?, ?)");
+                        $stmtInsert->execute([$moduleId, $sessionId]);
                     } else {
                         // Si ya existe, actualizarlo en caso de que haya cambiado
                         $stmtUpdate = $pdo->prepare("UPDATE modules_sessions SET module_id = ? WHERE session_id = ?");
@@ -51,15 +61,19 @@ if (isset($_POST["btnGuardar"])) {
                 }
             }
         }
+
         $_SESSION['mensaxe'] = "Datos guardados correctamente.";
     } catch (PDOException $e) {
         $_SESSION['mensaxe'] = "Error al guardar los datos: " . $e->getMessage();
     }
 }
+
+
 ?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,17 +108,22 @@ if (isset($_POST["btnGuardar"])) {
                         }
                         ?>
                     </select>
+                </div>
 
+                <div style="text-align: center; margin-bottom: 20px; width: 100%;">
                     <select class="dropdownCurso" name="curso" id="curso">
+                        <option>Selecciona un curso</option>
                         <option value="first">Primer Año</option>
                         <option value="second">Segundo Año</option>
                     </select>
-
-                    <button class="btnBuscar" type="submit" name="btnMostrarCiclos">Mostrar módulos</button>
                 </div>
             </form>
 
             <form method="post">
+
+                <input type="hidden" name="ciclo" id="cicloHidden">
+                <input type="hidden" name="curso" id="cursoHidden">
+
                 <div class="timetable">
                     <table>
                         <tr>
@@ -119,37 +138,37 @@ if (isset($_POST["btnGuardar"])) {
                         <?php
                         $querySessions = $pdo->query("SELECT * FROM sessions ORDER BY day, start_time");
                         $arraySessions = $querySessions->fetchAll(PDO::FETCH_ASSOC);
-                        
+
                         $diasSemana = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
                         $sessionsByTime = [];
-                        
+
                         // Guardamos la información de cada sesión en sessionsByTime
                         foreach ($arraySessions as $session) {
                             $sessionsByTime[$session['start_time']]['end_time'] = $session['end_time']; // Guardamos la hora de fin
                             $sessionsByTime[$session['start_time']][$session['day']] = $session['id'];  // Guardamos la sesión por día
                         }
-                        
+
                         foreach ($sessionsByTime as $startTime => $sessionDays) {
                             $endTime = isset($sessionDays['end_time']) ? $sessionDays['end_time'] : ''; // Obtenemos la hora de fin correspondiente
                             echo "<tr>";
-                        
+
                             // ✅ Ahora la celda muestra start_time - end_time
                             echo "<td class='horas'><b>{$startTime} - {$endTime}</b></td>";
-                        
+
                             foreach ($diasSemana as $day) {
                                 echo "<td class='dropdownModulo'>";
                                 $sessionId = isset($sessionDays[$day]) ? $sessionDays[$day] : null;
-                        
+
                                 if ($sessionId) {
                                     echo "<select name='modules[$sessionId]' class='dropdownModulo'>";
                                     echo "<option value=''>Selecciona Módulo</option>";
-                        
+
                                     if (!empty($arrayModules)) {
                                         foreach ($arrayModules as $module) {
                                             echo "<option value='" . htmlspecialchars($module['id']) . "' 
                                                         data-color='" . htmlspecialchars($module['color']) . "' 
                                                         data-max-sessions='" . htmlspecialchars($module['sessions_number']) . "'>"
-                                                        . htmlspecialchars($module['name']) . "</option>";
+                                                . htmlspecialchars($module['name']) . "</option>";
                                         }
                                     } else {
                                         echo "<option value=''>No hay módulos</option>";
@@ -162,7 +181,7 @@ if (isset($_POST["btnGuardar"])) {
                             }
                             echo "</tr>";
                         }
-                        
+
                         ?>
                     </table>
 
@@ -175,5 +194,7 @@ if (isset($_POST["btnGuardar"])) {
     </div>
 
     <script src="../js/selector_menu.js"></script>
+    <script src="../js/modules.js"></script>
 </body>
+
 </html>
