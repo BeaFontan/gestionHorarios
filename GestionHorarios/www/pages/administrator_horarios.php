@@ -7,18 +7,17 @@ if (!isset($_SESSION['user'])) {
 }
 
 include_once '../functions/connection.php';
-include_once '../functions/administrator/find_vocational_trainings.php';
 
-$arrayVocationalTrainings = findVocationalTrainings($pdo);
 $arrayModules = [];
 
 // Obtener los módulos según el ciclo seleccionado
 if (isset($_POST["btnMostrarCiclos"]) && !empty($_POST["ciclo"])) {
     $vocational_training = $_POST["ciclo"];
+    $curso = $_POST["curso"] ?? "first"; // Por defecto, "first"
 
     try {
-        $query = $pdo->prepare("SELECT id, name, color FROM `modules` WHERE vocational_training_id = ?");
-        $query->execute([$vocational_training]);
+        $query = $pdo->prepare("SELECT id, name, color, sessions_number FROM `modules` WHERE vocational_training_id = ? AND course = ?");
+        $query->execute([$vocational_training, $curso]);
         $arrayModules = $query->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         $_SESSION['mensaxe'] = "Error al obtener módulos: " . $e->getMessage();
@@ -28,11 +27,15 @@ if (isset($_POST["btnMostrarCiclos"]) && !empty($_POST["ciclo"])) {
 // Guardar los módulos en la tabla modules_sessions
 if (isset($_POST["btnGuardar"])) {
     try {
-        foreach ($_POST['modules'] as $sessionId => $dayModules) {
-            foreach ($dayModules as $dayIndex => $moduleId) {
-                if (!empty($moduleId) && is_numeric($moduleId) && is_numeric($sessionId)) {
+        foreach ($_POST['modules'] as $sessionId => $moduleId) {
+            if (!empty($moduleId) && is_numeric($moduleId) && is_numeric($sessionId)) {
 
-                    // Verificar si ya existe la combinación antes de insertar
+                // Verificar si la sesión realmente existe en la base de datos
+                $stmtCheckSession = $pdo->prepare("SELECT COUNT(*) FROM sessions WHERE id = ?");
+                $stmtCheckSession->execute([$sessionId]);
+                $sessionExists = $stmtCheckSession->fetchColumn();
+
+                if ($sessionExists > 0) {  // Si la sesión existe en la BD
                     $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM modules_sessions WHERE module_id = ? AND session_id = ?");
                     $stmtCheck->execute([$moduleId, $sessionId]);
                     $exists = $stmtCheck->fetchColumn();
@@ -40,6 +43,10 @@ if (isset($_POST["btnGuardar"])) {
                     if ($exists == 0) { // Solo insertamos si no existe
                         $stmt = $pdo->prepare("INSERT INTO modules_sessions (module_id, session_id) VALUES (?, ?)");
                         $stmt->execute([$moduleId, $sessionId]);
+                    } else {
+                        // Si ya existe, actualizarlo en caso de que haya cambiado
+                        $stmtUpdate = $pdo->prepare("UPDATE modules_sessions SET module_id = ? WHERE session_id = ?");
+                        $stmtUpdate->execute([$moduleId, $sessionId]);
                     }
                 }
             }
@@ -49,11 +56,10 @@ if (isset($_POST["btnGuardar"])) {
         $_SESSION['mensaxe'] = "Error al guardar los datos: " . $e->getMessage();
     }
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -64,32 +70,36 @@ if (isset($_POST["btnGuardar"])) {
 </head>
 
 <body>
-<?php if (isset($_SESSION['mensaxe'])): ?>
-    <div class="tooltip-container">
-        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
-    </div>
-    <?php unset($_SESSION['mensaxe']); ?>
-<?php endif; ?>
+    <?php if (isset($_SESSION['mensaxe'])): ?>
+        <div class="tooltip-container">
+            <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+        </div>
+        <?php unset($_SESSION['mensaxe']); ?>
+    <?php endif; ?>
 
     <h2>Xestión de Horarios</h2>
 
     <div class="container">
-        <!-- Contenedor izquierdo -->
         <?php include_once('partials/container_left.php') ?>
 
         <div class="container-rigth">
-            <form id="filter-form" style="all:initial;" method="post">
+            <form id="filter-form" method="post">
                 <div style="text-align: center; margin-bottom: 20px; width: 100%;">
                     <select class="dropdownCiclo" name="ciclo" id="ciclo">
                         <option value="">Selecciona Ciclo</option>
                         <?php
-                        if ($arrayVocationalTrainings) {
-                            foreach ($arrayVocationalTrainings as $ciclo) {
-                                echo "<option value='" . htmlspecialchars($ciclo['id']) . "'>" . htmlspecialchars($ciclo['course_name']) . "</option>";
-                            }
+                        $queryCiclos = $pdo->query("SELECT id, course_name FROM vocational_trainings");
+                        while ($ciclo = $queryCiclos->fetch(PDO::FETCH_ASSOC)) {
+                            echo "<option value='" . htmlspecialchars($ciclo['id']) . "'>" . htmlspecialchars($ciclo['course_name']) . "</option>";
                         }
                         ?>
                     </select>
+
+                    <select class="dropdownCurso" name="curso" id="curso">
+                        <option value="first">Primer Año</option>
+                        <option value="second">Segundo Año</option>
+                    </select>
+
                     <button class="btnBuscar" type="submit" name="btnMostrarCiclos">Mostrar módulos</button>
                 </div>
             </form>
@@ -107,42 +117,52 @@ if (isset($_POST["btnGuardar"])) {
                         </tr>
 
                         <?php
-                        // Definir horas y sus IDs correspondientes (session_id)
-                        $sessions = [
-                            1 => "8:45 - 9:35",
-                            2 => "9:35 - 10:25",
-                            3 => "10:25 - 11:15",
-                            4 => "11:15 - 12:05",
-                            5 => "12:05 - 12:55",
-                            6 => "12:55 - 13:45",
-                            7 => "13:45 - 14:35",
-                            8 => "16:00 - 16:50",
-                            9 => "16:50 - 17:40",
-                            10 => "17:40 - 18:30",
-                            11 => "18:30 - 19:20"
-                        ];
-
-                        foreach ($sessions as $sessionId => $hora) {
+                        $querySessions = $pdo->query("SELECT * FROM sessions ORDER BY day, start_time");
+                        $arraySessions = $querySessions->fetchAll(PDO::FETCH_ASSOC);
+                        
+                        $diasSemana = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+                        $sessionsByTime = [];
+                        
+                        // Guardamos la información de cada sesión en sessionsByTime
+                        foreach ($arraySessions as $session) {
+                            $sessionsByTime[$session['start_time']]['end_time'] = $session['end_time']; // Guardamos la hora de fin
+                            $sessionsByTime[$session['start_time']][$session['day']] = $session['id'];  // Guardamos la sesión por día
+                        }
+                        
+                        foreach ($sessionsByTime as $startTime => $sessionDays) {
+                            $endTime = isset($sessionDays['end_time']) ? $sessionDays['end_time'] : ''; // Obtenemos la hora de fin correspondiente
                             echo "<tr>";
-                            echo "<td class='horas'><b>$hora</b></td>";
-
-                            for ($i = 0; $i < 5; $i++) { // 5 columnas (Lunes a Viernes)
+                        
+                            // ✅ Ahora la celda muestra start_time - end_time
+                            echo "<td class='horas'><b>{$startTime} - {$endTime}</b></td>";
+                        
+                            foreach ($diasSemana as $day) {
                                 echo "<td class='dropdownModulo'>";
-                                echo "<select name='modules[$sessionId][$i]' class='dropdownModulo'>";
-                                echo "<option value=''>Selecciona Módulo</option>";
-
-                                if (!empty($arrayModules)) {
-                                    foreach ($arrayModules as $module) {
-                                        echo "<option value='" . htmlspecialchars($module['id']) . "' data-color='" . htmlspecialchars($module['color']) . "'>" . htmlspecialchars($module['name']) . "</option>";
+                                $sessionId = isset($sessionDays[$day]) ? $sessionDays[$day] : null;
+                        
+                                if ($sessionId) {
+                                    echo "<select name='modules[$sessionId]' class='dropdownModulo'>";
+                                    echo "<option value=''>Selecciona Módulo</option>";
+                        
+                                    if (!empty($arrayModules)) {
+                                        foreach ($arrayModules as $module) {
+                                            echo "<option value='" . htmlspecialchars($module['id']) . "' 
+                                                        data-color='" . htmlspecialchars($module['color']) . "' 
+                                                        data-max-sessions='" . htmlspecialchars($module['sessions_number']) . "'>"
+                                                        . htmlspecialchars($module['name']) . "</option>";
+                                        }
+                                    } else {
+                                        echo "<option value=''>No hay módulos</option>";
                                     }
+                                    echo "</select>";
                                 } else {
-                                    echo "<option value=''>No hay módulos</option>";
+                                    echo "<p>Sin sesión</p>";
                                 }
-                                echo "</select>";
                                 echo "</td>";
                             }
                             echo "</tr>";
                         }
+                        
                         ?>
                     </table>
 
@@ -154,8 +174,6 @@ if (isset($_POST["btnGuardar"])) {
         </div>
     </div>
 
-   <script src="../js/option_color.js"></script>
-   <script src="../js/selector_menu.js"></script>
+    <script src="../js/selector_menu.js"></script>
 </body>
-
 </html>
