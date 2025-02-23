@@ -36,11 +36,13 @@ document.getElementById("buscar").addEventListener("input", function (event) {
                     <div class='user-botones'>
                         <form method='post'>
                             <input type='hidden' name='id' value='${item.id}'>
+                            <input type='hidden' name='professor_id' value='${item.professor_id}'> 
+                            <input type='hidden' name='vocational_training_id' value='${item.vocational_training_id}'>
                             <input type='hidden' name='module_code' value='${item.module_code}'>
                             <input type='hidden' name='name' value='${item.name}'>
                             <input type='hidden' name='selectCourse' value='${item.course}'>
                             <input type='hidden' name='sessions_number' value='${item.sessions_number}'>
-                            
+
                             <button type='submit' class='btn' name='btnUpdate'>
                                 <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
                                 <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
@@ -93,11 +95,13 @@ document.getElementById("buscar").addEventListener("input", function (event) {
                     <div class='user-botones'>
                         <form method='post'>
                             <input type='hidden' name='id' value='${item.id}'>
+                            <input type='hidden' name='professor_id' value='${item.professor_id}'> 
+                            <input type='hidden' name='vocational_training_id' value='${item.vocational_training_id}'>
                             <input type='hidden' name='module_code' value='${item.module_code}'>
                             <input type='hidden' name='name' value='${item.name}'>
                             <input type='hidden' name='selectCourse' value='${item.course}'>
                             <input type='hidden' name='sessions_number' value='${item.sessions_number}'>
-                            
+
                             <button type='submit' class='btn' name='btnUpdate'>
                                 <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
                                 <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
