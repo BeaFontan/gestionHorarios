@@ -150,10 +150,13 @@ if (isset($_POST["btnGuardar"])) {
 
                         foreach ($sessionsByTime as $startTime => $sessionDays) {
                             $endTime = isset($sessionDays['end_time']) ? $sessionDays['end_time'] : ''; // Obtenemos la hora de fin correspondiente
-                            echo "<tr>";
 
-                            // ✅ Ahora la celda muestra start_time - end_time
-                            echo "<td class='horas'><b>{$startTime} - {$endTime}</b></td>";
+                            // Formateamos las horas
+                            $formattedStartTime = date('G:i', strtotime($startTime));  // Convierte la hora a formato 24h sin ceros a la izquierda
+                            $formattedEndTime = !empty($endTime) ? date('G:i', strtotime($endTime)) : '';  // Aplica lo mismo para la hora de fin
+
+                            echo "<tr>";
+                            echo "<td class='horas'><b>{$formattedStartTime} - {$formattedEndTime}</b></td>";
 
                             foreach ($diasSemana as $day) {
                                 echo "<td class='dropdownModulo'>";

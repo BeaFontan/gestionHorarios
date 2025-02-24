@@ -20,6 +20,7 @@ h2 {
   font-size: 2em;
   width: 100%;
   text-align: right;
+  padding-right: 35px;
 }
 
 /* Contenedor izquierdo */
@@ -296,37 +297,22 @@ form {
 
 .btnCreateUser {
   position: fixed;
-  bottom: 10%;
-  right: 16%;
+  bottom: 7%;
+  right: 15%;
   background-color: var(--color-primario);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: none;
-  font-size: 3rem;
-  color: var(--forty-color);
-  transition: transform 0s ease; /* Transición suave para el giro */
-}
-
-.btnCreateUser {
-  position: fixed;
-  bottom: 10%;
-  right: 16%;
-  background-color: var(--color-primario);
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   border: none;
   font-size: 3rem;
   color: var(--forty-color);
   transition: transform 0.5s ease, background-color 0.3s ease; /* Transición suave para rotación y color de fondo */
 }
-
 .btnCreateUser:hover {
   transform: rotate(180deg); /* Rota el botón 180 grados cuando hace hover */
   background-color: var(
     --second-color
-  ); /* Cambia el color de fondo al hacer hover */
+  );
 }
 
 .logout {
@@ -346,7 +332,7 @@ form {
   color: var(--tertiary-color);
   appearance: none;
   cursor: pointer;
-  width: 78%;
+  width: 100%;
   height: 30px;
   position: relative;
 }
@@ -355,23 +341,6 @@ form {
   background-color: #f0f8ff4a; /* Cambia el color de fondo cuando se selecciona */
   border-color: var(--second-color);
   outline: none;
-}
-
-.btnFiltrar {
-  background-color: var(--color-primario);
-  padding: 5px 5px;
-  border-radius: 12px;
-  border: none;
-  font-size: 14px;
-  color: var(--forty-color);
-  appearance: none;
-  cursor: pointer;
-  width: 10%;
-  height: 30px;
-}
-
-.btnFiltrar:hover {
-  background-color: var(--second-color);
 }
 
 .user-imagen {
@@ -676,6 +645,7 @@ p {
   .buscador{
     width: 100%;
     margin-top: 2%;
+    padding: 1%;
   }
 
   .row-edit{

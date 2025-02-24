@@ -59,32 +59,8 @@ if (isset($_POST["btnUpdate"])) {
                 <form method="post" style="all:initial;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar ciclo" name="txtFindVocationalTraining">
                 </form>
-
-                <!-- Botón de Filtros -->
-                <button class="btnFiltrar" type="button" onclick="toggleFilters()"><i class="fa fa-filter" style="margin-right: 5px;" aria-hidden="true"></i> Filtros</button>
             </div>
 
-            <!-- Contenedor de los filtros, inicialmente oculto -->
-            <div id="filters" style="display:none;">
-                <form id="filter-form">
-                    <label for="ciclo">Selecciona Ciclo</label>
-                    <select name="ciclo" id="ciclo" onchange="loadModulos(this.value)">
-                        <option value="">Selecciona Ciclo</option>
-                        <?php
-                        if ($arrayVocationalTrainings) {
-                            foreach ($arrayVocationalTrainings as $ciclo) {
-                                echo "<option value='" . $ciclo['vocational_training_id'] . "'>" . $ciclo["course_name"] . "</option>";
-                            }
-                        }
-                        ?>
-                    </select>
-
-                    <label for="modulo">Selecciona Módulo</label>
-                    <select name="modulo" id="modulo">
-                        <option value="">Selecciona Módulo</option>
-                    </select>
-                </form>
-            </div>
             <div class="mostrar-ciclos">
                 <?php
                 while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {

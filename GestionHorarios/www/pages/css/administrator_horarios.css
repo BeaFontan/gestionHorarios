@@ -269,6 +269,7 @@ table, th, td{
   width: 160px;  
   height: 30px;
 }
+
 /* Estilo base para el blanc space del título de los días de la semana */
 .cabeceraSemanaBlanc {
   background-color: var(--forty-color);
