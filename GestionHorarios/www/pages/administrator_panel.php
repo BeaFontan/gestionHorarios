@@ -56,8 +56,11 @@ if (isset($_POST["btnUpdate"])) {
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
-            <div style="text-align: center; margin-bottom: 20px; width: 100%;">
-                <form method="post" style="all:initial;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
+            <div class="container-buscador">
+                <button type='submit' class='btn-menu' name=''>    
+                    <img src='/images/menu.png' class='boton-icono-menu' alt='Borrar'>
+                </button>
+                <form method="post" style="all:initial; width: 100%;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar alumno" name="txtFindUser">
                 </form>
                 <!-- Botón de Filtros -->

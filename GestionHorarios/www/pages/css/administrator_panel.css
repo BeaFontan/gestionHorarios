@@ -35,7 +35,7 @@ h2 {
   border: solid var(--color-primario) 2px;
   border-radius: 20px;
   padding-bottom: 50px; /* Para evitar que el icono quede pegado */
-  height: auto;
+  height: 2000px;
 }
 
 .circle {
@@ -182,7 +182,7 @@ h2 {
   border-radius: 20px;
   padding: 25px;
   overflow-y: auto; /* Esto agrega scroll solo en el eje vertical cuando sea necesario */
-  height: auto;
+  height: 2000px;
 }
 
 /* Estilo para los usuarios */
@@ -270,6 +270,13 @@ h2 {
 .pic {
   border: 3px solid var(--color-primario);
   width: 60%;
+  border-radius: 80%;
+  margin-bottom: 10px;
+}
+
+.pic-crear{
+  border: 3px solid var(--color-primario);
+  width: 100px;
   border-radius: 80%;
   margin-bottom: 10px;
 }
@@ -620,6 +627,20 @@ p {
   background: #ebeeeb;
 }
 
+.btn-menu{
+ display: none;
+}
+
+.boton-icono-menu{
+  width: 35px;
+}
+
+.container-buscador{
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
 @media(max-width: 500px){
   body{
     margin: 0;
@@ -628,6 +649,11 @@ p {
   }
   .container-left{
     display: none;
+    display: flex;
+    position: absolute;
+    background-color: white;
+    justify-content: center;
+    z-index: 20;
   }
 
   .container-rigth{
@@ -674,8 +700,9 @@ p {
   }
 
   .buscador{
-    width: 100%;
+    width: 90%;
     margin-top: 2%;
+    margin-left: 3%;
   }
 
   .row-edit{
@@ -711,5 +738,32 @@ p {
 
   .user-imagen{
     width: 20%;
+  }
+
+  .btn-menu{
+    display: block;
+    background-color: white;
+    border: 0px;
+    width: 11%;
+    margin-left: 2.5%;
+    margin-top: 1.5%;
+  }
+  
+  .container-buscador{
+    display: flex;
+  }
+
+  .pic-user {
+    border: 3px solid var(--color-primario);
+    width: 90px;
+    border-radius: 80%;
+    margin-bottom: 10px;
+  }
+
+  .circle{
+    width: 40%; 
+    border-radius: 80%; 
+    border: 2px solid var(--color-primario);
+    margin: 0;
   }
 }
