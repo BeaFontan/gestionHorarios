@@ -20,6 +20,7 @@ h2 {
   font-size: 2em;
   width: 100%;
   text-align: right;
+  padding-right: 35px;
 }
 
 /* Contenedor izquierdo */
@@ -181,7 +182,8 @@ h2 {
   border: solid var(--color-primario) 2px;
   border-radius: 20px;
   padding: 25px;
-  overflow-y: auto; /* Esto agrega scroll solo en el eje vertical cuando sea necesario */
+  /*overflow-y: auto; Esto agrega scroll solo en el eje vertical cuando sea necesario */
+  overflow-y: auto;
   height: 2000px;
 }
 
@@ -303,37 +305,22 @@ form {
 
 .btnCreateUser {
   position: fixed;
-  bottom: 10%;
-  right: 16%;
+  bottom: 7%;
+  right: 15%;
   background-color: var(--color-primario);
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: none;
-  font-size: 3rem;
-  color: var(--forty-color);
-  transition: transform 0s ease; /* Transición suave para el giro */
-}
-
-.btnCreateUser {
-  position: fixed;
-  bottom: 10%;
-  right: 16%;
-  background-color: var(--color-primario);
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   border: none;
   font-size: 3rem;
   color: var(--forty-color);
   transition: transform 0.5s ease, background-color 0.3s ease; /* Transición suave para rotación y color de fondo */
 }
-
 .btnCreateUser:hover {
   transform: rotate(180deg); /* Rota el botón 180 grados cuando hace hover */
   background-color: var(
     --second-color
-  ); /* Cambia el color de fondo al hacer hover */
+  );
 }
 
 .logout {
@@ -353,7 +340,7 @@ form {
   color: var(--tertiary-color);
   appearance: none;
   cursor: pointer;
-  width: 78%;
+  width: 100%;
   height: 30px;
   position: relative;
 }
@@ -362,23 +349,6 @@ form {
   background-color: #f0f8ff4a; /* Cambia el color de fondo cuando se selecciona */
   border-color: var(--second-color);
   outline: none;
-}
-
-.btnFiltrar {
-  background-color: var(--color-primario);
-  padding: 5px 5px;
-  border-radius: 12px;
-  border: none;
-  font-size: 14px;
-  color: var(--forty-color);
-  appearance: none;
-  cursor: pointer;
-  width: 10%;
-  height: 30px;
-}
-
-.btnFiltrar:hover {
-  background-color: var(--second-color);
 }
 
 .user-imagen {
@@ -594,6 +564,13 @@ p {
   animation: fadeOut 5s forwards;
 }
 
+
+.ciclo-header{
+  margin-right: 6%;
+  margin-left: 6%;
+  width: 100%;
+}
+
 @keyframes fadeOut {
   0% {
     opacity: 1;
@@ -627,6 +604,11 @@ p {
   background: #ebeeeb;
 }
 
+/* Ocultar la barra de desplazamiento */
+::-webkit-scrollbar {
+  display: none;
+}
+
 .btn-menu{
  display: none;
 }
@@ -639,7 +621,22 @@ p {
   text-align: center;
   margin-bottom: 20px;
   width: 100%;
+  padding-left: 6%;
+  padding-right: 6%;
 }
+
+.overlay{
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: absolute;
+  background-color: rgba(0,0,0,0.35);
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 19;
+}
+
 
 @media(max-width: 500px){
   body{
@@ -649,7 +646,6 @@ p {
   }
   .container-left{
     display: none;
-    display: flex;
     position: absolute;
     background-color: white;
     justify-content: center;
@@ -700,7 +696,7 @@ p {
   }
 
   .buscador{
-    width: 90%;
+    width: 94%;
     margin-top: 2%;
     margin-left: 3%;
   }
@@ -747,10 +743,14 @@ p {
     width: 11%;
     margin-left: 2.5%;
     margin-top: 1.5%;
+    z-index: 20;
+    border-radius: 20%;
   }
   
   .container-buscador{
     display: flex;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .pic-user {
@@ -762,8 +762,20 @@ p {
 
   .circle{
     width: 40%; 
-    border-radius: 80%; 
-    border: 2px solid var(--color-primario);
-    margin: 0;
+    border-radius: 80%;
+    margin: 2%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .container{
+    justify-content: center;
+  }
+  
+  .btnCreateUser {
+    bottom: 14%;
+    right: 8%;
+    width: 80px;
+    height: 80px;
   }
 }

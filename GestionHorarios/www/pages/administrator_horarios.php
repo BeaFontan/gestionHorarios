@@ -97,8 +97,8 @@ if (isset($_POST["btnGuardar"])) {
         <?php include_once('partials/container_left.php') ?>
 
         <div class="container-rigth">
-            <form id="filter-form" method="post">
-                <div style="text-align: center; margin-bottom: 20px; width: 100%;">
+            <form id="filter-form" style="all: initial;" method="post">
+                <div class="container-drops">
                     <select class="dropdownCiclo" name="ciclo" id="ciclo">
                         <option value="">Selecciona Ciclo</option>
                         <?php
@@ -108,10 +108,7 @@ if (isset($_POST["btnGuardar"])) {
                         }
                         ?>
                     </select>
-                </div>
-
-                <div style="text-align: center; margin-bottom: 20px; width: 100%;">
-                    <select class="dropdownCurso" name="curso" id="curso">
+                    <select class="dropdownCiclo" name="curso" id="curso">
                         <option>Selecciona un curso</option>
                         <option value="first">Primer Año</option>
                         <option value="second">Segundo Año</option>
@@ -150,10 +147,13 @@ if (isset($_POST["btnGuardar"])) {
 
                         foreach ($sessionsByTime as $startTime => $sessionDays) {
                             $endTime = isset($sessionDays['end_time']) ? $sessionDays['end_time'] : ''; // Obtenemos la hora de fin correspondiente
-                            echo "<tr>";
 
-                            // ✅ Ahora la celda muestra start_time - end_time
-                            echo "<td class='horas'><b>{$startTime} - {$endTime}</b></td>";
+                            // Formateamos las horas
+                            $formattedStartTime = date('G:i', strtotime($startTime));  // Convierte la hora a formato 24h sin ceros a la izquierda
+                            $formattedEndTime = !empty($endTime) ? date('G:i', strtotime($endTime)) : '';  // Aplica lo mismo para la hora de fin
+
+                            echo "<tr>";
+                            echo "<td class='horas'><b>{$formattedStartTime} - {$formattedEndTime}</b></td>";
 
                             foreach ($diasSemana as $day) {
                                 echo "<td class='dropdownModulo'>";

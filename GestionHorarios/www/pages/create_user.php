@@ -59,11 +59,11 @@ if (!isset($_SESSION['user'])) {
                     </div>
                     <div class="row-crear">
                         <input type="email" class='inputs-form-add' name="txtEmail" placeholder="Email" required maxlength="100">
-                        <input type="tel" class='inputs-form-add' name="txtPhone" placeholder="Teléfono" pattern="\d{15}" maxlength="15" required>
+                        <input type="tel" class='inputs-form-add' name="txtPhone" placeholder="Teléfono" maxlength="15" minlength="9" required>
                     </div>
 
                     <div class="row-crear-guardar">
-                        <button type='submit' class='btnActualizar' name='btnSave'><b>GUARDAR</b></button>
+                    <button type="submit" class='btnActualizar' name="btnFormCreateUser" id="btnCreateUser">Guardar</button>
                     </div>
                 </form>
         </div>

@@ -45,6 +45,7 @@ foreach ($modulos as $modulo) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulos del Usuario</title>
     <link rel="stylesheet" href="../css/administrator_panel.css">
+    <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 
     <style>
         /* Estilos del icono que actúa como checkbox */
@@ -91,15 +92,16 @@ foreach ($modulos as $modulo) {
             <div class="mostrar-modulos">
                 <?php if (!empty($modulosPorCiclo)) : ?>
                     <?php foreach ($modulosPorCiclo as $ciclo => $modulosCiclo) : ?>
-                        <div class="ciclo-header"><?= htmlspecialchars($ciclo) ?></div>
+                        <div class="ciclo-header"><p class='texto-nombre'><strong><?= htmlspecialchars($ciclo) ?></strong></p></div>
+                        <br>
                         <?php foreach ($modulosCiclo as $modulo) : ?>
                             <div class='container-user container-check'>
                                 <div class='row'>
                                     <div class='user-imagen'>
-                                        <img src='/images/modulo.png' class='pic' alt='Módulo img'>
+                                        <img src='/images/asignatura.png' class='pic' alt='Módulo img'>
                                     </div>
                                     <div class='user-texto'>
-                                        <p class='texto-nombre'><strong><?= htmlspecialchars($modulo['name']) ?></strong></p>
+                                        <p class='texto-nombre'><?= htmlspecialchars($modulo['name']) ?></p>
                                         <p class='texto-descripcion'><?= htmlspecialchars($modulo['course']) ?></p>
                                     </div>
                                     <!-- Checkbox oculto para añadir/eliminar módulo -->
@@ -113,6 +115,7 @@ foreach ($modulos as $modulo) {
                                 </div>
                             </div>
                         <?php endforeach; ?>
+                        <br><br>
                     <?php endforeach; ?>
                 <?php else : ?>
                     <p>No tienes módulos asignados.</p>

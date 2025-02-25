@@ -189,19 +189,27 @@ form {
   font-size: 14px;  
   color: var(--tertiary-color);  
   cursor: pointer;  
-  width: 70%;  
+  width: 45%;  
   height: 30px;
   position: relative;
 }
 
-.dropdownCiclo::after {
+.container-drops{
+  text-align: center;
+  margin-bottom: 20px;
+  width: 100%;
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+/*.dropdownCiclo::after {
   content: '▼'; 
 
   font-size: 0.9em;  
   color: var(--tertiary-color); 
   position: absolute; 
   transform: translateY(-50%);
-}
+}*/
 
 /* Estilo base para el dropdown */
 .dropdownModulo {
@@ -246,12 +254,12 @@ table, th, td{
 
 /* Estilo base para las horas*/
 .horas {
-  background-color: #EBEEEB;
+  background-color: var(--color-primario);
   text-align: center;
   padding: 5px 10px;
   border-radius: 12px;
   font-size: 14px;  
-  color: var(--tertiary-color);  
+  color: var(--forty-color);  
   appearance: none; 
   width: 160px;  
   height: 40px;
@@ -269,6 +277,7 @@ table, th, td{
   width: 160px;  
   height: 30px;
 }
+
 /* Estilo base para el blanc space del título de los días de la semana */
 .cabeceraSemanaBlanc {
   background-color: var(--forty-color);

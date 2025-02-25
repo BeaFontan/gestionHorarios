@@ -1,15 +1,20 @@
 <?php
 if (strcmp($_SESSION["user"]["rol"], "admin") == 0) {
     echo '<!-- Contenedor izquierdo -->
-            <div class="container-left">
+            <div id="contIzq" class="container-left">
                 <div class="circle">
                     <img src="/images/user.png" class="pic-user" alt="Usuario">
                 </div>
                 
-                <h3>'.$_SESSION['user']['name'].'</h3>
-                <p>'.$_SESSION['user']['rol'].'</p>
+                <h3>'.$_SESSION['user']['name'].'</h3>';
 
-                <ul>
+                if ($_SESSION['user']['rol']=='student') {
+                    echo '<p>Alumno</p>';
+                }else{
+                    echo '<p>Administrativo</p>';
+                }
+
+              echo' <ul>
                     <li><a href="administrator_panel.php">ALUMNOS</a></li>
                     <li><a href="administrator_vocational_trainings.php">CICLOS</a></li>
                     <li><a href="administrator_modules.php">MODULOS</a></li>
@@ -25,15 +30,19 @@ if (strcmp($_SESSION["user"]["rol"], "admin") == 0) {
             </div>';
 }else {
     echo '<!-- Contenedor izquierdo -->
-            <div class="container-left">
+            <div id="contIzq" class="container-left">
                 <div class="circle">
                     <img src="/images/user.png" class="pic-user" alt="Usuario">
                 </div>
                 
-                <h3>'.$_SESSION['user']['name'].'</h3>
-                <p>'.$_SESSION['user']['rol'].'</p>
+                  <h3>'.$_SESSION['user']['name'].'</h3>';
 
-                <ul>
+                if ($_SESSION['user']['rol']=='student') {
+                    echo '<p>Alumno</p>';
+                }else{
+                    echo '<p>Administrativo</p>';
+                };
+                echo '<ul>
                     <li><a href="../student/student_vocational_trainings.php">CICLOS</a></li>
                     <li><a href="../student/student_modules.php">MODULOS</a></li>
                     <li><a href="../student/student_horarios.php">HORARIOS</a></li>

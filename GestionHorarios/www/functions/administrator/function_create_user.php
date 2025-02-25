@@ -1,14 +1,9 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['user'])) {
-    header('Location: login.php');
-    exit();
-}
-
 include('../connection.php');
 
-if (isset($_POST["btnCreateUser"])) {
+if (isset($_POST["btnFormCreateUser"])) {
     $name = $_POST["txtName"];
     $firstName = $_POST["txtFirstName"];
     $secondName = $_POST["txtSecondName"];

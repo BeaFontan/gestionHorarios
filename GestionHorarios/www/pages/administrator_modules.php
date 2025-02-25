@@ -54,16 +54,13 @@ if (isset($_POST["btnUpdate"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administrador</title>
-    <link rel="stylesheet" href="../pages/css/administrator_panel.css">
+    <link rel="stylesheet" href="../../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 
-    <style>
-
-
-</style>
 </head>
 
 <body>
+    <div id="overlay" class="overlay"></div>
 <?php if (isset($_SESSION['mensaxe'])): ?>
     <div class="tooltip-container">
         <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
@@ -80,36 +77,16 @@ if (isset($_POST["btnUpdate"])) {
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
-            <div style="text-align: center; margin-bottom: 20px; width: 100%;">
-                <form method="post" style="all:initial;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
+            <div class="container-buscador">
+                <input type="text" id="checkMenu" value="0" hidden>
+                <button onclick="menu()" class='btn-menu' name=''>    
+                    <img src='/images/menu.png' class='boton-icono-menu' alt='Borrar'>
+                </button>
+                <form method="post" style="all:initial; width: 100%;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar módulo" name="txtFindModules">
                 </form>
-
-                <!-- Botón de Filtros -->
-                <button class="btnFiltrar" type="button" onclick="toggleFilters()"><i class="fa fa-filter" style="margin-right: 5px;" aria-hidden="true"></i> Filtros</button>
             </div>
 
-            <!-- Contenedor de los filtros, inicialmente oculto -->
-            <div id="filters" style="display:none;">
-                <form id="filter-form">
-                    <label for="ciclo">Selecciona Ciclo</label>
-                    <select name="ciclo" id="ciclo" onchange="loadModulos(this.value)">
-                        <option value="">Selecciona Ciclo</option>
-                        <?php
-                        if ($arrayVocationalTrainings) {
-                            foreach ($arrayVocationalTrainings as $ciclo) {
-                                echo "<option value='" . $ciclo['vocational_training_id'] . "'>" . $ciclo["course_name"] . "</option>";
-                            }
-                        }
-                        ?>
-                    </select>
-
-                    <label for="modulo">Selecciona Módulo</label>
-                    <select name="modulo" id="modulo">
-                        <option value="">Selecciona Módulo</option>
-                    </select>
-                </form>
-            </div>
 
             <div class="mostrar-modulos">
                 <?php
@@ -277,6 +254,7 @@ if (isset($_POST["btnUpdate"])) {
 
     <script src="../js/find_modules.js"></script>
     <script src="../js/selector_menu.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 
 </html>
