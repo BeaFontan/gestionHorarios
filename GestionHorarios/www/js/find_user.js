@@ -29,8 +29,7 @@ document.getElementById("buscar").addEventListener("input", function(event) {
                                     <img src='/images/user.png' class='pic' alt='Usuario img'>
                                 </div>
                                 <div class='user-texto'>
-                                    <p class='texto-nombre'>${item.name} ${item.first_name} </p>
-                                    <p class='texto-ciclo'>ciclo</p>
+                                    <p class='texto-nombre'>${item.name} ${item.first_name} ${item.second_name} </p>
                                 </div>
 
                         <div class='user-botones'>
@@ -92,8 +91,7 @@ document.getElementById("buscar").addEventListener("input", function(event) {
                         <img src='/images/user.png' class='pic' alt='Usuario img'>
                     </div>
                     <div class='user-texto'>
-                        <p class='texto-nombre'>${item.name} ${item.first_name} </p>
-                        <p class='texto-ciclo'>ciclo</p>
+                        <p class='texto-nombre'>${item.name} ${item.first_name} ${item.second_name} </p>
                     </div>
 
             <div class='user-botones'>

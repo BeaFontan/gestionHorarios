@@ -51,19 +51,15 @@ if (!isset($_SESSION['user'])) {
                     
                     <div class="row-crear">
                         <input class='inputs-form-add' type="text" name="txtCourse_code" placeholder="Código ciclo" required maxlength="50">
-                        <input class='inputs-form-add' type="text" name="txtAcronym" placeholder="Siglas" required maxlength="5">
-                    </div>
-                    
-                    <div class="row-crear">
                         <input class='inputs-form-add' type="text" name="txtName" placeholder="Nombre del Ciclo" maxlength="100">
-                        <select class='inputs-form-add-select' name="selectModality" required>
+                    </div>
+
+                    <div class="row-crear">
+                    <select class='inputs-form-add-select' name="selectModality" required>
                             <option value="ordinary">Ordinario</option>
                             <option value="modular">Modular</option>
                             <option value="dual">Dual</option>
                         </select>
-                    </div>
-
-                    <div class="row-crear">
                         <select class='inputs-form-add-select' name="selectType" required>
                             <option value="medium">Medio</option>
                             <option value="higher">Superior</option>

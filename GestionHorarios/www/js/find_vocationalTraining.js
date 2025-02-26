@@ -37,9 +37,7 @@ document.getElementById("buscar").addEventListener("input", function (event) {
                   <div class='user-botones'>
                     <form method='post'>
                       <input type='hidden' name='id' value='${item.id}'>
-                      <input type='hidden' name='name' value='${item.course_name}'>
                       <input type='hidden' name='course_code' value='${item.course_code}'>
-                      <input type='hidden' name='acronym' value='${item.acronym}'>
                       <input type='hidden' name='course_name' value='${item.course_name}'>
                       <input type='hidden' name='modality' value='${item.modality}'>
                       <input type='hidden' name='type' value='${item.type}'>
@@ -92,7 +90,7 @@ document.getElementById("buscar").addEventListener("input", function (event) {
                   </div>
                   <div class='user-texto'>
                     <p class='texto-nombre'>${item.course_name} ${item.modality} </p>
-                    <p class='texto-ciclo'>ciclo</p>
+        
                   </div>
 
                   <div class='user-botones'>

@@ -118,7 +118,6 @@ if (isset($_POST["btnUpdate"])) {
                             foreach ($arrayVocationalTrainings as $vocationalTrining) {
                                 if ($professor["id"] === $professor_id && $vocationalTrining["id"] === $vocational_training_id) {
                                     if ($course == "first" ) {
-    
                                         echo "<p class='texto-ciclo'>".$professor["name"]. ' '. $professor["first_name"].' - 1º '.$vocationalTrining["course_name"].'</p>';
                                     } else {
                                         echo "<p class='texto-ciclo'>".$professor["name"]. ' '. $professor["first_name"].' - 2º ' .$vocationalTrining["course_name"].'</p>';
@@ -153,30 +152,29 @@ if (isset($_POST["btnUpdate"])) {
                                 </div>
                             
                                 <div class='row-edit' style='margin-left: 3.5%;'>
-                                    <select class='inputs-form-select' name='selectProfessor' id='selectProfessor' required onchange='updateHiddenProfessor()'>";
-                                        if (!empty($arrayProfessors)) {
-                                            foreach ($arrayProfessors as $professor) {
-                                                echo "<option value='{$professor['id']}'>" . htmlspecialchars($professor['name'] . ' ' . $professor['first_name']) . "</option>";
-                                            }
-                                        } else {
-                                            echo "<option value=''>No hay profesores disponibles</option>";
+                                         <select class='inputs-form-select' name='selectProfessor' required>
+                                        ";
+                                        foreach ($arrayProfessors as $professor) {
+                                            $selected = ($professor['id'] == $professor_id) ? "selected" : "";
+                                            echo "<option value='{$professor['id']}' $selected>{$professor['name']} {$professor['first_name']}</option>";
                                         }
-                                    echo "</select>
-
-                                    <select class='inputs-form-select' name='selectVocationalTraining' id='selectVocationalTraining' required onchange='updateHiddenVocationalTrining()'>";
-                                        if (!empty($arrayVocationalTrainings)) {
-                                            foreach ($arrayVocationalTrainings as $vocationalTrining) {
-                                                echo "<option value='{$vocationalTrining['id']}'>" . htmlspecialchars($vocationalTrining['course_name']) . "</option>";
-                                            }
-                                        } else {
-                                            echo "<option value=''>No hay ciclos disponibles</option>";
-                                        }
-                                    echo "</select>
-
-                                    <select class='inputs-form-select' name='selectCourse' >
-                                        <option value='first' " . (isset($selectCourse) && $selectCourse == 'first' ? 'selected' : '') . ">Primeiro</option>
-                                        <option value='second' " . (isset($selectCourse) && $selectCourse == 'second' ? 'selected' : '') . ">Segundo</option>
+                                        echo "
                                     </select>
+
+                                    <select class='inputs-form-select' name='selectVocationalTraining' required>
+                                        ";
+                                        foreach ($arrayVocationalTrainings as $vocationalTrining) {
+                                            $selected = ($vocationalTrining['id'] == $vocational_training_id) ? "selected" : "";
+                                            echo "<option value='{$vocationalTrining['id']}' $selected>{$vocationalTrining['course_name']}</option>";
+                                        }
+                                        echo "
+                                    </select>
+
+                                    <select class='inputs-form-select' name='selectCourse'>
+                                        <option value='first' <?php echo (isset($selectCourse) && $selectCourse == 'first') ? 'selected' : ''; ?>Primeiro</option>
+                                        <option value='second' <?php echo (isset($selectCourse) && $selectCourse == 'second') ? 'selected' : ''; ?>Segundo</option>
+                                    </select>
+
                                 </div>
                         
                                 <div class='row-guardar'>

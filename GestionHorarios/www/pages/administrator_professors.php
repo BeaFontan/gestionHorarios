@@ -2,12 +2,8 @@
 session_start();
 
 include_once '../functions/connection.php';
-include_once '../functions/administrator/find_vocational_trainings.php';
-include_once '../functions/administrator/load_modules.php';
 
-$arrayVocationalTrainings = findVocationalTrainings($pdo);
-
-$sql = "SELECT * FROM users WHERE rol LIKE 'student'";
+$sql = "SELECT * FROM professors";
 $stmt = $pdo->query($sql);
 
 // Inicializamos variables
@@ -22,8 +18,6 @@ if (isset($_POST["btnUpdate"])) {
     $name = $_POST["name"];
     $firstName = $_POST["first_name"];
     $secondName = $_POST["second_name"];
-    $phone = $_POST["telephone"];
-    $dni = $_POST["dni"];
     $email = $_POST["email"];
 }
 ?>
@@ -48,7 +42,7 @@ if (isset($_POST["btnUpdate"])) {
         <?php unset($_SESSION['mensaxe']); ?>
     <?php endif; ?>
 
-    <h2>Alumnos</h2>
+    <h2>Profesores</h2>
 
     <div class="container">
 
@@ -63,40 +57,17 @@ if (isset($_POST["btnUpdate"])) {
                     <img src='/images/menu.png' class='boton-icono-menu' alt='Borrar'>
                 </button>
                 <form method="post" style="all:initial; width: 100%;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
-                    <input class="buscador" type="text" id="buscar" placeholder="Buscar alumno" name="txtFindUser">
+                    <input class="buscador" type="text" id="buscar" placeholder="Buscar profesor" name="txtFindProfessor">
                 </form>
             </div>
 
-            <!-- Contenedor de los filtros, inicialmente oculto -->
-            <!-- <div id="filters" style="display:none;">
-                <form id="filter-form">
-                    <label for="ciclo">Selecciona Ciclo</label>
-                    <select name="ciclo" id="ciclo" onchange="loadModulos(this.value)">
-                        <option value="">Selecciona Ciclo</option>
-                        <?php
-                        //if ($arrayVocationalTrainings) {
-                           // foreach ($arrayVocationalTrainings as $ciclo) {
-                              //  echo "<option value='" . $ciclo['vocational_training_id'] . "'>" . $ciclo["course_name"] . "</option>";
-                            //}
-                        //}
-                        ?>
-                    </select>
-
-                    <label for="modulo">Selecciona Módulo</label>
-                    <select name="modulo" id="modulo">
-                        <option value="">Selecciona Módulo</option>
-                    </select>
-                </form>
-            </div> -->
-            <div class="mostrar-users">
+            <div class="mostrar-profesores">
                 <?php
                 while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     $id = $fila['id'];
                     $name = $fila['name'];
                     $firstName = $fila['first_name'];
                     $secondName = $fila['second_name'];
-                    $telephone = $fila['second_name'];
-                    $dni = $fila['dni'];
                     $email = $fila['email'];
 
                     echo "<div class='container-user'>
@@ -106,6 +77,7 @@ if (isset($_POST["btnUpdate"])) {
                                 </div>
                               <div class='user-texto'>
                                     <p class='texto-nombre'>$name $firstName $secondName</p>
+                                    <p class='texto-ciclo'>$email</p>
                                 </div>";
 
                     if ($editUserId == $id) {
@@ -121,7 +93,7 @@ if (isset($_POST["btnUpdate"])) {
                                 </div>
                             </div>
                         <div class='user-editar'>
-                            <form action='../functions/administrator/function_update_user.php' style='all:initial; width: 100%;' method='post'>
+                            <form action='../functions/professors/function_update_professor.php' style='all:initial; width: 100%;' method='post'>
                                 <div class='row-edit' style='margin-left: 3.5%;'>
                                     <input type='hidden' class='inputs-form' name='id' value='$id'>
                                     <input type='text' class='inputs-form' name='txtName' value='$name' required><br>
@@ -129,9 +101,7 @@ if (isset($_POST["btnUpdate"])) {
                                     <input type='text' class='inputs-form' name='txtSecondName' value='$secondName' placeholder='Segundo Apelido' ><br>
                                 </div>
                                 <div class='row-edit' style='margin-left: 3.5%;'>
-                                    <input type='number' class='inputs-form' name='txtTelephone' value='$telephone' placeholder='Teléfono' ><br>
                                     <input type='email' class='inputs-form' name='txtEmail' value='$email' placeholder='Email' ><br>
-                                    <input type='text' class='inputs-form' name='txtDNI' value='$dni' placeholder='DNI' required><br>
                                 </div>
 
                                 <div class='row-guardar'>
@@ -149,16 +119,13 @@ if (isset($_POST["btnUpdate"])) {
                                 <input type='hidden' name='first_name' value='$firstName'>
                                 <input type='hidden' name='second_name' value='$secondName'>
                                 <input type='hidden' name='email' value='$email'>
-                                <input type='hidden' name='telephone' value='$telephone'>
-                                <input type='hidden' name='dni' value='$dni'>
-                            
                                 
                                 <button type='submit' class='btn' name='btnUpdate'>
                                     <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
                                     <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
                                 </button>
                             </form>
-                            <form method='post' action='../functions/administrator/function_delete_user.php'>
+                            <form method='post' action='../../functions/professors/function_delete_professor.php'>
                                 <input type='hidden' name='id' value='$id'>
                                 <button type='submit' class='btn-delete' name='btnDelete'>    
                                     <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
@@ -175,14 +142,12 @@ if (isset($_POST["btnUpdate"])) {
         </div>
     </div>
 
-    <form action="create_user.php">
-        <button name="btnCreateUser" class="btnCreateUser">+</button>
+    <form action="administrator_create_professor.php">
+        <button name="btnCreateProffesor" class="btnCreateUser">+</button>
     </form>
 
-    <script src="../js/find_user.js"></script>
-
+    <script src="../js/find_professors.js"></script>
     <script src="../js/selector_menu.js"></script>
-
     <script src="../js/menu.js"></script>
 
 </body>

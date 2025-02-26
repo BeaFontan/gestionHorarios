@@ -16,6 +16,7 @@ if (strcmp($_SESSION["user"]["rol"], "admin") == 0) {
 
               echo' <ul>
                     <li><a href="administrator_panel.php">ALUMNOS</a></li>
+                    <li><a href="administrator_professors.php">PROFESORES</a></li>
                     <li><a href="administrator_vocational_trainings.php">CICLOS</a></li>
                     <li><a href="administrator_modules.php">MODULOS</a></li>
                     <li><a href="administrator_horarios.php">HORARIOS</a></li>

@@ -205,6 +205,11 @@ h2 {
   flex-wrap: wrap;
 }
 
+.mostrar-profesores {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .container-user {
   display: flex;
   flex-direction: column;
