@@ -532,9 +532,9 @@ p {
 
 /* toltip de errores */
 .tooltip-container {
-  position: fixed; /* Fijo en pantalla */
-  left: 20%;
-  top: 80px; /* Ajusta la distancia desde arriba */
+  position: fixed; 
+  left: 19.5%;
+  top: 45px; 
   transform: translateX(-50%);
   z-index: 9999; /* Aparece por encima de todo */
 }
@@ -548,7 +548,7 @@ p {
   font-size: 14px;
   white-space: nowrap;
   opacity: 1;
-  transition: opacity 3s ease-in-out;
+  transition: opacity 5s ease-in-out;
 }
 
 /* Animación de desaparición */

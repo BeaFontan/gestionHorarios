@@ -155,51 +155,60 @@ if ($selectedCycle) {
     <!-- Agregar jsPDF y html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="../js/selector_menu.js"></script>
+    <script src="../../js/selector_menu.js"></script>
     
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const cicloSelect = document.getElementById("ciclo");
-        const form = document.getElementById("filter-form");
+document.addEventListener("DOMContentLoaded", function() {
+    const cicloSelect = document.getElementById("ciclo");
+    const form = document.getElementById("filter-form");
 
-        const selectedCiclo = document.getElementById("selectedCiclo").value;
-        if (selectedCiclo) {
-            cicloSelect.value = selectedCiclo;
-        }
+    const selectedCiclo = document.getElementById("selectedCiclo").value;
+    if (selectedCiclo) {
+        cicloSelect.value = selectedCiclo;
+    }
 
-        cicloSelect.addEventListener("change", function() {
-            form.submit();
-        });
+    cicloSelect.addEventListener("change", function() {
+        form.submit();
+    });
 
-        // Obtener el nombre del alumno desde PHP sin mostrarlo en el HTML
-        const alumnoNombre = "<?php echo htmlspecialchars($_SESSION['user']['name']); ?>";
+    // Obtener el nombre del alumno desde PHP sin mostrarlo en el HTML
+    const alumnoNombre = "<?php echo htmlspecialchars($_SESSION['user']['name']); ?>";
 
-        // Función para exportar a PDF con título y nombre del alumno
-        document.getElementById("export-pdf").addEventListener("click", function () {
-            const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
+    document.getElementById("export-pdf").addEventListener("click", function () {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
 
-            const timetable = document.getElementById("horario");
-            const cicloSeleccionado = cicloSelect.options[cicloSelect.selectedIndex].text; // Obtener el ciclo seleccionado
+        const timetable = document.getElementById("horario");
+        const cicloSeleccionado = cicloSelect.options[cicloSelect.selectedIndex].text;
 
-            // Añadir el título y el nombre del alumno al PDF (pero NO en el HTML)
-            doc.setFontSize(18);
-            doc.text("Horario del Alumno", 140, 20, null, null, "center");
-            doc.setFontSize(12);
-            doc.text("Alumno: " + alumnoNombre, 140, 30, null, null, "center");
-            doc.text("Ciclo seleccionado: " + cicloSeleccionado, 140, 40, null, null, "center");
+        // Añadir el título y el nombre del alumno al PDF
+        doc.setFontSize(18);
+        doc.text("Horario del Alumno", 140, 20, null, null, "center");
+        doc.setFontSize(12);
+        doc.text("Alumno: " + alumnoNombre, 140, 30, null, null, "center");
+        doc.text("Ciclo seleccionado: " + cicloSeleccionado, 140, 40, null, null, "center");
 
-            // Convertir la tabla a imagen y agregarla al PDF
-            html2canvas(timetable, { scale: 2 }).then(canvas => {
-                const imgData = canvas.toDataURL("image/png");
-                const imgWidth = 280;
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+        // 🔥 Forzar estilos de desktop antes de capturar
+        const originalStyles = timetable.style.cssText; // Guardar estilos actuales
+        timetable.style.width = "1200px"; // Forzar ancho de escritorio
+        timetable.style.maxWidth = "none";
+        timetable.style.fontSize = "16px"; // Evitar textos pequeños de móvil
 
-                doc.addImage(imgData, "PNG", 10, 50, imgWidth, imgHeight);
-                doc.save("horario_alumno.pdf");
-            });
+        // Capturar la tabla con html2canvas
+        html2canvas(timetable, { scale: 2 }).then(canvas => {
+            // Restaurar los estilos originales
+            timetable.style.cssText = originalStyles;
+
+            const imgData = canvas.toDataURL("image/png");
+            const imgWidth = 280;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+            doc.addImage(imgData, "PNG", 10, 50, imgWidth, imgHeight);
+            doc.save("horario_alumno.pdf");
         });
     });
+});
+
 </script>
 </body>
 
