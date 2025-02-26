@@ -44,7 +44,7 @@ if (!isset($_SESSION['user'])) {
                 <form style="width: 100%;" action="../functions/vocational_trainings/function_create_vocational_training.php" method="post">
                     <br><br>
                     <div>
-                        <img src='/images/ciclo.png' class='pic' alt='Usuario img'>
+                        <img src='/images/ciclo.png' class='pic-crear' alt='Usuario img'>
                     </div>
 
                     <br><br>

@@ -66,7 +66,7 @@ function get_vocational_trainings($pdo)
             <form style="width: 100%;" action="../functions/modules/function_create_modules.php" method="post">
                 <br><br>
                 <div>
-                    <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                    <img src='/images/asignatura.png' class='pic-crear' alt='Usuario img'>
                     <!-- <p style="font-size: 90px; margin-left: 10px;">+</p> -->
                 </div>
 

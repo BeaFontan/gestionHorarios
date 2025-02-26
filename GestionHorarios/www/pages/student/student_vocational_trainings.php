@@ -81,7 +81,7 @@ $stmt = $pdo->query($sql);
                         <div class='container-user container-check'>
                             <div class='row'>
                                 <div class='user-imagen'>
-                                    <img src='/images/asignatura.png' class='pic' alt='Usuario img'>
+                                    <img src='/images/ciclo.png' class='pic' alt='Módulo img'>
                                 </div>
                                 <div class='user-texto'>
                                     <p class='texto-nombre'><?= htmlspecialchars($fila['course_name']) ?></p>

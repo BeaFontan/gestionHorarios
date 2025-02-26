@@ -1,7 +1,7 @@
 <?php
 if (strcmp($_SESSION["user"]["rol"], "admin") == 0) {
     echo '<!-- Contenedor izquierdo -->
-            <div class="container-left">
+            <div id="contIzq" class="container-left">
                 <div class="circle">
                     <img src="/images/user.png" class="pic-user" alt="Usuario">
                 </div>
@@ -30,7 +30,7 @@ if (strcmp($_SESSION["user"]["rol"], "admin") == 0) {
             </div>';
 }else {
     echo '<!-- Contenedor izquierdo -->
-            <div class="container-left">
+            <div id="contIzq" class="container-left">
                 <div class="circle">
                     <img src="/images/user.png" class="pic-user" alt="Usuario">
                 </div>

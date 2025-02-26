@@ -43,7 +43,7 @@ if (!isset($_SESSION['user'])) {
                 <form style="width: 100%;" action="../functions/administrator/function_create_user.php" method="post">
                     <br><br>
                     <div>
-                        <img src='/images/user.png' class='pic' alt='Usuario img'>
+                        <img src='/images/user.png' class='pic-crear' alt='Usuario img'>
                         <!-- <p style="font-size: 90px; margin-left: 10px;">+</p> -->
                     </div>
 

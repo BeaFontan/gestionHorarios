@@ -60,6 +60,7 @@ if (isset($_POST["btnUpdate"])) {
 </head>
 
 <body>
+    <div id="overlay" class="overlay"></div>
 <?php if (isset($_SESSION['mensaxe'])): ?>
     <div class="tooltip-container">
         <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
@@ -76,8 +77,12 @@ if (isset($_POST["btnUpdate"])) {
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
-            <div style="text-align: center; margin-bottom: 20px; width: 100%;">
-                <form method="post" style="all:initial;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
+            <div class="container-buscador">
+                <input type="text" id="checkMenu" value="0" hidden>
+                <button onclick="menu()" class='btn-menu' name=''>    
+                    <img src='/images/menu.png' class='boton-icono-menu' alt='Borrar'>
+                </button>
+                <form method="post" style="all:initial; width: 100%;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar módulo" name="txtFindModules">
                 </form>
             </div>
@@ -249,6 +254,7 @@ if (isset($_POST["btnUpdate"])) {
 
     <script src="../js/find_modules.js"></script>
     <script src="../js/selector_menu.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 
 </html>
