@@ -83,6 +83,9 @@ function get_vocational_trainings($pdo)
                         <option value="second">Segundo</option>
                     </select>
                     <input class='inputs-form-add' type="number" name="txtSessions" placeholder="Nº de sesións">
+                    <input class='inputs-form-add' type="text" name="txtModuleAcronym" placeholder="Sigras">
+                    <input class='inputs-form-add' type="number" name="txtCLassRoom" placeholder="Aula">
+
                 </div>
 
                 <div class="row-crear">
@@ -122,6 +125,9 @@ function get_vocational_trainings($pdo)
 
         </div>
     </div>
+
+    <script src="../js/selector_menu.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 
 </html>

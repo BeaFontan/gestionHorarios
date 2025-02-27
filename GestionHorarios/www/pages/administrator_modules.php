@@ -44,6 +44,10 @@ if (isset($_POST["btnUpdate"])) {
     $name = $_POST['name'];
     $selectCourse = $_POST['selectCourse'];
     $sessions_number = $_POST['sessions_number'];
+    $classRoom=$_POST['classroom'];
+    $color=$_POST['color'];
+    $module_acronym=$_POST['module_acronym'];
+
 }
 ?>
 
@@ -100,10 +104,13 @@ if (isset($_POST["btnUpdate"])) {
                     $professor_id = $fila['professor_id'];
                     $vocational_training_id = $fila['vocational_training_id'];
                     $module_code = $fila['module_code'];
+                    $module_acronym = $fila['module_acronym'];
                     $name = $fila['name'];
                     $course = $fila['course'];
                     $sessions_number = $fila['sessions_number'];
                     $course_name = "";
+                    $classRoom = $fila['classroom'];
+                    $color = $fila['color'];
 
                     echo "<div class='container-user'>
                             <div class='row'>
@@ -111,7 +118,11 @@ if (isset($_POST["btnUpdate"])) {
                                     <img src='/images/asignatura.png' class='pic' alt='Asignatura img'>
                                 </div>
                                 <div class='user-texto'>
-                                    <p class='texto-nombre'>$name </p>";
+                                <p class='texto-nombre'>$name 
+                                <span class='color_circle' style='background-color: $color; display: inline-block; width: 15px; height: 15px; border-radius: 50%; margin-left: 5px;'></span>
+                                </p>";
+                               
+
 
                     if (!empty($arrayProfessors)) {
                         foreach ($arrayProfessors as $professor) {
@@ -126,6 +137,9 @@ if (isset($_POST["btnUpdate"])) {
                             }
                         }
                     }
+
+                    echo "<p class='texto-ciclo' style='font-size: 12px;'>$module_code - <strong>Clase:</strong> $classRoom - <strong>Nº sesiones:</strong> $sessions_number</p>";
+
 
                     echo "</div>";
 
@@ -146,9 +160,12 @@ if (isset($_POST["btnUpdate"])) {
                                 <input type='hidden' name='id' value='$id'>
 
                                 <div class='row-edit' style='margin-left: 3.5%;'>
-                                    <input class='inputs-form' type='text' name='txtModule_code' value='$module_code' required><br>
+                                    <input class='inputs-form' type='text' name='txtModule_code' value='$module_code' required placeholder='Código módulo'><br>
                                     <input class='inputs-form' type='text' name='txtModule_name' value='$name' placeholder='Nome'><br>
-                                    <input class='inputs-form' type='text' name='txtSessions_number' value='$sessions_number' placeholder='Modalidade'><br>
+                                    <input class='inputs-form' type='text' name='txtSessions_number' value='$sessions_number' placeholder='Nº sesiones'><br>
+                                    <input class='inputs-form' type='text' name='txtCLassRoom' value='$classRoom' placeholder='Aula'><br>
+                                    <input class='inputs-form' type='color' name='txtColor' value='$color' placeholder='Color'><br>
+                                    <input class='inputs-form' type='text' name='txtModuleAcronym' value='$module_acronym' placeholder='Sigras'><br>
                                 </div>
                             
                                 <div class='row-edit' style='margin-left: 3.5%;'>
@@ -174,7 +191,6 @@ if (isset($_POST["btnUpdate"])) {
                                         <option value='first' <?php echo (isset($selectCourse) && $selectCourse == 'first') ? 'selected' : ''; ?>Primeiro</option>
                                         <option value='second' <?php echo (isset($selectCourse) && $selectCourse == 'second') ? 'selected' : ''; ?>Segundo</option>
                                     </select>
-
                                 </div>
                         
                                 <div class='row-guardar'>
@@ -194,6 +210,10 @@ if (isset($_POST["btnUpdate"])) {
                                 <input type='hidden' name='name' value='$name'>
                                 <input type='hidden' name='selectCourse' value='" . (isset($selectCourse) ? $selectCourse : '') . "'>  <!-- Asegúrate de pasar el valor aquí -->
                                 <input type='hidden' name='sessions_number' value='$sessions_number'>
+                                <input type='hidden' name='classroom' value='$classRoom'>
+                                <input type='hidden' name='color' value='$color'>
+                                 <input type='hidden' name='module_acronym' value='$module_acronym'>
+
                         
                                 <button type='submit' class='btn' name='btnUpdate'>
                                     <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>

@@ -60,6 +60,8 @@ if (!isset($_SESSION['user'])) {
                 </form>
         </div>
     </div>
+    <script src="../js/selector_menu.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 
 </html>

@@ -7,7 +7,8 @@ include_once '../functions/administrator/load_modules.php';
 
 $arrayVocationalTrainings = findVocationalTrainings($pdo);
 
-$sql = "SELECT * FROM users WHERE rol LIKE 'student'";
+$sql = "SELECT * FROM users 
+        WHERE rol LIKE 'student'";
 $stmt = $pdo->query($sql);
 
 // Inicializamos variables
@@ -95,7 +96,7 @@ if (isset($_POST["btnUpdate"])) {
                     $name = $fila['name'];
                     $firstName = $fila['first_name'];
                     $secondName = $fila['second_name'];
-                    $telephone = $fila['second_name'];
+                    $telephone = $fila['telephone'];
                     $dni = $fila['dni'];
                     $email = $fila['email'];
 
@@ -106,6 +107,9 @@ if (isset($_POST["btnUpdate"])) {
                                 </div>
                               <div class='user-texto'>
                                     <p class='texto-nombre'>$name $firstName $secondName</p>
+                                    <p class='texto-ciclo'><strong>Dni: </strong>$dni</p>
+                                    <p class='texto-ciclo' style='font-size: 14px;'><strong>Email:</strong> $email </strong>- <strong>Teléfono:</strong> $telephone</p>
+
                                 </div>";
 
                     if ($editUserId == $id) {
@@ -124,14 +128,14 @@ if (isset($_POST["btnUpdate"])) {
                             <form action='../functions/administrator/function_update_user.php' style='all:initial; width: 100%;' method='post'>
                                 <div class='row-edit' style='margin-left: 3.5%;'>
                                     <input type='hidden' class='inputs-form' name='id' value='$id'>
-                                    <input type='text' class='inputs-form' name='txtName' value='$name' required><br>
-                                    <input type='text' class='inputs-form' name='txtFirstName' value='$firstName' placeholder='Primeiro Apelido' required><br>
-                                    <input type='text' class='inputs-form' name='txtSecondName' value='$secondName' placeholder='Segundo Apelido' ><br>
+                                    <input type='text' class='inputs-form' name='txtName' value='$name' maxlength='50' required><br>
+                                    <input type='text' class='inputs-form' name='txtFirstName' value='$firstName' placeholder='Primeiro Apelido'  maxlength='50' required><br>
+                                    <input type='text' class='inputs-form' name='txtSecondName' value='$secondName' placeholder='Segundo Apelido' maxlength='50'><br>
                                 </div>
                                 <div class='row-edit' style='margin-left: 3.5%;'>
                                     <input type='number' class='inputs-form' name='txtTelephone' value='$telephone' placeholder='Teléfono' ><br>
-                                    <input type='email' class='inputs-form' name='txtEmail' value='$email' placeholder='Email' ><br>
-                                    <input type='text' class='inputs-form' name='txtDNI' value='$dni' placeholder='DNI' required><br>
+                                    <input type='email' class='inputs-form' name='txtEmail' value='$email' placeholder='Email' maxlength='100' ><br>
+                                    <input type='text' class='inputs-form' name='txtDNI' value='$dni' placeholder='DNI' maxlength='9' required><br>
                                 </div>
 
                                 <div class='row-guardar'>

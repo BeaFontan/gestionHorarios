@@ -12,15 +12,40 @@ if (isset($_POST["btnDelete"])) {
 
     $id = $_POST["id"];
 
-    try {
-        $query = $pdo->prepare("DELETE FROM `users` WHERE id LIKE ?");
-        $query->execute([$id]);
+    $query = $pdo->prepare("select * from users_modules where user_id like ?");
+    $query->execute([$id]);
+    $userModule = $query->fetchAll();
 
-        $_SESSION['mensaxe'] = "Usuario eliminado correctamente";
+    $query = $pdo->prepare("select * from users_vocational_trainings where user_id like ?");
+    $query->execute([$id]);
+    $userVocationalTraining = $query->fetchAll();
 
+
+    if (!empty($userModule)) {
+        $_SESSION['mensaxe'] = "Non podes eliminar un alumno que está matriculado nun módulo";
         header('Location: ../../pages/administrator_panel.php');
         exit();
-    } catch (PDOException $e) {
-        $_SESSION['mensaxe'] = "Erro na eliminación de datos" . $e->getMessage();
+
+    }else if (!empty($userVocationalTraining)) {
+        $_SESSION['mensaxe'] = "Non podes eliminar un alumno que está matriculado nun ciclo";
+        header('Location: ../../pages/administrator_panel.php');
+        exit();
+        
+    }else {
+        try {
+            $query = $pdo->prepare("DELETE FROM `users` WHERE id LIKE ?");
+            $query->execute([$id]);
+    
+            $_SESSION['mensaxe'] = "Usuario eliminado correctamente";
+    
+            header('Location: ../../pages/administrator_panel.php');
+            exit();
+        } catch (PDOException $e) {
+            $_SESSION['mensaxe'] = "Erro na eliminación de datos" . $e->getMessage();
+        }
     }
+
+
+
+
 }

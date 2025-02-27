@@ -29,7 +29,7 @@ function actualizarModulos() {
             return;
         }
 
-        // Mapeo de módulos disponibles
+        // Crear el mapeo de módulos disponibles
         modulesMap = {};
         data.modules.forEach(mod => {
             modulesMap[mod.id] = {
@@ -39,28 +39,29 @@ function actualizarModulos() {
             };
         });
 
-        // Inicialización del uso de módulos
+        // Inicializar el contador de uso para cada módulo
         usage = {};
         Object.keys(modulesMap).forEach(modId => {
             usage[modId] = 0;
         });
 
-        // Llenar los selects de la tabla con los módulos disponibles
+        // Actualizar los selects que se encuentran en cada slide (vista móvil)
         const selects = document.querySelectorAll('select[name^="modules["]');
         selects.forEach(select => {
-            const sessionId = select.name.match(/modules\[(\d+)\]/)[1];
-            const assignedModId = data.assignedModules[sessionId] || "";
+            const sessionIdMatch = select.name.match(/modules\[(\d+)\]/);
+            const sessionId = sessionIdMatch ? sessionIdMatch[1] : null;
+            const assignedModId = (data.assignedModules && data.assignedModules[sessionId]) ? data.assignedModules[sessionId] : "";
 
             // Limpiar el select antes de agregar nuevas opciones
             select.innerHTML = "";
-            
+
             // Opción por defecto
             const defaultOption = document.createElement('option');
             defaultOption.value = "";
             defaultOption.textContent = "Selecciona Módulo";
             select.appendChild(defaultOption);
 
-            // Agregar opciones de módulos disponibles
+            // Agregar cada opción con sus atributos y color
             data.modules.forEach(mod => {
                 const option = document.createElement('option');
                 option.value = mod.id;
@@ -71,81 +72,80 @@ function actualizarModulos() {
                 // Si este módulo estaba asignado previamente, lo preseleccionamos
                 if (mod.id == assignedModId) {
                     option.selected = true;
-                    select.style.backgroundColor = mod.color; // Aplicar color
+                    select.style.backgroundColor = mod.color;
                 }
-
                 select.appendChild(option);
             });
 
-            // Guardamos el valor antiguo
+            // Guardar el valor anterior para luego comparar en cambios
             select.dataset.oldValue = assignedModId;
 
-            // Aumentamos el contador de uso del módulo asignado
+            // Incrementar contador si había un módulo asignado
             if (assignedModId) {
                 usage[assignedModId]++;
             }
         });
 
-        // Añadir listeners a los selects para gestionar cambios
+        // Añadir los listeners a los selects para controlar los cambios
         attachesSelectListeners();
 
-        // Aplicar los colores
+        // Aplicar el color de fondo a cada select y su contenedor
         aplicarColores();
+
+        // Si usas un slider (por ejemplo, Swiper), actualiza su instancia para reflejar los cambios
+        if (typeof swiper !== 'undefined' && swiper.update) {
+            swiper.update();
+        }
     })
     .catch(error => {
         console.error("Error al obtener módulos:", error);
     });
 }
 
-// Aplicar el color de fondo al select según la opción seleccionada
+// Función para aplicar el color de fondo al select según la opción seleccionada
 function aplicarColores() {
     document.querySelectorAll('select[name^="modules["]').forEach(select => {
-        const color = select.options[select.selectedIndex].getAttribute('data-color');
-        
-        // Pintar el fondo del select
+        const color = select.options[select.selectedIndex] ? select.options[select.selectedIndex].getAttribute('data-color') : '';
+        // Aplicar color al select
         select.style.backgroundColor = color || '';
 
-        // 🔥 También pintar el fondo de la celda <td> que contiene el select
-        const td = select.closest('td'); // Encuentra el <td> más cercano
-        if (td) {
-            td.style.backgroundColor = color || '';
+        // Si el select está contenido en un elemento (por ejemplo, una tarjeta o contenedor en la slide), aplicarle el color también
+        const container = select.closest('td') || select.closest('.session');
+        if (container) {
+            container.style.backgroundColor = color || '';
         }
     });
 }
 
-
-// Agregar listeners a los selects para controlar la validación de límite
+// Función para añadir los listeners a cada select
 function attachesSelectListeners() {
     document.querySelectorAll('select[name^="modules["]').forEach(select => {
-        select.removeEventListener('change', onSelectChange); // Eliminar cualquier listener previo
+        select.removeEventListener('change', onSelectChange); // Remover listeners previos
         select.addEventListener('change', onSelectChange);
     });
 }
 
-// Lógica para manejar cambios en los selects
+// Lógica para manejar el cambio en los selects y validar el límite de sesiones por módulo
 function onSelectChange(event) {
     const select = event.target;
     const newValue = select.value;            // Nuevo módulo seleccionado
-    const oldValue = select.dataset.oldValue; // Módulo que tenía antes
+    const oldValue = select.dataset.oldValue;   // Módulo que tenía asignado previamente
 
-    // Decrementar uso del módulo anterior
+    // Decrementar el contador del módulo anterior (si lo hubiera)
     if (oldValue) {
         usage[oldValue]--;
-        if (usage[oldValue] < 0) usage[oldValue] = 0; // Seguridad
+        if (usage[oldValue] < 0) usage[oldValue] = 0; // Por seguridad
     }
 
-    // Incrementar uso del nuevo módulo
+    // Incrementar el contador del nuevo módulo
     if (newValue) {
         usage[newValue]++;
-
-        // Verificar si supera el límite permitido
         const maxSessions = modulesMap[newValue].sessions_number;
         if (usage[newValue] > maxSessions) {
             alert(`Has superado el número máximo de sesiones para el módulo: ${modulesMap[newValue].name} (máximo: ${maxSessions})`);
-            
             // Revertir al valor anterior
             usage[newValue]--;
-            select.value = oldValue || ""; // Si no había oldValue, lo dejamos vacío
+            select.value = oldValue || "";
         } else {
             select.dataset.oldValue = newValue;
         }
@@ -153,10 +153,11 @@ function onSelectChange(event) {
         select.dataset.oldValue = "";
     }
 
-    // Aplicar color al nuevo valor seleccionado
+    // Reaplicar colores luego del cambio
     aplicarColores();
 }
 
+// Inicialización al cargar la página (o cuando se use el slider en la vista móvil)
 document.addEventListener("DOMContentLoaded", () => {
     const cicloSelect = document.getElementById("ciclo");
     const cursoSelect = document.getElementById("curso");
@@ -164,11 +165,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const cicloHidden = document.getElementById("cicloHidden");
     const cursoHidden = document.getElementById("cursoHidden");
 
-    // Función para actualizar los valores ocultos y cargar los módulos
+    // Actualizar los valores ocultos y recargar módulos al cambiar ciclo o curso
     function actualizarCicloCurso() {
         cicloHidden.value = cicloSelect.value;
         cursoHidden.value = cursoSelect.value;
-        actualizarModulos(); // 🔹 Asegurar que los módulos se vuelvan a cargar
+        actualizarModulos();
     }
 
     if (cicloSelect && cursoSelect) {
@@ -176,5 +177,6 @@ document.addEventListener("DOMContentLoaded", () => {
         cursoSelect.addEventListener("change", actualizarCicloCurso);
     }
 
-    actualizarModulos(); // 🔹 Cargar módulos al inicio
+    // Cargar los módulos al inicio
+    actualizarModulos();
 });
