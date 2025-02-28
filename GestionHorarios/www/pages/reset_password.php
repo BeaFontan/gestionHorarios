@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Resetear contrasinal</title>
+    <link rel="icon" type="image/png" href="../images/icono.png">
     <link rel="stylesheet" href="../pages/css/style.css" />
 </head>
 
@@ -21,8 +22,6 @@
     </div>
     <?php unset($_SESSION['mensaxe']); ?>
 <?php endif; ?>
-
-
 
     <form action="../functions/user/function_reset_password.php" method="post">
         <input

@@ -3,10 +3,8 @@
 include_once '../connection.php';
 
 try {
-    // Función para transformar los valores antes de enviarlos al frontend
     function transformData($data) {
         foreach ($data as &$item) {
-            // Transformar el campo "course" a "1º" o "2º"
             $item['course'] = ($item['course'] === 'first') ? "1º" : "2º";
         }
         return $data;
@@ -16,7 +14,6 @@ try {
         $searchField = strtolower($_POST["txtFindModules"]);
         $searchTerm = "%$searchField%";
 
-        // Realizamos la consulta con JOIN para obtener los nombres de profesor y ciclo formativo
         $query = $pdo->prepare("
             SELECT m.*, p.name AS professor_name, p.first_name AS professor_first_name, vt.course_name 
             FROM modules m
@@ -31,9 +28,9 @@ try {
         $query->execute([$searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm, $searchTerm]);
 
         $searchResults = $query->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode(transformData($searchResults)); // Aplicamos transformación
+        echo json_encode(transformData($searchResults));
     } else {
-        // Si no hay búsqueda, traemos todos los resultados con transformación
+       
         $query = $pdo->prepare("
             SELECT m.*, p.name AS professor_name, p.first_name AS professor_first_name, vt.course_name 
             FROM modules m
@@ -42,7 +39,7 @@ try {
         $query->execute();
 
         $allResults = $query->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode(transformData($allResults)); // Aplicamos transformación
+        echo json_encode(transformData($allResults));
     }
 } catch (PDOException $e) {
     $_SESSION['mensaxe'] = "Error buscando módulos: " . $e->getMessage();

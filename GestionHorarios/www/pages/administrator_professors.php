@@ -6,7 +6,6 @@ include_once '../functions/connection.php';
 $sql = "SELECT * FROM professors";
 $stmt = $pdo->query($sql);
 
-// Inicializamos variables
 $editUserId = null;
 $name = "";
 $firstName = "";
@@ -28,7 +27,8 @@ if (isset($_POST["btnUpdate"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administrador</title>
+    <title>Profesores</title>
+    <link rel="icon" type="image/png" href="../images/icono.png">
     <link rel="stylesheet" href="../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 </head>

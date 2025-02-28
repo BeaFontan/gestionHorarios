@@ -8,7 +8,6 @@ if (!isset($_SESSION['user'])) {
 
 include('../connection.php');
 
-
 if (isset($_POST["btnSave"])) {
 
     $idModuleToEdit = $_POST['id'];

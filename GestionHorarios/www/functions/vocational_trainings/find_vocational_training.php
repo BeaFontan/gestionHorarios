@@ -9,12 +9,11 @@ if (!isset($_SESSION['user'])) {
 include_once '../connection.php';
 
 try {
-    // Función para transformar los valores
     function transformData($data) {
         foreach ($data as &$item) {
-            // Transformamos "type"
+
             $item['type'] = ($item['type'] === 'higher') ? "Superior" : "Medio";
-            // Transformamos "modality"
+
             $item['modality'] = ($item['modality'] === 'ordinary') ? "Ordinario" : 
                                (($item['modality'] === 'modular') ? "Modular" : "Dual");
         }
@@ -25,7 +24,6 @@ try {
         $searchField = strtolower($_POST["txtFindVocationalTraining"]);
         $searchTerm = "%$searchField%";
 
-        // Consulta de búsqueda con parámetros
         $query = $pdo->prepare("SELECT * FROM vocational_trainings 
                                 WHERE LOWER(course_code) LIKE ? 
                                 OR LOWER(course_name) LIKE ? 
@@ -34,14 +32,14 @@ try {
         $query->execute([$searchTerm, $searchTerm, $searchTerm, $searchTerm]);
 
         $searchResults = $query->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode(transformData($searchResults)); // Aplicamos transformación
+        echo json_encode(transformData($searchResults)); 
     } else {
-        // Si no hay término de búsqueda, traemos todos los resultados con transformación
+    
         $query = $pdo->prepare("SELECT * FROM vocational_trainings");
         $query->execute();
 
         $allResults = $query->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode(transformData($allResults)); // Aplicamos transformación
+        echo json_encode(transformData($allResults));
     }
 } catch (PDOException $e) {
     $_SESSION['mensaxe'] = "Error buscando ciclo: " . $e->getMessage();

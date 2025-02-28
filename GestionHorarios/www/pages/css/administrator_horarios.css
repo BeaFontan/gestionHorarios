@@ -3,9 +3,9 @@
 body {
   font-family: Arial, sans-serif;
   height: 100vh;
-  overflow: hidden; /* Esto evita que la página tenga scroll */
+  overflow: hidden; 
   margin: 2.5% 20px;
-  width: calc(100% - 40px); /* Compensa el ancho para evitar overflow */
+  width: calc(100% - 40px);
 }
 
 /* Contenedor principal */
@@ -81,7 +81,7 @@ h2 {
   font-size: 20px;
   padding: 10px 0;
   position: relative;
-  transition: padding-left 0.3s; /* Agregamos transición para el padding */
+  transition: padding-left 0.3s;
 }
 
 .container-left ul li a {
@@ -97,10 +97,10 @@ h2 {
   position: absolute;
   top: 0;
   left: 0;
-  width: 0; /* Comienza con el fondo invisible */
+  width: 0; 
   height: 100%;
   background-color: var(--color-primario);
-  transition: width 0.3s ease-out; /* Transición para el fondo */
+  transition: width 0.3s ease-out; 
   z-index: -1;
 
   border-top-right-radius: 50px;
@@ -109,11 +109,11 @@ h2 {
 
 /* Efecto hover */
 .container-left ul li:hover::after {
-  width: 90%; /* El pseudo-elemento cubre el fondo */
+  width: 90%; 
 }
 
 .container-left ul li:hover {
-  padding-left: 20px; /* Movimiento del contenido hacia la derecha */
+  padding-left: 20px;
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 }
@@ -131,11 +131,11 @@ h2 {
   width: 100%;
   max-height: calc(
     95vh - 70px
-  ); /* Ajusta según tu diseño, para dejar espacio para el título o el margen */
+  ); 
   border: solid var(--color-primario) 2px;
   border-radius: 20px;
   padding: 25px;
-  overflow-y: auto; /* Esto agrega scroll solo en el eje vertical cuando sea necesario */
+  overflow-y: auto; 
 }
 
 /* Estilo para los usuarios */
@@ -247,7 +247,7 @@ select{
 }
 /* Estilo para cuando el dropdown tiene foco */
 .dropdownModulo:focus {
-  outline: none;  /* Elimina el borde de enfoque predeterminado */
+  outline: none; 
 }
 
 hr{

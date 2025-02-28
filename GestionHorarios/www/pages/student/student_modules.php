@@ -2,7 +2,7 @@
 session_start();
 include_once '../../functions/connection.php';
 
-// Verificar si el usuario está logueado
+
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
     exit();
@@ -10,13 +10,13 @@ if (!isset($_SESSION['user'])) {
 
 $userId = $_SESSION['user']['id'];
 
-// Consultar los módulos asignados al usuario
+
 $sqlModulosAsignados = "SELECT module_id FROM users_modules WHERE user_id = ?";
 $stmtModulosAsignados = $pdo->prepare($sqlModulosAsignados);
 $stmtModulosAsignados->execute([$userId]);
-$modulosAsignados = $stmtModulosAsignados->fetchAll(PDO::FETCH_COLUMN, 0); // Devuelve un array con los IDs de los módulos asignados
+$modulosAsignados = $stmtModulosAsignados->fetchAll(PDO::FETCH_COLUMN, 0); 
 
-// Obtener los módulos disponibles y su ciclo
+
 $sqlModulos = "SELECT m.*, vt.course_name AS ciclo_nombre
                FROM modules m
                JOIN vocational_trainings vt ON vt.id = m.vocational_training_id
@@ -29,7 +29,7 @@ $stmtModulos = $pdo->prepare($sqlModulos);
 $stmtModulos->execute([$userId]);
 $modulos = $stmtModulos->fetchAll(PDO::FETCH_ASSOC);
 
-// Agrupar los módulos por ciclo
+
 $modulosPorCiclo = [];
 foreach ($modulos as $modulo) {
     $cicloNombre = $modulo['ciclo_nombre'];
@@ -43,12 +43,13 @@ foreach ($modulos as $modulo) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Módulos del Usuario</title>
+    <title>Módulos</title>
+    <link rel="icon" type="image/png" href="../../images/icono.png">
     <link rel="stylesheet" href="../../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 
     <style>
-        /* Estilos del icono que actúa como checkbox */
+  
         .toggle-icon {
             display: flex;
             align-items: center;
@@ -82,7 +83,7 @@ foreach ($modulos as $modulo) {
 
 <body>
     <div id="overlay" class="overlay"></div>
-    <h2>Módulos Matriculados</h2>
+    <h2>Módulos</h2>
 
     <div class="container">
         <!-- Contenedor izquierdo -->
@@ -110,11 +111,11 @@ foreach ($modulos as $modulo) {
                                         <p class='texto-descripcion'><?= htmlspecialchars($modulo['course']) ?></p>
                                     </div>
                                     <div class='user-botonesAdd'>
-                                        <!-- Checkbox oculto para añadir/eliminar módulo -->
+                               
                                         <input type="checkbox" id="modulo<?= $modulo['id'] ?>" name="modulos[]" value="<?= $modulo['id'] ?>"
                                             onchange="toggleModulo(this)"
                                             <?php if (in_array($modulo['id'], $modulosAsignados)) echo 'checked'; ?>>
-                                        <!-- Label que funciona como checkbox -->
+                                    
                                         <label for="modulo<?= $modulo['id'] ?>" class="toggle-icon" id="iconoModulo<?= $modulo['id'] ?>">
                                             <?php echo (in_array($modulo['id'], $modulosAsignados)) ? '-' : '+'; ?>
                                         </label>
@@ -136,10 +137,10 @@ foreach ($modulos as $modulo) {
             let moduloId = checkbox.value;
             let icon = document.getElementById("iconoModulo" + moduloId);
 
-            // Cambiar el icono de + a -
+
             icon.textContent = checkbox.checked ? "-" : "+";
 
-            // Enviar petición AJAX al servidor
+
             let formData = new FormData();
             formData.append("modulo_id", moduloId);
             formData.append("action", checkbox.checked ? "add" : "remove");

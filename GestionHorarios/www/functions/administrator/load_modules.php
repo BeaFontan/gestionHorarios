@@ -1,17 +1,12 @@
 <?php
 
-function loadModules($pdo, $vocational_training)
+function loadModules($pdo)
 {
     try {
-
-        try {
-            $query = $pdo->prepare("SELECT * FROM `modules` where vocational_training_id = ?");
-            $query->execute([$vocational_training]);
-            return $query->fetchAll();
-        } catch (PDOException) {
-            echo "";
-        }
+        $query = $pdo->query("SELECT * FROM `modules`");
+        $query->execute();
+        return $query->fetchAll();
     } catch (PDOException $e) {
-        $_SESSION['mensaxe'] = "Erro na cargando módulos" . $e->getMessage();
+        $_SESSION['mensaxe'] = "Erro buscando módulos" . $e->getMessage();
     }
 }

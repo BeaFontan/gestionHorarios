@@ -15,10 +15,9 @@ if (!isset($_SESSION['user'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engadir Alumno</title>
-
+    <title>Engadir Ciclo</title>
+    <link rel="icon" type="image/png" href="../images/icono.png">
     <link rel="stylesheet" href="../pages/css/administrator_panel.css">
-    <!-- <link rel="stylesheet" href="../pages/css/style.css"> -->
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 </head>
 
@@ -82,5 +81,4 @@ if (!isset($_SESSION['user'])) {
 
     <script src="../js/menu.js"></script>
 </body>
-
 </html>

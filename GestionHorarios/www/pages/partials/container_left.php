@@ -23,8 +23,13 @@ if (strcmp($_SESSION["user"]["rol"], "admin") == 0) {
                 </ul>
 
                 <br>
-                <div style="margin-top: auto;">
-                    <a href="../functions/user/close_session.php" class="logout">
+                
+                <div style="margin-top: auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <a href="reset_password.php" class="logout">
+                        <b>Cambiar contrasinal</b>
+                    </a>
+                    <br>
+                    <a href="../../functions/user/close_session.php" class="logout">
                         <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b>
                     </a>
                 </div>
@@ -51,15 +56,15 @@ if (strcmp($_SESSION["user"]["rol"], "admin") == 0) {
 
                 <br>
 
-                <div style="margin-top: auto;">
+                <div style="margin-top: auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                    <a href="../reset_password.php" class="logout">
+                        <b>Cambiar contrasinal</b>
+                    </a>
+                    <br>
                     <a href="../../functions/user/close_session.php" class="logout">
                         <i class="fas fa-sign-out-alt"></i> <b>Cerrar sesión</b>
                     </a>
                 </div>
             </div>';
-    
 }
-
-
-
 ?>

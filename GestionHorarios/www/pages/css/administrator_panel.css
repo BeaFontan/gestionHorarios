@@ -3,9 +3,9 @@
 body {
   font-family: Arial, sans-serif;
   height: 100vh;
-  overflow: hidden; /* Esto evita que la página tenga scroll */
+  overflow: hidden; 
   margin: 2.5% 20px;
-  width: calc(100% - 40px); /* Compensa el ancho para evitar overflow */
+  width: calc(100% - 40px); 
 }
 
 /* Contenedor principal */
@@ -35,7 +35,7 @@ h2 {
   width: 269px;
   border: solid var(--color-primario) 2px;
   border-radius: 20px;
-  padding-bottom: 50px; /* Para evitar que el icono quede pegado */
+  padding-bottom: 50px; 
   height: 2000px;
 }
 
@@ -67,7 +67,7 @@ h2 {
   font-size: 20px;
   padding: 10px 0;
   position: relative;
-  transition: padding-left 0.3s; /* Agregamos transición para el padding */
+  transition: padding-left 0.3s; 
 }
 
 .container-left ul li a {
@@ -83,11 +83,11 @@ h2 {
   position: absolute;
   top: 0;
   left: 0;
-  width: 0; /* Comienza con el fondo invisible */
+  width: 0; 
   height: 100%;
   background-color: var(--color-primario);
   color: var(--forty-color);
-  transition: width 0.3s ease-out; /* Transición para el fondo */
+  transition: width 0.3s ease-out; 
   z-index: -1;
 
   border-top-right-radius: 50px;
@@ -96,11 +96,11 @@ h2 {
 
 /* Efecto hover */
 .container-left ul li:hover::after {
-  width: 90%; /* El pseudo-elemento cubre el fondo */
+  width: 90%; 
 }
 
 .container-left ul li:hover {
-  padding-left: 20px; /* Movimiento del contenido hacia la derecha */
+  padding-left: 20px; 
   border-top-left-radius: 30px;
   border-bottom-left-radius: 30px;
 }
@@ -111,25 +111,25 @@ h2 {
 }
 
 .container-left ul li a.active {
-  position: relative; /* Necesario para que funcione el pseudo-elemento */
-  color: var(--forty-color); /* Asegura que el texto tenga el mismo color */
-  font-weight: bold; /* Si quieres que resalte más */
-  z-index: 1; /* Para que el texto quede encima del fondo */
+  position: relative; 
+  color: var(--forty-color); 
+  font-weight: bold; 
+  z-index: 1; 
 }
 
 .container-left ul li a.active::after {
   content: "";
   position: absolute;
-  top: 50%; /* Centra el fondo verticalmente */
+  top: 50%; 
   left: 0;
-  width: 90%; /* Expande más en ancho */
-  height: 146%; /* Reduce el crecimiento en altura */
-  background-color: var(--color-primario); /* Usa el color del hover */
+  width: 90%; 
+  height: 146%; 
+  background-color: var(--color-primario);
   border-top-right-radius: 50px;
   border-bottom-right-radius: 50px;
-  transform: translateY(-50%); /* Asegura que se mantenga centrado */
-  z-index: -1; /* Envía el fondo detrás del texto */
-  transition: all 0.3s ease-out; /* Suaviza la animación */
+  transform: translateY(-50%);
+  z-index: -1;
+  transition: all 0.3s ease-out; 
 }
 
 .menu a {
@@ -138,14 +138,14 @@ h2 {
   padding: 10px;
   text-decoration: none;
   color: #333;
-  background-color: transparent; /* Color por defecto */
+  background-color: transparent; 
   transition: background-color 0.3s ease;
 }
 
 .menu a:hover,
 .menu a.active {
   /* Aplica el hover y la clase activa */
-  background-color: #007bff; /* Color del hover y del enlace activo */
+  background-color: #007bff; 
   color: white;
 }
 
@@ -326,10 +326,10 @@ form {
   border: none;
   font-size: 3rem;
   color: var(--forty-color);
-  transition: transform 0.5s ease, background-color 0.3s ease; /* Transición suave para rotación y color de fondo */
+  transition: transform 0.5s ease, background-color 0.3s ease; 
 }
 .btnCreateUser:hover {
-  transform: rotate(180deg); /* Rota el botón 180 grados cuando hace hover */
+  transform: rotate(180deg); 
   background-color: var(
     --second-color
   );
@@ -371,7 +371,7 @@ form {
 }
 
 .buscador:focus {
-  background-color: #f0f8ff4a; /* Cambia el color de fondo cuando se selecciona */
+  background-color: #f0f8ff4a; 
   border-color: var(--second-color);
   outline: none;
 }
@@ -615,7 +615,7 @@ p {
   left: 19.5%;
   top: 45px; 
   transform: translateX(-50%);
-  z-index: 9999; /* Aparece por encima de todo */
+  z-index: 9999; 
 }
 
 .error-tooltip {

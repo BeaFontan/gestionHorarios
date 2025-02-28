@@ -1,25 +1,25 @@
-// Capturamos el evento 'input' en el campo de búsqueda
+
 document.getElementById("buscar").addEventListener("input", function (event) {
-    let query = this.value.trim(); // Obtenemos el valor ingresado en el campo de búsqueda
+    let query = this.value.trim();
   
     if (query.length > 0) {
-      event.preventDefault(); // Evitamos que el formulario se envíe de manera tradicional
+      event.preventDefault(); 
   
-      // Creamos un objeto FormData para enviar la búsqueda por POST
+
       let formData = new FormData();
-      formData.append("txtFindProfessor", query); // Agregamos el texto de búsqueda
+      formData.append("txtFindProfessor", query); 
   
       fetch("../functions/professors/find_professors.php", {
         method: "POST",
-        body: formData, // Enviamos los datos del formulario
+        body: formData,
       })
-        .then((response) => response.json()) // Esperamos una respuesta JSON
+        .then((response) => response.json()) 
         .then((data) => {
-          let resultadosDiv = document.querySelector(".mostrar-profesores"); // Seleccionamos el contenedor de resultados
-          resultadosDiv.innerHTML = ""; // Limpiamos los resultados anteriores
+          let resultadosDiv = document.querySelector(".mostrar-profesores"); 
+          resultadosDiv.innerHTML = ""; 
   
           if (data.length > 0) {
-            // Si se encontraron resultados, los mostramos
+
             data.forEach((item) => {
               let div = document.createElement("div");
               div.classList.add("container-user");
@@ -55,27 +55,26 @@ document.getElementById("buscar").addEventListener("input", function (event) {
                       </div>
                   </div>
               `;
-              resultadosDiv.appendChild(div); // Agregamos el div con el resultado
+              resultadosDiv.appendChild(div); 
             });
           } else {
-            // Si no se encuentran resultados, mostramos un mensaje
+
             resultadosDiv.innerHTML = "<p>No se encontraron resultados.</p>";
           }
         })
         .catch((error) => console.error("Error al obtener los resultados:", error));
     } else {
-      // Si el campo de búsqueda está vacío, obtenemos todos los profesores
+
       fetch("../functions/professors/find_professors.php", {
         method: "POST",
-        body: new FormData(), // Enviamos un FormData vacío para obtener todos los registros
+        body: new FormData(), 
       })
-        .then((response) => response.json()) // Esperamos una respuesta JSON
+        .then((response) => response.json()) 
         .then((data) => {
-          let resultadosDiv = document.querySelector(".mostrar-profesores"); // Seleccionamos el contenedor de resultados
-          resultadosDiv.innerHTML = ""; // Limpiamos los resultados anteriores
-  
+          let resultadosDiv = document.querySelector(".mostrar-profesores"); 
+          resultadosDiv.innerHTML = ""; 
           if (data.length > 0) {
-            // Si se encontraron resultados, los mostramos
+
             data.forEach((item) => {
               let div = document.createElement("div");
               div.classList.add("container-user");
@@ -111,10 +110,10 @@ document.getElementById("buscar").addEventListener("input", function (event) {
                       </div>
                   </div>
               `;
-              resultadosDiv.appendChild(div); // Agregamos el div con el resultado
+              resultadosDiv.appendChild(div); 
             });
           } else {
-            // Si no se encuentran resultados, mostramos un mensaje
+
             resultadosDiv.innerHTML = "<p>No se encontraron resultados.</p>";
           }
         })

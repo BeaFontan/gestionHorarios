@@ -21,13 +21,11 @@ $stmtCycles = $pdo->prepare("
 $stmtCycles->execute([$userId]);
 $arrayCycles = $stmtCycles->fetchAll(PDO::FETCH_ASSOC);
 
-// Obtener los módulos y sesiones del alumno según el ciclo seleccionado
 $arrayModules = [];
 $sessionsWithModules = [];
 $selectedCycle = $_POST['ciclo'] ?? null;
 
 if ($selectedCycle) {
-    // 🔥 Obtener los módulos asignados al alumno dentro del ciclo seleccionado, incluyendo el color
     $stmtModules = $pdo->prepare("
         SELECT m.id, m.module_code, m.module_acronym, m.classroom, m.color
         FROM modules m
@@ -37,7 +35,6 @@ if ($selectedCycle) {
     $stmtModules->execute([$userId, $selectedCycle]);
     $arrayModules = $stmtModules->fetchAll(PDO::FETCH_ASSOC);
 
-    // 🔥 Obtener las sesiones con módulos asignados dentro del ciclo
     $stmtSessions = $pdo->prepare("
         SELECT ms.session_id, m.module_acronym, m.classroom, m.color
         FROM modules_sessions ms
@@ -56,7 +53,8 @@ if ($selectedCycle) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Horarios - Alumnos</title>
+    <title>Horarios</title>
+    <link rel="icon" type="image/png" href="../../images/icono.png">
     <link rel="stylesheet" href="../../pages/css/administrator_horarios.css">
     <link rel="stylesheet" href="../../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
@@ -64,7 +62,7 @@ if ($selectedCycle) {
 
 <body>
     <div id="overlay" class="overlay"></div>
-    <h2>Gestión de Horarios - Alumnos</h2>
+    <h2>Horario</h2>
 
     <div class="container">
         <?php include_once('../partials/container_left.php') ?>
@@ -126,7 +124,7 @@ if ($selectedCycle) {
                             $sessionId = $sessionDays[$day] ?? null;
                             $moduleName = "";
                             $moduleClass = "";
-                            $moduleColor = "#ebeeeb8b"; // Color por defecto
+                            $moduleColor = "#ebeeeb8b";
 
                             if ($sessionId) {
                                 foreach ($sessionsWithModules as $sessionModule) {
@@ -139,7 +137,7 @@ if ($selectedCycle) {
                                 }
                             }
 
-                            // Pintar la celda con el color del módulo
+
                             echo "<td style='background-color: {$moduleColor}; border-radius: 12px;' class='horas'>";
                             echo "<p>$moduleName </p>";
                             echo "<p style='font-size: 13px;'>$moduleClass</p>";
@@ -151,14 +149,12 @@ if ($selectedCycle) {
                 </table>
             </div>
 
-            <!-- BOTÓN PARA EXPORTAR A PDF -->
             <div style="text-align: right; width: 100%; margin-top: 20px;">
                 <button id="export-pdf" class="btnGuardar"><b>EXPORTAR A PDF</b></button>
             </div>
         </div>
     </div>
 
-    <!-- Agregar jsPDF y html2canvas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="../../js/selector_menu.js"></script>
@@ -177,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function() {
         form.submit();
     });
 
-    // Obtener el nombre del alumno desde PHP sin mostrarlo en el HTML
+
     const alumnoNombre = "<?php echo htmlspecialchars($_SESSION['user']['name']); ?>";
 
     document.getElementById("export-pdf").addEventListener("click", function () {
@@ -187,22 +183,22 @@ document.addEventListener("DOMContentLoaded", function() {
         const timetable = document.getElementById("horario");
         const cicloSeleccionado = cicloSelect.options[cicloSelect.selectedIndex].text;
 
-        // Añadir el título y el nombre del alumno al PDF
+
         doc.setFontSize(18);
         doc.text("Horario del Alumno", 140, 20, null, null, "center");
         doc.setFontSize(12);
         doc.text("Alumno: " + alumnoNombre, 140, 30, null, null, "center");
         doc.text("Ciclo seleccionado: " + cicloSeleccionado, 140, 40, null, null, "center");
 
-        // 🔥 Forzar estilos de desktop antes de capturar
-        const originalStyles = timetable.style.cssText; // Guardar estilos actuales
-        timetable.style.width = "1200px"; // Forzar ancho de escritorio
-        timetable.style.maxWidth = "none";
-        timetable.style.fontSize = "16px"; // Evitar textos pequeños de móvil
 
-        // Capturar la tabla con html2canvas
+        const originalStyles = timetable.style.cssText; 
+        timetable.style.width = "1200px"; 
+        timetable.style.maxWidth = "none";
+        timetable.style.fontSize = "16px"; 
+
+
         html2canvas(timetable, { scale: 2 }).then(canvas => {
-            // Restaurar los estilos originales
+
             timetable.style.cssText = originalStyles;
 
             const imgData = canvas.toDataURL("image/png");

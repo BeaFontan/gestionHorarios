@@ -9,12 +9,10 @@ if (!isset($_SESSION['user'])) {
 include_once '../connection.php';
 
 try {
-    // Si hay un término de búsqueda, realizamos la búsqueda
     if (isset($_POST["txtFindUser"]) && !empty($_POST["txtFindUser"])) {
-        $searchField = strtoupper(trim($_POST["txtFindUser"])); // Convertimos a mayúsculas y eliminamos espacios
+        $searchField = strtoupper(trim($_POST["txtFindUser"])); 
         $searchTerm = "%$searchField%";
 
-        // Buscamos por nombre (first_name), apellido (second_name), nombre completo (name + first_name), email y dni
         $query = $pdo->prepare("
             SELECT id, name, first_name, second_name, email, dni, telephone 
             FROM users 
@@ -33,7 +31,7 @@ try {
         $searchResults = $query->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($searchResults);
     } else {
-        // Si no hay término de búsqueda, devolver todos los usuarios
+        
         $query = $pdo->prepare("
             SELECT id, name, first_name, second_name, email, dni, telephone 
             FROM users 
@@ -46,5 +44,5 @@ try {
     }
 } catch (PDOException $e) {
     $_SESSION['mensaxe'] = "Error buscando usuario: " . $e->getMessage();
-    echo json_encode([]); // Devolvemos un array vacío en caso de error
+    echo json_encode([]);
 }

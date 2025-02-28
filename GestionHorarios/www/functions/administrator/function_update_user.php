@@ -9,7 +9,7 @@ if (!isset($_SESSION['user'])) {
 include('../connection.php');
 
 if (isset($_POST["btnSave"])) {
-
+    
     $id = $_POST["id"];
     $name = $_POST["txtName"];
     $firstName = $_POST["txtFirstName"];
@@ -29,6 +29,6 @@ if (isset($_POST["btnSave"])) {
         header('Location: ../../pages/administrator_panel.php');
         exit();
     } catch (PDOException $e) {
-        $_SESSION['mensaxe'] = "Erro na insercción de datos" . $e->getMessage();
+        echo "Erro na insercción de datos" . $e->getMessage();
     }
 }

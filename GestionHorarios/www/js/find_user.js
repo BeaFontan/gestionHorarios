@@ -1,5 +1,5 @@
 document.getElementById("buscar").addEventListener("input", function(event) {
-  let query = this.value.trim(); // Obtenemos el valor ingresado en el campo de búsqueda
+  let query = this.value.trim(); 
   let formData = new FormData();
 
   if (query.length > 0) {
@@ -13,14 +13,13 @@ document.getElementById("buscar").addEventListener("input", function(event) {
   .then(response => response.json())
   .then(data => {
       let resultadosDiv = document.querySelector(".mostrar-users");
-      resultadosDiv.innerHTML = ""; // Limpiamos los resultados anteriores
-
+      resultadosDiv.innerHTML = ""; 
       if (data.length > 0) {
           data.forEach(item => {
               let div = document.createElement("div");
               div.classList.add("container-user");
 
-              // Si el segundo apellido no existe, lo omitimos
+
               let fullName = `${item.name} ${item.first_name}`;
               if (item.second_name) {
                   fullName += ` ${item.second_name}`;
@@ -73,7 +72,7 @@ document.getElementById("buscar").addEventListener("input", function(event) {
   .catch(error => console.error("Error al obtener los resultados:", error));
 });
 
-// Si el campo de búsqueda está vacío, recargamos todos los usuarios
+
 document.getElementById("buscar").addEventListener("blur", function () {
   if (this.value.trim() === "") {
       fetch("../functions/administrator/function_panel_administrator.php", {

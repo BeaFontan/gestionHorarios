@@ -1,23 +1,23 @@
 document.getElementById("buscar").addEventListener("input", function (event) {
-  let query = this.value.trim(); // Obtenemos el valor ingresado en el campo de búsqueda
+  let query = this.value.trim(); 
   let formData = new FormData();
 
   if (query.length > 0) {
-    formData.append("txtFindVocationalTraining", query); // Agregamos el texto de búsqueda
+    formData.append("txtFindVocationalTraining", query); 
   }
 
   fetch("../functions/vocational_trainings/find_vocational_training.php", {
     method: "POST",
     body: formData,
   })
-    .then((response) => response.json()) // Esperamos una respuesta JSON
+    .then((response) => response.json()) 
     .then((data) => {
       let resultadosDiv = document.querySelector(".mostrar-ciclos");
-      resultadosDiv.innerHTML = ""; // Limpiamos los resultados anteriores
+      resultadosDiv.innerHTML = ""; 
 
       if (data.length > 0) {
         data.forEach((item) => {
-          // Transformamos los valores de type y modality de la misma forma que en PHP
+
           let typeTransform = item.type === "higher" ? "Superior" : "Medio";
           let modalityTransform =
             item.modality === "ordinary"
@@ -26,7 +26,7 @@ document.getElementById("buscar").addEventListener("input", function (event) {
               ? "Modular"
               : "Dual";
 
-          // Construimos el div de la misma manera que en PHP
+
           let div = document.createElement("div");
           div.classList.add("container-user");
           div.innerHTML = `

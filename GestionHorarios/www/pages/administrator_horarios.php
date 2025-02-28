@@ -10,51 +10,46 @@ include_once '../functions/connection.php';
 
 $arrayModules = [];
 
-// Guardar los módulos en la tabla modules_sessions
 if (isset($_POST["btnGuardar"])) {
     try {
         $ciclo = $_POST['ciclo'] ?? null;
         $curso = $_POST['curso'] ?? null;
 
         if ($ciclo && $curso) {
-            // 1️⃣ 🔥 Obtener los módulos asociados al ciclo y curso seleccionados
             $stmtModules = $pdo->prepare("SELECT id FROM modules WHERE vocational_training_id = ? AND course = ?");
             $stmtModules->execute([$ciclo, $curso]);
-            $modulesIds = $stmtModules->fetchAll(PDO::FETCH_COLUMN); // Array con los IDs de los módulos
+            $modulesIds = $stmtModules->fetchAll(PDO::FETCH_COLUMN); 
 
             if (!empty($modulesIds)) {
-                $idsString = implode(',', $modulesIds); // Convertir el array en una lista de valores separados por coma
+                $idsString = implode(',', $modulesIds); 
             
-                // 🔥 Ejecutar el DELETE de forma directa sin prepare()
                 $sql = "DELETE FROM modules_sessions WHERE module_id IN ($idsString)";
-                $rowsAffected = $pdo->exec($sql); // Usamos exec() en lugar de execute()
+                $rowsAffected = $pdo->exec($sql); 
             
-                // 🔥 Verificar si quedaron registros después del DELETE
                 $stmtCheckRemaining = $pdo->query("SELECT * FROM modules_sessions WHERE module_id IN ($idsString)");
                 $remainingRecords = $stmtCheckRemaining->fetchAll(PDO::FETCH_ASSOC);
 
             }
         }
 
-        // 3️⃣ 🔹 Guardar los módulos en la tabla modules_sessions
         foreach ($_POST['modules'] as $sessionId => $moduleId) {
             if (!empty($moduleId) && is_numeric($moduleId) && is_numeric($sessionId)) {
 
-                // Verificar si la sesión realmente existe en la base de datos
+        
                 $stmtCheckSession = $pdo->prepare("SELECT COUNT(*) FROM sessions WHERE id = ?");
                 $stmtCheckSession->execute([$sessionId]);
                 $sessionExists = $stmtCheckSession->fetchColumn();
 
-                if ($sessionExists > 0) {  // Si la sesión existe en la BD
+                if ($sessionExists > 0) {  
                     $stmtCheck = $pdo->prepare("SELECT COUNT(*) FROM modules_sessions WHERE module_id = ? AND session_id = ?");
                     $stmtCheck->execute([$moduleId, $sessionId]);
                     $exists = $stmtCheck->fetchColumn();
 
-                    if ($exists == 0) { // Solo insertamos si no existe
+                    if ($exists == 0) { 
                         $stmtInsert = $pdo->prepare("INSERT INTO modules_sessions (module_id, session_id) VALUES (?, ?)");
                         $stmtInsert->execute([$moduleId, $sessionId]);
                     } else {
-                        // Si ya existe, actualizarlo en caso de que haya cambiado
+                        
                         $stmtUpdate = $pdo->prepare("UPDATE modules_sessions SET module_id = ? WHERE session_id = ?");
                         $stmtUpdate->execute([$moduleId, $sessionId]);
                     }
@@ -77,7 +72,8 @@ if (isset($_POST["btnGuardar"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Horarios</title>
+    <title>Horarios</title>
+    <link rel="icon" type="image/png" href="../images/icono.png">
     <link rel="stylesheet" href="../pages/css/administrator_horarios.css">
     <link rel="stylesheet" href="../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
@@ -147,18 +143,18 @@ if (isset($_POST["btnGuardar"])) {
                         $diasSemana = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
                         $sessionsByTime = [];
 
-                        // Guardamos la información de cada sesión en sessionsByTime
+                  
                         foreach ($arraySessions as $session) {
-                            $sessionsByTime[$session['start_time']]['end_time'] = $session['end_time']; // Guardamos la hora de fin
-                            $sessionsByTime[$session['start_time']][$session['day']] = $session['id'];  // Guardamos la sesión por día
+                            $sessionsByTime[$session['start_time']]['end_time'] = $session['end_time']; 
+                            $sessionsByTime[$session['start_time']][$session['day']] = $session['id']; 
                         }
 
                         foreach ($sessionsByTime as $startTime => $sessionDays) {
-                            $endTime = isset($sessionDays['end_time']) ? $sessionDays['end_time'] : ''; // Obtenemos la hora de fin correspondiente
+                            $endTime = isset($sessionDays['end_time']) ? $sessionDays['end_time'] : '';
 
                             // Formateamos las horas
-                            $formattedStartTime = date('G:i', strtotime($startTime));  // Convierte la hora a formato 24h sin ceros a la izquierda
-                            $formattedEndTime = !empty($endTime) ? date('G:i', strtotime($endTime)) : '';  // Aplica lo mismo para la hora de fin
+                            $formattedStartTime = date('G:i', strtotime($startTime));  
+                            $formattedEndTime = !empty($endTime) ? date('G:i', strtotime($endTime)) : '';  
 
                             echo "<tr>";
                             echo "<td class='horas'><b>{$formattedStartTime} - {$formattedEndTime}</b></td>";

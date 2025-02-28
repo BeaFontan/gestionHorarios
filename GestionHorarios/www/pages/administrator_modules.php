@@ -2,7 +2,6 @@
 session_start();
 
 include_once '../functions/connection.php';
-//include_once '../functions/modules/find_modules.php';
 
 $sql = "SELECT * FROM modules";
 $stmt = $pdo->query($sql);
@@ -30,10 +29,8 @@ function getVocationalTrainings($pdo)
     }
 }
 
-// Inicializamos variables
 $editModules = null;
 $name = "";
-
 
 // Si se ha presionado el botón "Editar"
 if (isset($_POST["btnUpdate"])) {
@@ -47,7 +44,6 @@ if (isset($_POST["btnUpdate"])) {
     $classRoom=$_POST['classroom'];
     $color=$_POST['color'];
     $module_acronym=$_POST['module_acronym'];
-
 }
 ?>
 
@@ -57,7 +53,8 @@ if (isset($_POST["btnUpdate"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administrador</title>
+    <title>Módulos</title>
+    <link rel="icon" type="image/png" href="../images/icono.png">
     <link rel="stylesheet" href="../../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 
@@ -211,7 +208,7 @@ if (isset($_POST["btnUpdate"])) {
                                 <input type='hidden' name='vocational_training_id' id='vocational_training_id'>
                                 <input type='hidden' name='module_code' value='$module_code'>
                                 <input type='hidden' name='name' value='$name'>
-                                <input type='hidden' name='selectCourse' value='" . (isset($selectCourse) ? $selectCourse : '') . "'>  <!-- Asegúrate de pasar el valor aquí -->
+                                <input type='hidden' name='selectCourse' value='" . (isset($selectCourse) ? $selectCourse : '') . "'> 
                                 <input type='hidden' name='sessions_number' value='$sessions_number'>
                                 <input type='hidden' name='classroom' value='$classRoom'>
                                 <input type='hidden' name='color' value='$color'>
@@ -235,17 +232,6 @@ if (isset($_POST["btnUpdate"])) {
                         </div>
                     ";
                     }
-
-                    // Botón "Borrar"
-                    /*echo "
-                    <form method='post' action='../functions/modules/function_delete_modules.php'>
-                        <input type='hidden' name='id' value='$id'>
-                        <button type='submit' class='btn-delete' name='btnDelete'>    
-                            <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
-                            <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
-                        </button>
-                    </form>";*/
-
                     echo "</div>";
                 }
                 ?>

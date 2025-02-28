@@ -5,12 +5,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
+    <link rel="icon" type="image/png" href="../images/icono.png">
     <link rel="stylesheet" href="../pages/css/style.css" />
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
-
-    <style>
-
-    </style>
 </head>
 
 <body>
@@ -36,14 +33,14 @@
                 id="txtPass"
                 placeholder="Contrasinal" />
             <button type="button" id="togglePassword">
-                <i class="fa-solid fa-eye-slash"></i> <!-- Ícono inicial -->
+                <i class="fa-solid fa-eye-slash"></i>
             </button>
         </div>
 
         <button type="submit" name="btnLogin" id="btnLogin">Entrar</button>
     </form>
 
-    <a href="#">¿Esqueceches a túa contrasinal?</a>
+    <a href="reset_password.php">¿Esqueceches a túa contrasinal?</a>
 
     <script src="../js/eye_pass.js"></script>
 </body>

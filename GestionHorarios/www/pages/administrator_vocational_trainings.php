@@ -8,7 +8,6 @@ include_once '../functions/administrator/load_modules.php';
 $sql = "SELECT * FROM vocational_trainings";
 $stmt = $pdo->query($sql);
 
-// Inicializamos variables
 $editVocationalTrainingId = null;
 $course_name = "";
 $course_code = "";
@@ -31,7 +30,8 @@ if (isset($_POST["btnUpdate"])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administrador</title>
+    <title>Ciclos</title>
+    <link rel="icon" type="image/png" href="../images/icono.png">
     <link rel="stylesheet" href="../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 </head>

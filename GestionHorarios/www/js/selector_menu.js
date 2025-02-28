@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ✅ Resaltar el enlace activo en el menú lateral
+
     const menuLinks = document.querySelectorAll(".container-left ul li a");
     const currentPage = window.location.pathname.split("/").pop().split("?")[0];
 

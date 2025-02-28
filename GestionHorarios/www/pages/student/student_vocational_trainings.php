@@ -2,20 +2,20 @@
 session_start();
 include_once '../../functions/connection.php';
 
-// Verifica si el usuario está logueado
+
 if (!isset($_SESSION['user'])) {
     header('Location: login.php');
     exit();
 }
 
-// Obtener los ciclos que tiene el usuario
+
 $userId = $_SESSION['user']['id'];
 $sqlUserCiclos = "SELECT vocational_training_id FROM users_vocational_trainings WHERE user_id = ?";
 $stmtUserCiclos = $pdo->prepare($sqlUserCiclos);
 $stmtUserCiclos->execute([$userId]);
-$userCiclos = $stmtUserCiclos->fetchAll(PDO::FETCH_COLUMN); // Obtener solo los IDs de los ciclos
+$userCiclos = $stmtUserCiclos->fetchAll(PDO::FETCH_COLUMN);
 
-// Obtener todos los ciclos disponibles
+
 $sql = "SELECT * FROM vocational_trainings";
 $stmt = $pdo->query($sql);
 ?>
@@ -26,12 +26,13 @@ $stmt = $pdo->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Estudiante</title>
+    <title>Ciclos</title>
+    <link rel="icon" type="image/png" href="../../images/icono.png">
     <link rel="stylesheet" href="../../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 
     <style>
-        /* Estilos del icono que actúa como checkbox */
+
         .toggle-icon {
             display: flex;
             align-items: center;
@@ -47,12 +48,12 @@ $stmt = $pdo->query($sql);
             transition: background-color 0.5s ease-in-out, transform 0.2s ease-in-out;
         }
 
-        /* Cambia el color cuando está marcado */
+
         input[type="checkbox"]:checked+.toggle-icon {
             background-color: #c12b2e;
         }
 
-        /* Ocultar el checkbox real */
+
         input[type="checkbox"] {
             position: absolute;
             width: 50px;
@@ -72,7 +73,6 @@ $stmt = $pdo->query($sql);
         <!-- Contenedor izquierdo -->
         <?php include_once('../partials/container_left.php') ?>
 
-
         <div class="container-rigth">
             <input type="text" id="checkMenu" value="0" hidden>
             <button onclick="menu()" class='btn-menu-crear' style="margin-left: 1%;" name=''>    
@@ -91,10 +91,8 @@ $stmt = $pdo->query($sql);
                                     <p class='texto-nombre'><?= htmlspecialchars($fila['course_name']) ?></p>
                                     <p class='texto-ciclo'><?= htmlspecialchars($fila['modality']) ?></p>
                                 </div>
-                                <!-- Checkbox oculto -->
                                 <div class='user-botonesAdd'>
                                     <input type="checkbox" id="ciclo<?= $fila['id'] ?>" name="ciclos[]" value="<?= $fila['id'] ?>" <?= $isChecked ?> onchange="toggleCiclo(this)">
-                                    <!-- Label que funciona como checkbox -->
                                 
                                     <label for="ciclo<?= $fila['id'] ?>" class="toggle-icon" id="icono<?= $fila['id'] ?>">
                                         <?= $isChecked ? '-' : '+' ?>
@@ -113,21 +111,21 @@ $stmt = $pdo->query($sql);
             let cicloId = checkbox.value;
             let icon = document.getElementById("icono" + cicloId);
 
-            // Obtener el número actual de checkboxes seleccionados
+
             let checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
 
-            // Si ya hay 2 seleccionados y se intenta seleccionar otro, impedirlo
+
             if (checkedBoxes.length > 2) {
-                checkbox.checked = false; // Desmarca el intento
+                checkbox.checked = false; 
                 return;
             }
 
             let action = checkbox.checked ? "add" : "remove";
 
-            // Cambiar el icono de + a -
+
             icon.textContent = checkbox.checked ? "-" : "+";
 
-            // Enviar petición AJAX al servidor
+
             let formData = new FormData();
             formData.append("ciclo_id", cicloId);
             formData.append("action", action);

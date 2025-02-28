@@ -1,5 +1,5 @@
 document.getElementById("buscar").addEventListener("input", function (event) {
-  let query = this.value.trim(); // Obtenemos el valor ingresado en el campo de búsqueda
+  let query = this.value.trim(); 
   let formData = new FormData();
 
   if (query.length > 0) {
@@ -13,14 +13,12 @@ document.getElementById("buscar").addEventListener("input", function (event) {
     .then((response) => response.json())
     .then((data) => {
       let resultadosDiv = document.querySelector(".mostrar-modulos");
-      resultadosDiv.innerHTML = ""; // Limpiamos los resultados anteriores
+      resultadosDiv.innerHTML = ""; 
 
       if (data.length > 0) {
         data.forEach((item) => {
-          // Transformar el campo "course" a "1º Ciclo Formativo" o "2º Ciclo Formativo"
           let courseText = item.course === "first" ? "1º" : "2º";
 
-          // Construimos el div con el mismo formato que en PHP
           let div = document.createElement("div");
           div.classList.add("container-user");
           div.innerHTML = `
