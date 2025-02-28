@@ -63,38 +63,44 @@ if ($selectedCycle) {
 </head>
 
 <body>
+    <div id="overlay" class="overlay"></div>
     <h2>Gestión de Horarios - Alumnos</h2>
 
     <div class="container">
         <?php include_once('../partials/container_left.php') ?>
 
         <div class="container-rigth">
-            <form id="filter-form" method="post">
-                <!-- Seleccionar Ciclo -->
-                <div style="text-align: center; margin-bottom: 20px; width: 100%;">
-                    <select class="dropdownCiclo" name="ciclo" id="ciclo">
-                        <option value="">Selecciona Ciclo</option>
-                        <?php
-                        foreach ($arrayCycles as $cycle) {
-                            $selected = ($selectedCycle == $cycle['id']) ? 'selected' : '';
-                            echo "<option value='" . htmlspecialchars($cycle['id']) . "' $selected>" . htmlspecialchars($cycle['course_name']) . "</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-                <input type="hidden" name="selectedCiclo" id="selectedCiclo" value="<?php echo $selectedCycle; ?>">
-            </form>
+            <div class="container-buscador">
+                <input type="text" id="checkMenu" value="0" hidden>
+                <button onclick="menu()" class='btn-menu' name=''>    
+                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+                </button>
+                <form id="filter-form" style="initial: all; width: 100%;" method="post">
+                    <!-- Seleccionar Ciclo -->
+                        <select class="dropdownHorarios" name="ciclo" id="ciclo">
+                            <option value="">Selecciona Ciclo</option>
+                            <?php
+                            foreach ($arrayCycles as $cycle) {
+                                $selected = ($selectedCycle == $cycle['id']) ? 'selected' : '';
+                                echo "<option value='" . htmlspecialchars($cycle['id']) . "' $selected>" . htmlspecialchars($cycle['course_name']) . "</option>";
+                            }
+                            ?>
+                        </select>
+                    
+                    <input type="hidden" name="selectedCiclo" id="selectedCiclo" value="<?php echo $selectedCycle; ?>">
+                </form>
+            </div>
 
             <!-- TABLA DE HORARIOS -->
             <div class="timetable" id="horario">
                 <table>
                     <tr>
                         <th class="cabeceraSemanaBlanc"></th>
-                        <th class="cabeceraSemana">LUNES</th>
-                        <th class="cabeceraSemana">MARTES</th>
-                        <th class="cabeceraSemana">MIÉRCOLES</th>
-                        <th class="cabeceraSemana">JUEVES</th>
-                        <th class="cabeceraSemana">VIERNES</th>
+                        <th class="cabeceraSemana" data-dia="LUNES" data-inicial="L"></th>
+                        <th class="cabeceraSemana" data-dia="MARTES" data-inicial="M"></th>
+                        <th class="cabeceraSemana" data-dia="MIÉRCOLES" data-inicial="X"></th>
+                        <th class="cabeceraSemana" data-dia="JUEVES" data-inicial="J"></th>
+                        <th class="cabeceraSemana" data-dia="VIERNES" data-inicial="V"></th>
                     </tr>
 
                     <?php
@@ -210,6 +216,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 </script>
+
+<script src="../../js/menu.js"></script>
 </body>
 
 </html>

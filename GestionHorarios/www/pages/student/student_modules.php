@@ -44,7 +44,7 @@ foreach ($modulos as $modulo) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Módulos del Usuario</title>
-    <link rel="stylesheet" href="../css/administrator_panel.css">
+    <link rel="stylesheet" href="../../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 
     <style>
@@ -62,7 +62,6 @@ foreach ($modulos as $modulo) {
             border-radius: 50px;
             cursor: pointer;
             transition: background-color 0.5s ease-in-out, transform 0.2s ease-in-out;
-            margin-top: 25px;
         }
 
         /* Cambia el color cuando está marcado */
@@ -82,6 +81,7 @@ foreach ($modulos as $modulo) {
 </head>
 
 <body>
+    <div id="overlay" class="overlay"></div>
     <h2>Módulos Matriculados</h2>
 
     <div class="container">
@@ -89,6 +89,11 @@ foreach ($modulos as $modulo) {
         <?php include_once('../partials/container_left.php') ?>
 
         <div class="container-rigth">
+            <input type="text" id="checkMenu" value="0" hidden>
+            <button onclick="menu()" class='btn-menu-crear' style="margin-left: 1%;" name=''>    
+                <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+            </button>
+
             <div class="mostrar-modulos">
                 <?php if (!empty($modulosPorCiclo)) : ?>
                     <?php foreach ($modulosPorCiclo as $ciclo => $modulosCiclo) : ?>
@@ -97,21 +102,23 @@ foreach ($modulos as $modulo) {
                         <?php foreach ($modulosCiclo as $modulo) : ?>
                             <div class='container-user container-check'>
                                 <div class='row'>
-                                    <div class='user-imagen'>
-                                        <img src='/images/asignatura.png' class='pic' alt='Módulo img'>
+                                    <div class='user-imagen-alumn'>
+                                        <img src='/images/asignatura.png' class='pic-alumn' alt='Módulo img'>
                                     </div>
                                     <div class='user-texto'>
                                         <p class='texto-nombre'><?= htmlspecialchars($modulo['name']) ?></p>
                                         <p class='texto-descripcion'><?= htmlspecialchars($modulo['course']) ?></p>
                                     </div>
-                                    <!-- Checkbox oculto para añadir/eliminar módulo -->
-                                    <input type="checkbox" id="modulo<?= $modulo['id'] ?>" name="modulos[]" value="<?= $modulo['id'] ?>"
-                                        onchange="toggleModulo(this)"
-                                        <?php if (in_array($modulo['id'], $modulosAsignados)) echo 'checked'; ?>>
-                                    <!-- Label que funciona como checkbox -->
-                                    <label for="modulo<?= $modulo['id'] ?>" class="toggle-icon" id="iconoModulo<?= $modulo['id'] ?>">
-                                        <?php echo (in_array($modulo['id'], $modulosAsignados)) ? '-' : '+'; ?>
-                                    </label>
+                                    <div class='user-botonesAdd'>
+                                        <!-- Checkbox oculto para añadir/eliminar módulo -->
+                                        <input type="checkbox" id="modulo<?= $modulo['id'] ?>" name="modulos[]" value="<?= $modulo['id'] ?>"
+                                            onchange="toggleModulo(this)"
+                                            <?php if (in_array($modulo['id'], $modulosAsignados)) echo 'checked'; ?>>
+                                        <!-- Label que funciona como checkbox -->
+                                        <label for="modulo<?= $modulo['id'] ?>" class="toggle-icon" id="iconoModulo<?= $modulo['id'] ?>">
+                                            <?php echo (in_array($modulo['id'], $modulosAsignados)) ? '-' : '+'; ?>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -150,6 +157,7 @@ foreach ($modulos as $modulo) {
     </script>
 
     <script src="../../js/selector_menu.js"></script>
+    <script src="../../js/menu.js"></script>
 </body>
 
 </html>

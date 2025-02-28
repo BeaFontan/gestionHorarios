@@ -38,11 +38,18 @@ h2 {
 }
 
 .circle {
-  width: 87px;
-  height: 87px;
+  width: 40%; 
   border-radius: 80%;
-  /*border: 2px solid var(--color-primario);*/
-  margin: 39px;
+  margin: 2%;
+  display: flex;
+  justify-content: center;
+}
+
+.pic-user {
+  border: 3px solid var(--color-primario);
+  width: 100%;
+  border-radius: 80%;
+  margin-bottom: 10px;
 }
 
 .container-left h3 {
@@ -187,6 +194,7 @@ form {
   padding: 5px 10px;
   border-radius: 12px;
   font-size: 14px;  
+  margin-right: 3%;
   color: var(--tertiary-color);  
   cursor: pointer;  
   width: 45%;  
@@ -220,8 +228,8 @@ form {
   color: var(--tertiary-color);  
   appearance: none;  
   cursor: pointer;  
-  width: 160px;  
-  height: 30px;
+  width: 5vw;  
+  height: 2vw;
   position: relative;
 }
 .dropdownModulo::after {
@@ -263,6 +271,7 @@ table, th, td{
   appearance: none; 
   width: 160px;  
   height: 40px;
+  font-family: Arial, sans-serif;
 }
 
 
@@ -276,6 +285,7 @@ table, th, td{
   appearance: none;  
   width: 160px;  
   height: 30px;
+  font-family: Arial, sans-serif;
 }
 
 /* Estilo base para el blanc space del título de los días de la semana */
@@ -302,7 +312,7 @@ table, th, td{
   color: var(--forty-color);  
   appearance: none;  
   cursor: pointer;  
-  width: 140px;  
+  width: 180px;  
   height: 40px;
 }
 
@@ -334,4 +344,44 @@ table, th, td{
 
 .logout:hover{
   color: var(--second-color);
+}
+
+.cabeceraSemana::after {
+  content: attr(data-dia);
+}
+
+@media(max-width: 500px){
+
+  .container-drops{
+    flex-wrap: nowrap;
+    flex-direction: column;
+    text-align: right;
+    padding-right: 0;
+    margin-right: 0;
+  }
+
+  .dropdownCiclo{
+    width: 80%;
+    margin-top: 2.5%;
+  }
+
+  .pic-user {
+    border: 3px solid var(--color-primario);
+    width: 90px;
+    border-radius: 80%;
+    margin-bottom: 10px;
+  }
+
+  .circle{
+    width: 40%; 
+    border-radius: 80%;
+    margin: 2%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .cabeceraSemana::after {
+    content: attr(data-inicial);
+  }
+
 }

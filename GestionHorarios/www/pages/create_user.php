@@ -23,12 +23,13 @@ if (!isset($_SESSION['user'])) {
 </head>
 
 <body>
-<?php if (isset($_SESSION['mensaxe'])): ?>
-    <div class="tooltip-container">
-        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
-    </div>
-    <?php unset($_SESSION['mensaxe']); ?>
-<?php endif; ?>
+    <div id="overlay" class="overlay"></div>
+    <?php if (isset($_SESSION['mensaxe'])): ?>
+        <div class="tooltip-container">
+            <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+        </div>
+        <?php unset($_SESSION['mensaxe']); ?>
+    <?php endif; ?>
 
     <h2>Engadir Alumno</h2>
 
@@ -42,6 +43,12 @@ if (!isset($_SESSION['user'])) {
         <div class="container-rigth">
                 <form style="width: 100%;" action="../functions/administrator/function_create_user.php" method="post">
                     <br><br>
+
+                    <input type="text" id="checkMenu" value="0" hidden>
+                    <button onclick="menu()" class='btn-menu-crear' name=''>    
+                        <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+                    </button>
+
                     <div>
                         <img src='/images/user.png' class='pic-crear' alt='Usuario img'>
                         <!-- <p style="font-size: 90px; margin-left: 10px;">+</p> -->
@@ -68,6 +75,9 @@ if (!isset($_SESSION['user'])) {
                 </form>
         </div>
     </div>
+
+    <script src="../js/menu.js"></script>
+
 </body>
 
 </html>

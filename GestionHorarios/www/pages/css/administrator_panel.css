@@ -251,7 +251,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  padding-right: 8.5%;
+  padding-right: 7%;
   justify-content: right;
 }
 
@@ -275,6 +275,13 @@ h2 {
 }
 
 .pic {
+  border: 3px solid var(--color-primario);
+  width: 60%;
+  border-radius: 80%;
+  margin-bottom: 10px;
+}
+
+.pic-alumn {
   border: 3px solid var(--color-primario);
   width: 60%;
   border-radius: 80%;
@@ -350,6 +357,19 @@ form {
   position: relative;
 }
 
+.dropdownHorarios{
+  background-color: var(--forty-color);
+  border: 2px solid var(--color-primario);
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--tertiary-color);
+  cursor: pointer;
+  width: 90%;
+  height: 30px;
+  position: relative;
+}
+
 .buscador:focus {
   background-color: #f0f8ff4a; /* Cambia el color de fondo cuando se selecciona */
   border-color: var(--second-color);
@@ -357,6 +377,13 @@ form {
 }
 
 .user-imagen {
+  width: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-imagen-alumn {
   width: 15%;
   display: flex;
   align-items: center;
@@ -380,6 +407,14 @@ form {
 }
 
 .user-botones {
+  width: 9%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-botonesAdd {
   width: 9%;
   text-align: left;
   display: flex;
@@ -499,7 +534,38 @@ form {
   width: 40%;
   height: 30px;
   position: relative;
-  margin: 20px;
+  margin: 3%;
+}
+
+.inputs-form-2 {
+  background-color: var(--forty-color);
+  border: 2px solid var(--color-primario);
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--tertiary-color);
+  appearance: none;
+  cursor: pointer;
+  width: 44%;
+  height: 30px;
+  position: relative;
+  margin-left: 3%;
+  margin-right: 3%;
+}
+
+.inputs-form-select-2 {
+  background-color: var(--forty-color);
+  border: 2px solid var(--color-primario);
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: var(--tertiary-color);
+  cursor: pointer;
+  width: 44%;
+  height: 30px;
+  position: relative;
+  margin-left: 3%;
+  margin-right: 3%;
 }
 
 .inputs-form-add-select {
@@ -513,7 +579,7 @@ form {
   width: 40%;
   height: 30px;
   position: relative;
-  margin: 20px;
+  margin: 3%;
 }
 
 input::-webkit-outer-spin-button,
@@ -630,6 +696,7 @@ p {
   padding-right: 6%;
 }
 
+
 .overlay{
   width: 100%;
   height: 100%;
@@ -640,6 +707,10 @@ p {
   left: 0;
   right: 0;
   z-index: 19;
+}
+
+.btn-menu-crear{
+  display: none;
 }
 
 
@@ -706,7 +777,19 @@ p {
     margin-left: 3%;
   }
 
+  .dropdownHorarios{
+    width: 94%;
+    margin-top: 2%;
+    margin-left: 3%;
+  }
+
   .row-edit{
+    flex-direction: column;
+    margin: 0;
+  }
+
+
+  .row-crear{
     flex-direction: column;
     margin: 0;
   }
@@ -717,15 +800,47 @@ p {
     font-size: 2.9vw;
   }
 
+  .inputs-form-2{
+    width: 90%;
+    margin-right: 0;
+    font-size: 2.9vw;
+  }
+
+  .inputs-form-add{
+    width: 90%;
+    margin-right: 0;
+    font-size: 2.9vw;
+  }
+
+  .inputs-form-add-select{
+    width: 90%;
+    margin-right: 0;
+    font-size: 2.9vw;
+    margin-bottom: 4.5%;
+  }
+
+  .inputs-form-select-2{
+    width: 90%;
+    margin-right: 0;
+    font-size: 2.9vw;
+    margin-bottom: 4.5%;
+  }
+
   .inputs-form-select{
     width: 90%;
     margin-right: 0;
-    margin-top: 4.5%;
+    margin-bottom: 4.5%;
     font-size: 2.9vw;
+
   }
 
   .pic{
     border: 2px solid var(--color-primario);
+  }
+
+  .pic-alumn{
+    border: 2px solid var(--color-primario);
+    width: 90%;
   }
 
   .btn-delete{
@@ -741,6 +856,10 @@ p {
     width: 20%;
   }
 
+  .user-imagen-alumn{
+    width: 15%;
+  }
+
   .btn-menu{
     display: block;
     background-color: white;
@@ -750,6 +869,18 @@ p {
     margin-top: 1.5%;
     z-index: 20;
     border-radius: 20%;
+  }
+
+  .btn-menu-crear{
+    display: block;
+    background-color: white;
+    border: 0px;
+    width: 11%;
+    margin-left: 2.5%;
+    margin-top: 0;
+    z-index: 20;
+    border-radius: 20%;
+    position: absolute;
   }
   
   .container-buscador{
@@ -782,6 +913,15 @@ p {
     right: 8%;
     width: 80px;
     height: 80px;
+  }
+
+  .inputs-form-color{
+    width: 90%;
+    margin: 3%;
+  }
+
+  .user-botonesAdd {
+    width: 15%;
   }
 }
 

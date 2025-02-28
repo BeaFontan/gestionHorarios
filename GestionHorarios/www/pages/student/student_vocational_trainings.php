@@ -45,7 +45,6 @@ $stmt = $pdo->query($sql);
             border-radius: 50px;
             cursor: pointer;
             transition: background-color 0.5s ease-in-out, transform 0.2s ease-in-out;
-            margin-top: 25px;
         }
 
         /* Cambia el color cuando está marcado */
@@ -65,6 +64,7 @@ $stmt = $pdo->query($sql);
 </head>
 
 <body>
+    <div id="overlay" class="overlay"></div>
     <h2>Ciclos</h2>
 
     <div class="container">
@@ -74,23 +74,27 @@ $stmt = $pdo->query($sql);
 
 
         <div class="container-rigth">
-            
+            <input type="text" id="checkMenu" value="0" hidden>
+            <button onclick="menu()" class='btn-menu-crear' style="margin-left: 1%;" name=''>    
+                <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+            </button>
+
                 <form class="mostrar-ciclos" id="ciclos-form">
                     <?php while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
                         <?php $isChecked = in_array($fila['id'], $userCiclos) ? 'checked' : ''; ?>
                         <div class='container-user container-check'>
                             <div class='row'>
-                                <div class='user-imagen'>
-                                    <img src='/images/ciclo.png' class='pic' alt='Módulo img'>
+                                <div class='user-imagen-alumn'>
+                                    <img src='/images/ciclo.png' class='pic-alumn' alt='Módulo img'>
                                 </div>
                                 <div class='user-texto'>
                                     <p class='texto-nombre'><?= htmlspecialchars($fila['course_name']) ?></p>
                                     <p class='texto-ciclo'><?= htmlspecialchars($fila['modality']) ?></p>
                                 </div>
                                 <!-- Checkbox oculto -->
-                                <div class='user-botones'>
-                                <input type="checkbox" id="ciclo<?= $fila['id'] ?>" name="ciclos[]" value="<?= $fila['id'] ?>" <?= $isChecked ?> onchange="toggleCiclo(this)">
-                                <!-- Label que funciona como checkbox -->
+                                <div class='user-botonesAdd'>
+                                    <input type="checkbox" id="ciclo<?= $fila['id'] ?>" name="ciclos[]" value="<?= $fila['id'] ?>" <?= $isChecked ?> onchange="toggleCiclo(this)">
+                                    <!-- Label que funciona como checkbox -->
                                 
                                     <label for="ciclo<?= $fila['id'] ?>" class="toggle-icon" id="icono<?= $fila['id'] ?>">
                                         <?= $isChecked ? '-' : '+' ?>
@@ -140,7 +144,7 @@ $stmt = $pdo->query($sql);
         }
     </script>
     <script src="../../js/selector_menu.js"></script>
-
+    <script src="../../js/menu.js"></script>
 
 </body>
 

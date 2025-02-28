@@ -57,9 +57,9 @@ if (isset($_POST["btnUpdate"])) {
             <div class="container-buscador">
                 <input type="text" id="checkMenu" value="0" hidden>
                 <button onclick="menu()" class='btn-menu'>    
-                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menú'>
+                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
                 </button>
-                <form method="post" action="../functions/administrator/function_panel_administrator.php" id="search-form">
+                <form method="post" style="all:initial; width: 100%;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar ciclo" name="txtFindVocationalTraining">
                 </form>
             </div>
@@ -102,23 +102,23 @@ if (isset($_POST["btnUpdate"])) {
                             </div>
 
                             <div class='user-editar'>
-                                <form action='../functions/vocational_trainings/function_update_vocational_trainings.php' method='post'>
+                                <form action='../functions/vocational_trainings/function_update_vocational_trainings.php' style='all:initial; width: 100%;' method='post'>
                                     <div class='row-edit'>
-                                        <input class='inputs-form' type='hidden' name='id' value='<?php echo $id; ?>'>
-                                        <input class='inputs-form' type='text' name='txtCourse_code' value='<?php echo $course_code; ?>' placeholder='Código ciclo' required><br>
-                                        <input class='inputs-form' type='text' name='txtCourse_name' value='<?php echo $course_name; ?>' placeholder='Nombre'><br>
+                                        <input type='hidden' name='id' value='<?php echo $id; ?>'>
+                                        <input class='inputs-form-2' type='text' name='txtCourse_code' value='<?php echo $course_code; ?>' placeholder='Código ciclo' required><br>
+                                        <input class='inputs-form-2' type='text' name='txtCourse_name' value='<?php echo $course_name; ?>' placeholder='Nombre'><br>
                                     </div>
 
                                     <div class='row-edit'>
                         
-                                        <select class='inputs-form-add-select' name="selectModality" id="selectModality" required>
+                                        <select class='inputs-form-select-2' name="selectModality" id="selectModality" required>
                                             <option value="ordinary" <?= ($modality == 'ordinary') ? 'selected' : ''; ?>>Ordinario</option>
                                             <option value="modular" <?= ($modality == 'modular') ? 'selected' : ''; ?>>Modular</option>
                                             <option value="dual" <?= ($modality == 'dual') ? 'selected' : ''; ?>>Dual</option>
                                         </select>
 
                             
-                                        <select class='inputs-form-add-select' name="selectType" id="selectType" required>
+                                        <select class='inputs-form-select-2' name="selectType" id="selectType" required>
                                             <option value="medium" <?= ($type == 'medium') ? 'selected' : ''; ?>>Medio</option>
                                             <option value="higher" <?= ($type == 'higher') ? 'selected' : ''; ?>>Superior</option>
                                         </select>

@@ -18,7 +18,9 @@
         <span class="raya">Login</span> <span class="negrita">IES</span> San
         Clemente
     </h1>
-    <div class="circle"></div>
+    <div class="circle">
+        <img src="/images/user.png" class="imagen" alt="Usuario">
+    </div>
     <?php
     if (isset($_GET['message'])) {
         echo '<p style="color: red;">' . $_GET['message'] . '</p>';

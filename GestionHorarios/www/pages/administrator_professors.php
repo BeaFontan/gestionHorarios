@@ -54,7 +54,7 @@ if (isset($_POST["btnUpdate"])) {
             <div class="container-buscador">
                 <input type="text" id="checkMenu" value="0" hidden>
                 <button onclick="menu()" class='btn-menu' name=''>    
-                    <img src='/images/menu.png' class='boton-icono-menu' alt='Borrar'>
+                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
                 </button>
                 <form method="post" style="all:initial; width: 100%;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar profesor" name="txtFindProfessor">
@@ -94,14 +94,14 @@ if (isset($_POST["btnUpdate"])) {
                             </div>
                         <div class='user-editar'>
                             <form action='../functions/professors/function_update_professor.php' style='all:initial; width: 100%;' method='post'>
-                                <div class='row-edit' style='margin-left: 3.5%;'>
+                                <div class='row-edit'>
                                     <input type='hidden' class='inputs-form' name='id' value='$id'>
-                                    <input type='text' class='inputs-form' name='txtName' value='$name' required><br>
-                                    <input type='text' class='inputs-form' name='txtFirstName' value='$firstName' placeholder='Primeiro Apelido' required><br>
-                                    <input type='text' class='inputs-form' name='txtSecondName' value='$secondName' placeholder='Segundo Apelido' ><br>
+                                    <input type='text' class='inputs-form-2' name='txtName' value='$name' required><br>
+                                    <input type='text' class='inputs-form-2' name='txtFirstName' value='$firstName' placeholder='Primeiro Apelido' required><br>
                                 </div>
-                                <div class='row-edit' style='margin-left: 3.5%;'>
-                                    <input type='email' class='inputs-form' name='txtEmail' value='$email' placeholder='Email' ><br>
+                                <div class='row-edit'>
+                                    <input type='text' class='inputs-form-2' name='txtSecondName' value='$secondName' placeholder='Segundo Apelido' ><br>
+                                    <input type='email' class='inputs-form-2' name='txtEmail' value='$email' placeholder='Email' ><br>
                                 </div>
 
                                 <div class='row-guardar'>

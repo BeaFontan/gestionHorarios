@@ -84,6 +84,7 @@ if (isset($_POST["btnGuardar"])) {
 </head>
 
 <body>
+    <div id="overlay" class="overlay"></div>
     <?php if (isset($_SESSION['mensaxe'])): ?>
         <div class="tooltip-container">
             <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
@@ -97,8 +98,14 @@ if (isset($_POST["btnGuardar"])) {
         <?php include_once('partials/container_left.php') ?>
 
         <div class="container-rigth">
-            <form id="filter-form" method="post">
-                <div style="text-align: center; margin-bottom: 20px; width: 100%;">
+            
+            <input type="text" id="checkMenu" value="0" hidden>
+            <button onclick="menu()" style="margin-top: 2%;" class='btn-menu-crear'>    
+                <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+            </button>
+             
+            <form id="filter-form" style="all: initial;" method="post">
+                <div class="container-drops">
                     <select class="dropdownCiclo" name="ciclo" id="ciclo">
                         <option value="">Selecciona Ciclo</option>
                         <?php
@@ -108,10 +115,8 @@ if (isset($_POST["btnGuardar"])) {
                         }
                         ?>
                     </select>
-                </div>
 
-                <div style="text-align: center; margin-bottom: 20px; width: 100%;">
-                    <select class="dropdownCurso" name="curso" id="curso">
+                    <select class="dropdownCiclo" name="curso" id="curso">
                         <option>Selecciona un curso</option>
                         <option value="first">Primer Año</option>
                         <option value="second">Segundo Año</option>
@@ -119,7 +124,7 @@ if (isset($_POST["btnGuardar"])) {
                 </div>
             </form>
 
-            <form method="post">
+            <form style="all:initial;" method="post">
 
                 <input type="hidden" name="ciclo" id="cicloHidden">
                 <input type="hidden" name="curso" id="cursoHidden">
@@ -128,11 +133,11 @@ if (isset($_POST["btnGuardar"])) {
                     <table>
                         <tr>
                             <th class="cabeceraSemanaBlanc"></th>
-                            <th class="cabeceraSemana">LUNES</th>
-                            <th class="cabeceraSemana">MARTES</th>
-                            <th class="cabeceraSemana">MIÉRCOLES</th>
-                            <th class="cabeceraSemana">JUEVES</th>
-                            <th class="cabeceraSemana">VIERNES</th>
+                            <th class="cabeceraSemana" data-dia="LUNES" data-inicial="L"></th>
+                            <th class="cabeceraSemana" data-dia="MARTES" data-inicial="M"></th>
+                            <th class="cabeceraSemana" data-dia="MIÉRCOLES" data-inicial="X"></th>
+                            <th class="cabeceraSemana" data-dia="JUEVES" data-inicial="J"></th>
+                            <th class="cabeceraSemana" data-dia="VIERNES" data-inicial="V"></th>
                         </tr>
 
                         <?php
@@ -198,6 +203,7 @@ if (isset($_POST["btnGuardar"])) {
 
     <script src="../js/selector_menu.js"></script>
     <script src="../js/modules.js"></script>
+    <script src="../js/menu.js"></script>
 </body>
 
 </html>

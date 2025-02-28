@@ -70,3 +70,8 @@ a {
   color: var(--color-primario);
   font-size: 13px;
 }
+
+.imagen {
+  width: 100%;
+  border-radius: 80%;
+}

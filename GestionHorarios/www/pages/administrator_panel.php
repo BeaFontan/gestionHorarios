@@ -61,7 +61,7 @@ if (isset($_POST["btnUpdate"])) {
             <div class="container-buscador">
                 <input type="text" id="checkMenu" value="0" hidden>
                 <button onclick="menu()" class='btn-menu' name=''>    
-                    <img src='/images/menu.png' class='boton-icono-menu' alt='Borrar'>
+                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
                 </button>
                 <form method="post" style="all:initial; width: 100%;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar alumno" name="txtFindUser">

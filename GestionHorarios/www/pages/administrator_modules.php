@@ -84,7 +84,7 @@ if (isset($_POST["btnUpdate"])) {
             <div class="container-buscador">
                 <input type="text" id="checkMenu" value="0" hidden>
                 <button onclick="menu()" class='btn-menu' name=''>    
-                    <img src='/images/menu.png' class='boton-icono-menu' alt='Borrar'>
+                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
                 </button>
                 <form method="post" style="all:initial; width: 100%;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar módulo" name="txtFindModules">
@@ -163,6 +163,9 @@ if (isset($_POST["btnUpdate"])) {
                                     <input class='inputs-form' type='text' name='txtModule_code' value='$module_code' required placeholder='Código módulo'><br>
                                     <input class='inputs-form' type='text' name='txtModule_name' value='$name' placeholder='Nome'><br>
                                     <input class='inputs-form' type='text' name='txtSessions_number' value='$sessions_number' placeholder='Nº sesiones'><br>
+                                </div>
+
+                                <div class='row-edit' style='margin-left: 3.5%;'>
                                     <input class='inputs-form' type='text' name='txtCLassRoom' value='$classRoom' placeholder='Aula'><br>
                                     <input class='inputs-form' type='color' name='txtColor' value='$color' placeholder='Color'><br>
                                     <input class='inputs-form' type='text' name='txtModuleAcronym' value='$module_acronym' placeholder='Sigras'><br>

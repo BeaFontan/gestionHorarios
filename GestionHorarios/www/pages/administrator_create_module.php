@@ -47,12 +47,13 @@ function get_vocational_trainings($pdo)
 </head>
 
 <body>
-<?php if (isset($_SESSION['mensaxe'])): ?>
-    <div class="tooltip-container">
-        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
-    </div>
-    <?php unset($_SESSION['mensaxe']); ?>
-<?php endif; ?>
+    <div id="overlay" class="overlay"></div>
+    <?php if (isset($_SESSION['mensaxe'])): ?>
+        <div class="tooltip-container">
+            <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+        </div>
+        <?php unset($_SESSION['mensaxe']); ?>
+    <?php endif; ?>
 
     <h2>Engadir Módulo</h2>
     
@@ -65,6 +66,12 @@ function get_vocational_trainings($pdo)
         <div class="container-rigth">
             <form style="width: 100%;" action="../functions/modules/function_create_modules.php" method="post">
                 <br><br>
+
+                <input type="text" id="checkMenu" value="0" hidden>
+                <button onclick="menu()" class='btn-menu-crear' name=''>    
+                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+                </button>
+
                 <div>
                     <img src='/images/asignatura.png' class='pic-crear' alt='Usuario img'>
                     <!-- <p style="font-size: 90px; margin-left: 10px;">+</p> -->
@@ -83,6 +90,9 @@ function get_vocational_trainings($pdo)
                         <option value="second">Segundo</option>
                     </select>
                     <input class='inputs-form-add' type="number" name="txtSessions" placeholder="Nº de sesións">
+                </div>
+
+                <div class="row-crear">
                     <input class='inputs-form-add' type="text" name="txtModuleAcronym" placeholder="Sigras">
                     <input class='inputs-form-add' type="number" name="txtCLassRoom" placeholder="Aula">
 
