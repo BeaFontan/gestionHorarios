@@ -45,6 +45,11 @@ if (isset($_POST["btnUpdate"])) {
 
 <body>
     <div id="overlay" class="overlay"></div>
+    <input type="text" id="checkMenu" value="0" hidden>
+    <button onclick="menu()" class='btn-menu' name=''>    
+        <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+    </button>
+    
     <?php if (isset($_SESSION['mensaxe'])): ?>
         <div class="tooltip-container">
             <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
@@ -62,19 +67,15 @@ if (isset($_POST["btnUpdate"])) {
         <!-- Contenedor derecho -->
         <div class="container-rigth">
             <div class="container-buscador">
-                <input type="text" id="checkMenu" value="0" hidden>
-                <button onclick="menu()" class='btn-menu' name=''>    
-                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
-                </button>
                 <form method="post" style="all:initial; width: 100%;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar alumno" name="txtFindUser">
                 </form>
-                <button id="filter-button" onclick="toggleFilters()">Filtro</button>
+                <button id="filter-button" class="btnFiltrar" onclick="toggleFilters()">Filtro</button>
             </div>
 
              <div id="filters" style="display:none;">
                 <form id="filter-form">
-                    <select name="ciclo" id="ciclo" onchange="loadModulos(this.value)">
+                    <select name="ciclo" class="drpCiclo" id="ciclo" onchange="loadModulos(this.value)">
                         <option value="">Selecciona Ciclo</option>
                         <?php
                         if ($arrayVocationalTrainings) {

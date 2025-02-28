@@ -62,6 +62,10 @@ if ($selectedCycle) {
 
 <body>
     <div id="overlay" class="overlay"></div>
+    <input type="text" id="checkMenu" value="0" hidden>
+    <button onclick="menu()" class='btn-menu' name=''>    
+        <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+    </button>
     <h2>Horario</h2>
 
     <div class="container">
@@ -69,10 +73,6 @@ if ($selectedCycle) {
 
         <div class="container-rigth">
             <div class="container-buscador">
-                <input type="text" id="checkMenu" value="0" hidden>
-                <button onclick="menu()" class='btn-menu' name=''>    
-                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
-                </button>
                 <form id="filter-form" style="initial: all; width: 100%;" method="post">
                     <!-- Seleccionar Ciclo -->
                         <select class="dropdownHorarios" name="ciclo" id="ciclo">

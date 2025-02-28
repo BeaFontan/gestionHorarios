@@ -81,6 +81,11 @@ if (isset($_POST["btnGuardar"])) {
 
 <body>
     <div id="overlay" class="overlay"></div>
+    <input type="text" id="checkMenu" value="0" hidden>
+    <button onclick="menu()" class='btn-menu' name=''>    
+        <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+    </button>
+    
     <?php if (isset($_SESSION['mensaxe'])): ?>
         <div class="tooltip-container">
             <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
@@ -94,11 +99,6 @@ if (isset($_POST["btnGuardar"])) {
         <?php include_once('partials/container_left.php') ?>
 
         <div class="container-rigth">
-            
-            <input type="text" id="checkMenu" value="0" hidden>
-            <button onclick="menu()" style="margin-top: 2%;" class='btn-menu-crear'>    
-                <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
-            </button>
              
             <form id="filter-form" style="all: initial;" method="post">
                 <div class="container-drops">

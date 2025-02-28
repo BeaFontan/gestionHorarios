@@ -20,6 +20,11 @@ if (!isset($_SESSION['user'])) {
 
 <body>
     <div id="overlay" class="overlay"></div>
+    <input type="text" id="checkMenu" value="0" hidden>
+    <button onclick="menu()" class='btn-menu' name=''>    
+        <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+    </button>
+
     <?php if (isset($_SESSION['mensaxe'])): ?>
         <div class="tooltip-container">
             <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
@@ -39,12 +44,6 @@ if (!isset($_SESSION['user'])) {
         <div class="container-rigth">
                 <form style="width: 100%;" action="../functions/administrator/function_create_user.php" method="post">
                     <br><br>
-
-                    <input type="text" id="checkMenu" value="0" hidden>
-                    <button onclick="menu()" class='btn-menu-crear' name=''>    
-                        <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
-                    </button>
-
                     <div>
                         <img src='/images/user.png' class='pic-crear' alt='Usuario img'>
                     </div>

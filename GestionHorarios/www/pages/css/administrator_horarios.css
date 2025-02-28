@@ -91,7 +91,7 @@ h2 {
   padding: 10px 20px;
 }
 
-/* Agregamos el pseudo-elemento para el efecto */
+
 .container-left ul li::after {
   content: "";
   position: absolute;
@@ -156,13 +156,6 @@ h2 {
   width: 90%;
 }
 
-/*.container-user .circle {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}*/
-
 .container-user p {
   margin: 5px 0;
 }
@@ -210,15 +203,6 @@ form {
   padding-right: 4%;
 }
 
-/*.dropdownCiclo::after {
-  content: '▼'; 
-
-  font-size: 0.9em;  
-  color: var(--tertiary-color); 
-  position: absolute; 
-  transform: translateY(-50%);
-}*/
-
 /* Estilo base para el dropdown */
 .dropdownModulo {
   background-color: #EBEEEB;
@@ -245,6 +229,7 @@ form {
 select{
   border:none;
 }
+
 /* Estilo para cuando el dropdown tiene foco */
 .dropdownModulo:focus {
   outline: none; 
@@ -355,14 +340,16 @@ table, th, td{
   .container-drops{
     flex-wrap: nowrap;
     flex-direction: column;
-    text-align: right;
+    text-align: center;
     padding-right: 0;
     margin-right: 0;
+    padding-left: 0;
   }
 
   .dropdownCiclo{
-    width: 80%;
+    width: 95%;
     margin-top: 2.5%;
+    margin-right: 0;
   }
 
   .pic-user {

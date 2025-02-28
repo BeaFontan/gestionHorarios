@@ -83,6 +83,10 @@ foreach ($modulos as $modulo) {
 
 <body>
     <div id="overlay" class="overlay"></div>
+    <input type="text" id="checkMenu" value="0" hidden>
+    <button onclick="menu()" class='btn-menu' name=''>    
+        <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+    </button>
     <h2>Módulos</h2>
 
     <div class="container">
@@ -90,11 +94,6 @@ foreach ($modulos as $modulo) {
         <?php include_once('../partials/container_left.php') ?>
 
         <div class="container-rigth">
-            <input type="text" id="checkMenu" value="0" hidden>
-            <button onclick="menu()" class='btn-menu-crear' style="margin-left: 1%;" name=''>    
-                <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
-            </button>
-
             <div class="mostrar-modulos">
                 <?php if (!empty($modulosPorCiclo)) : ?>
                     <?php foreach ($modulosPorCiclo as $ciclo => $modulosCiclo) : ?>

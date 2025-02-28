@@ -66,6 +66,10 @@ $stmt = $pdo->query($sql);
 
 <body>
     <div id="overlay" class="overlay"></div>
+    <input type="text" id="checkMenu" value="0" hidden>
+    <button onclick="menu()" class='btn-menu' name=''>    
+        <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+    </button>
     <h2>Ciclos</h2>
 
     <div class="container">
@@ -74,10 +78,6 @@ $stmt = $pdo->query($sql);
         <?php include_once('../partials/container_left.php') ?>
 
         <div class="container-rigth">
-            <input type="text" id="checkMenu" value="0" hidden>
-            <button onclick="menu()" class='btn-menu-crear' style="margin-left: 1%;" name=''>    
-                <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
-            </button>
 
                 <form class="mostrar-ciclos" id="ciclos-form">
                     <?php while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
