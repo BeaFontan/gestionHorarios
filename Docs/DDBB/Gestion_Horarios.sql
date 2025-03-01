@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Generation Time: Feb 24, 2025 at 07:08 PM
+-- Generation Time: Mar 01, 2025 at 08:55 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.2.24
 
@@ -46,12 +46,14 @@ CREATE TABLE `modules` (
 --
 
 INSERT INTO `modules` (`id`, `professor_id`, `vocational_training_id`, `module_code`, `module_acronym`, `name`, `course`, `sessions_number`, `classroom`, `color`, `time_Stamp`) VALUES
-(3, 1, 1, 'MP0615MOD', 'DIW', 'Diseño de Interfaces Web', 'first', 5, 5, '#5733FF', '2025-01-29 06:57:16'),
-(4, 1, 1, 'EXTRAmod', 'LEP', 'Lengua estranjera profesional II', 'second', 2, 24, '#F1C40F', '2025-01-29 06:57:16'),
-(5, 1, 1, 'MP0618', 'EIE', 'Empresa e Iniciativa Emprendedora', 'first', 3, 14, '#8E44AD', '2025-01-29 06:57:16'),
-(6, 6, 1, 'MP0156', 'IP', 'Inglés profesional', 'first', 2, 5, '#16A085', '2025-01-29 06:57:16'),
-(7, 2, 1, 'MP0618', 'EIE', 'Empresa e Iniciativa Emprendedora', 'first', 3, 6, '#e91c96', '2025-01-29 06:57:16'),
-(10, 3, 2, 'sgfh', 'ACD', 'sdfg', 'second', 4, 12, '#ce4646', '2025-02-19 18:33:37');
+(4, 3, 2, 'MZ142', 'LEP', 'Lengua estranjera profesional II', 'first', 2, 24, '#0ef11d', '2025-01-29 06:57:16'),
+(5, 1, 1, 'MP0618', 'EIE', 'Empresa e Iniciativa Emprendedora', 'first', 5, 14, '#43ad7b', '2025-01-29 06:57:16'),
+(6, 5, 1, 'MP0156', 'IP', 'Inglés profesional', 'second', 2, 5, '#16A085', '2025-01-29 06:57:16'),
+(7, 2, 2, 'MP0618', 'EIE', 'Empresa e Iniciativa Emprendedora', 'second', 3, 6, '#e91c96', '2025-01-29 06:57:16'),
+(10, 3, 2, 'MK415', 'DWCS', 'Diseño web en contorno servidor', 'second', 4, 12, '#ce4646', '2025-02-19 18:33:37'),
+(11, 3, 2, 'MZ41585', 'DWCC', 'Diseño web en contorno cliente', 'second', 6, 24, '#d12e2e', '2025-02-27 18:13:09'),
+(12, 2, 2, 'asdfasd', 'BBDD', 'Bases de datos', 'first', 15, 25, '#a46060', '2025-02-27 18:19:59'),
+(13, 9, 2, 'MJ1425', 'DIW', 'Diseño de Interfaces Web', 'second', 2, 24, '#db711a', '2025-03-01 08:48:16');
 
 -- --------------------------------------------------------
 
@@ -63,26 +65,6 @@ CREATE TABLE `modules_sessions` (
   `module_id` int NOT NULL,
   `session_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `modules_sessions`
---
-
-INSERT INTO `modules_sessions` (`module_id`, `session_id`) VALUES
-(3, 1),
-(10, 1),
-(4, 2),
-(10, 2),
-(4, 3),
-(3, 4),
-(5, 5),
-(3, 12),
-(6, 13),
-(6, 14),
-(3, 23),
-(5, 25),
-(5, 26),
-(7, 27);
 
 -- --------------------------------------------------------
 
@@ -105,11 +87,11 @@ CREATE TABLE `professors` (
 
 INSERT INTO `professors` (`id`, `name`, `first_name`, `second_name`, `email`, `time_stamp`) VALUES
 (1, 'Ignacio', 'Sordo', 'Martínez', 'ignacio.sordo@example.com', '2025-01-28 19:05:38'),
-(2, 'Ofelia', 'López', NULL, 'ofelia.lopez@example.com', '2025-01-28 19:05:38'),
+(2, 'Ofelia', 'López', '', 'ofelia.lopez@example.com', '2025-01-28 19:05:38'),
 (3, 'César', 'Rodríguez', 'Fernández', 'cesar.rodriguez@example.com', '2025-01-28 19:05:38'),
-(4, 'Luis', 'González', 'Pérez', 'luis.gonzalez@example.com', '2025-01-28 19:05:38'),
 (5, 'Xoana', 'Costa', NULL, 'xoana.costa@example.com', '2025-01-28 19:05:38'),
-(6, 'Pedro', 'García', 'García', 'pedrogarcia@sanclemente.net', '2025-01-29 06:35:49');
+(7, 'Mónica', 'Rodríguez', 'Pérez', 'monica@monica.com', '2025-02-26 17:35:48'),
+(9, 'Luis', 'González', 'Varela', 'luis@example.com', '2025-03-01 08:46:32');
 
 -- --------------------------------------------------------
 
@@ -237,7 +219,7 @@ CREATE TABLE `users` (
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `first_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `second_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `telephone` varchar(15) NOT NULL,
+  `telephone` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `dni` varchar(9) NOT NULL,
   `time_stamp` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -247,14 +229,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `password_reset`, `rol`, `name`, `first_name`, `second_name`, `telephone`, `dni`, `time_stamp`) VALUES
-(1, 'admin@admin.com', 'admin', 0, 'admin', 'admin ', 'admin', '', '', 'dddd', '2025-01-28 17:55:37'),
-(2, 'ana.rodriguez@example.com', '$2y$10$wlCxJUnym8D7wF0/cmMt0ePaYFMZXmgL/MObop8y1IuDJ/zhUHFxK', 1, 'student', 'ana', 'Rodríguez  ', 'Fernández', '', '87654321B', '2025-01-28 17:55:37'),
-(3, 'carlos.martin@example.com', 'carlospass', 0, 'student', 'Carlos', 'Martín', 'Fernández', '600555666', '11223344C', '2025-01-28 17:55:37'),
-(4, 'maria.lopez@example.com', 'mariapass', 0, 'student', 'María', 'López d', 'Sánchez', '', '44556677D', '2025-01-28 17:55:37'),
-(7, 'paco@pago.com', '$2y$10$XDM8rMmTX062vNxJNzof1esXHJthbEu4LL1fcS/dp5CQ1Ts/NU3xG', 1, 'student', 'Ana mod', 'Rodríguez mod', 'adsfdsf', '45452554', 'fadsfdsf', '2025-02-11 20:05:01'),
-(13, 'manuel@manuel.com', '$2y$10$ii6MS5Igwel3uXa9tYVKYOFuzAAXidmfjFz.asbpOYoGc6SIOP16S', 0, 'student', 'MAría', 'sadfsd', 'asdf', '45452554', '35241542P', '2025-02-24 16:42:47'),
-(14, 'asfasdf@rsdgfasdf', '$2y$10$p2VZyC/ppLe.NC/mINzzVe6WJHdtiN4BxNXEHsvSnWHmWt6uzWdIO', 0, 'student', 'sfdg', 'sadfgdf', 'sdfag', '44444444444', '35241542P', '2025-02-24 16:44:19'),
-(15, 'manuel@manuel.com', '$2y$10$KJpKzN4g210mfPgjeDFx3eUhofKQp/vK7I9lzyuxted8wNhROlTE.', 0, 'student', 'adsfsdf', 'asdfadsf', 'asdfadsf', '44444444444', '35241542P', '2025-02-24 16:44:51');
+(1, 'admin@admin.com', '$2y$10$r14c03ykCjcCVZpS6Bd5OejMYT25Qr.YtfYUu2eFfQVvDEodNAy8K', 0, 'admin', 'admin ', 'admin', '', '', '', '2025-01-28 17:55:37'),
+(2, 'ana.rodriguez@example.com', '$2y$10$r14c03ykCjcCVZpS6Bd5OejMYT25Qr.YtfYUu2eFfQVvDEodNAy8K', 1, 'admin', 'ana', 'Rodríguez  ', 'Fernández', '5412545', '87654321B', '2025-01-28 17:55:37'),
+(17, 'manuel@manuel.com', '$2y$10$r14c03ykCjcCVZpS6Bd5OejMYT25Qr.YtfYUu2eFfQVvDEodNAy8K', 1, 'student', 'Manuel ', 'Pérez', '', '652415852', '35475845L', '2025-02-28 17:19:00'),
+(18, 'maria@maria.com', '$2y$10$r14c03ykCjcCVZpS6Bd5OejMYT25Qr.YtfYUu2eFfQVvDEodNAy8K', 1, 'student', 'María', 'Castro', '', '415425485', '35241585L', '2025-02-28 17:49:05'),
+(19, 'elena@elena.com', '$2y$10$r14c03ykCjcCVZpS6Bd5OejMYT25Qr.YtfYUu2eFfQVvDEodNAy8K', 1, 'student', 'Elena', 'Martínez', 'Santiago', '41541414', '24154541K', '2025-02-28 17:50:01');
 
 -- --------------------------------------------------------
 
@@ -273,9 +252,11 @@ CREATE TABLE `users_modules` (
 
 INSERT INTO `users_modules` (`user_id`, `module_id`) VALUES
 (2, 4),
+(2, 5),
 (2, 6),
 (2, 7),
-(2, 10);
+(2, 11),
+(2, 12);
 
 -- --------------------------------------------------------
 
@@ -294,7 +275,9 @@ CREATE TABLE `users_vocational_trainings` (
 
 INSERT INTO `users_vocational_trainings` (`user_id`, `vocational_training_id`) VALUES
 (2, 1),
-(2, 2);
+(18, 1),
+(2, 2),
+(19, 2);
 
 -- --------------------------------------------------------
 
@@ -305,7 +288,6 @@ INSERT INTO `users_vocational_trainings` (`user_id`, `vocational_training_id`) V
 CREATE TABLE `vocational_trainings` (
   `id` int NOT NULL,
   `course_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `acronym` varchar(5) NOT NULL,
   `course_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `modality` enum('ordinary','dual','modular','') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `type` enum('medium','higher') NOT NULL,
@@ -316,13 +298,10 @@ CREATE TABLE `vocational_trainings` (
 -- Dumping data for table `vocational_trainings`
 --
 
-INSERT INTO `vocational_trainings` (`id`, `course_code`, `acronym`, `course_name`, `modality`, `type`, `time_stamp`) VALUES
-(1, 'ASIR_ORDd', 'modf', 'Administración de Sistemas Informáticos en Red', 'ordinary', 'higher', '2025-01-28 18:09:03'),
-(2, 'DAW', '', 'Desarrollo de Aplicaciones Web', 'modular', 'higher', '2025-01-28 18:09:03'),
-(3, 'DAM_DUAL', '', 'Desarrollo de Aplicaciones Multiplataforma', 'dual', 'higher', '2025-01-28 18:09:03'),
-(4, 'SMR_ORD', '', 'Sistemas Microinformáticos y Redes', 'ordinary', 'medium', '2025-01-28 18:09:03'),
-(5, 'asdf', 'sadf', 'asdfadf', 'ordinary', 'medium', '2025-02-18 16:21:45'),
-(6, 'nuevo', 'nuevo', 'nuevo', 'ordinary', 'medium', '2025-02-18 17:50:12');
+INSERT INTO `vocational_trainings` (`id`, `course_code`, `course_name`, `modality`, `type`, `time_stamp`) VALUES
+(1, 'M5315', 'Administración de Sistemas Informáticos en Red', 'modular', 'higher', '2025-01-28 18:09:03'),
+(2, 'MI524', 'Desarrollo de Aplicaciones Web', 'ordinary', 'medium', '2025-01-28 18:09:03'),
+(4, 'MZ415', 'Sistemas Microinformáticos y Redes', 'ordinary', 'medium', '2025-01-28 18:09:03');
 
 --
 -- Indexes for dumped tables
@@ -389,13 +368,13 @@ ALTER TABLE `vocational_trainings`
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `professors`
 --
 ALTER TABLE `professors`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `sessions`
@@ -407,13 +386,13 @@ ALTER TABLE `sessions`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `vocational_trainings`
 --
 ALTER TABLE `vocational_trainings`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables
