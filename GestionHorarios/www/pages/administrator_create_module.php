@@ -14,7 +14,6 @@ function getProfessors($pdo)
         $query = $pdo->query("Select * from professors");
         $query->execute();
         return $query->fetchAll();
-    
     } catch (PDOException $e) {
         $_SESSION['mensaxe'] = "Erro listando profesores" . $e->getMessage();
     }
@@ -26,7 +25,6 @@ function get_vocational_trainings($pdo)
         $query = $pdo->query("Select * from vocational_trainings");
         $query->execute();
         return $query->fetchAll();
-    
     } catch (PDOException $e) {
         $_SESSION['mensaxe'] = "Erro listando ciclos" . $e->getMessage();
     }
@@ -48,10 +46,10 @@ function get_vocational_trainings($pdo)
 <body>
     <div id="overlay" class="overlay"></div>
     <input type="text" id="checkMenu" value="0" hidden>
-    <button onclick="menu()" class='btn-menu' name=''>    
+    <button onclick="menu()" class='btn-menu' name=''>
         <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
     </button>
-    
+
     <?php if (isset($_SESSION['mensaxe'])): ?>
         <div class="tooltip-container">
             <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
@@ -60,7 +58,7 @@ function get_vocational_trainings($pdo)
     <?php endif; ?>
 
     <h2>Engadir Módulo</h2>
-    
+
     <div class="container">
 
         <!-- Contenedor izquierdo -->
@@ -104,7 +102,7 @@ function get_vocational_trainings($pdo)
 
                         if (!empty($arrayProfessors)) {
                             foreach ($arrayProfessors as $professor) {
-                                echo '<option value="'.$professor["id"].'">'.$professor["name"].' '.$professor["second_name"].'</option>';
+                                echo '<option value="' . $professor["id"] . '">' . $professor["name"] . ' ' . $professor["second_name"] . '</option>';
                             }
                         } ?>
                     </select>
@@ -116,7 +114,7 @@ function get_vocational_trainings($pdo)
 
                         if (!empty($arrayCiclos)) {
                             foreach ($arrayCiclos as $ciclo) {
-                                echo '<option value="'.$ciclo["id"].'">'.$ciclo["course_name"].'</option>';
+                                echo '<option value="' . $ciclo["id"] . '">' . $ciclo["course_name"] . '</option>';
                             }
                         } ?>
                     </select>
@@ -133,7 +131,8 @@ function get_vocational_trainings($pdo)
 
         </div>
     </div>
-    
+
     <script src="../js/menu.js"></script>
 </body>
+
 </html>

@@ -63,7 +63,7 @@ if ($selectedCycle) {
 <body>
     <div id="overlay" class="overlay"></div>
     <input type="text" id="checkMenu" value="0" hidden>
-    <button onclick="menu()" class='btn-menu' name=''>    
+    <button onclick="menu()" class='btn-menu' name=''>
         <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
     </button>
     <h2>Horario</h2>
@@ -75,16 +75,16 @@ if ($selectedCycle) {
             <div class="container-buscador">
                 <form id="filter-form" style="initial: all; width: 100%;" method="post">
                     <!-- Seleccionar Ciclo -->
-                        <select class="dropdownHorarios" name="ciclo" id="ciclo">
-                            <option value="">Selecciona Ciclo</option>
-                            <?php
-                            foreach ($arrayCycles as $cycle) {
-                                $selected = ($selectedCycle == $cycle['id']) ? 'selected' : '';
-                                echo "<option value='" . htmlspecialchars($cycle['id']) . "' $selected>" . htmlspecialchars($cycle['course_name']) . "</option>";
-                            }
-                            ?>
-                        </select>
-                    
+                    <select class="dropdownHorarios" name="ciclo" id="ciclo">
+                        <option value="">Selecciona Ciclo</option>
+                        <?php
+                        foreach ($arrayCycles as $cycle) {
+                            $selected = ($selectedCycle == $cycle['id']) ? 'selected' : '';
+                            echo "<option value='" . htmlspecialchars($cycle['id']) . "' $selected>" . htmlspecialchars($cycle['course_name']) . "</option>";
+                        }
+                        ?>
+                    </select>
+
                     <input type="hidden" name="selectedCiclo" id="selectedCiclo" value="<?php echo $selectedCycle; ?>">
                 </form>
             </div>
@@ -158,62 +158,69 @@ if ($selectedCycle) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="../../js/selector_menu.js"></script>
-    
+
     <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const cicloSelect = document.getElementById("ciclo");
-    const form = document.getElementById("filter-form");
+        document.addEventListener("DOMContentLoaded", function() {
+            const cicloSelect = document.getElementById("ciclo");
+            const form = document.getElementById("filter-form");
 
-    const selectedCiclo = document.getElementById("selectedCiclo").value;
-    if (selectedCiclo) {
-        cicloSelect.value = selectedCiclo;
-    }
+            const selectedCiclo = document.getElementById("selectedCiclo").value;
+            if (selectedCiclo) {
+                cicloSelect.value = selectedCiclo;
+            }
 
-    cicloSelect.addEventListener("change", function() {
-        form.submit();
-    });
-
-
-    const alumnoNombre = "<?php echo htmlspecialchars($_SESSION['user']['name']); ?>";
-
-    document.getElementById("export-pdf").addEventListener("click", function () {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF({ orientation: "landscape", unit: "mm", format: "a4" });
-
-        const timetable = document.getElementById("horario");
-        const cicloSeleccionado = cicloSelect.options[cicloSelect.selectedIndex].text;
+            cicloSelect.addEventListener("change", function() {
+                form.submit();
+            });
 
 
-        doc.setFontSize(18);
-        doc.text("Horario del Alumno", 140, 20, null, null, "center");
-        doc.setFontSize(12);
-        doc.text("Alumno: " + alumnoNombre, 140, 30, null, null, "center");
-        doc.text("Ciclo seleccionado: " + cicloSeleccionado, 140, 40, null, null, "center");
+            const alumnoNombre = "<?php echo htmlspecialchars($_SESSION['user']['name']); ?>";
+
+            document.getElementById("export-pdf").addEventListener("click", function() {
+                const {
+                    jsPDF
+                } = window.jspdf;
+                const doc = new jsPDF({
+                    orientation: "landscape",
+                    unit: "mm",
+                    format: "a4"
+                });
+
+                const timetable = document.getElementById("horario");
+                const cicloSeleccionado = cicloSelect.options[cicloSelect.selectedIndex].text;
 
 
-        const originalStyles = timetable.style.cssText; 
-        timetable.style.width = "1200px"; 
-        timetable.style.maxWidth = "none";
-        timetable.style.fontSize = "16px"; 
+                doc.setFontSize(18);
+                doc.text("Horario del Alumno", 140, 20, null, null, "center");
+                doc.setFontSize(12);
+                doc.text("Alumno: " + alumnoNombre, 140, 30, null, null, "center");
+                doc.text("Ciclo seleccionado: " + cicloSeleccionado, 140, 40, null, null, "center");
 
 
-        html2canvas(timetable, { scale: 2 }).then(canvas => {
+                const originalStyles = timetable.style.cssText;
+                timetable.style.width = "1200px";
+                timetable.style.maxWidth = "none";
+                timetable.style.fontSize = "16px";
 
-            timetable.style.cssText = originalStyles;
 
-            const imgData = canvas.toDataURL("image/png");
-            const imgWidth = 280;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                html2canvas(timetable, {
+                    scale: 2
+                }).then(canvas => {
 
-            doc.addImage(imgData, "PNG", 10, 50, imgWidth, imgHeight);
-            doc.save("horario_alumno.pdf");
+                    timetable.style.cssText = originalStyles;
+
+                    const imgData = canvas.toDataURL("image/png");
+                    const imgWidth = 280;
+                    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                    doc.addImage(imgData, "PNG", 10, 50, imgWidth, imgHeight);
+                    doc.save("horario_alumno.pdf");
+                });
+            });
         });
-    });
-});
+    </script>
 
-</script>
-
-<script src="../../js/menu.js"></script>
+    <script src="../../js/menu.js"></script>
 </body>
 
 </html>

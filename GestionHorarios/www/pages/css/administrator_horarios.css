@@ -3,7 +3,7 @@
 body {
   font-family: Arial, sans-serif;
   height: 100vh;
-  overflow: hidden; 
+  overflow: hidden;
   margin: 2.5% 20px;
   width: calc(100% - 40px);
 }
@@ -25,9 +25,7 @@ h2 {
 /* Contenedor izquierdo */
 .container-left {
   display: flex;
-  max-height: calc(
-    95vh - 70px
-  );
+  max-height: calc(95vh - 70px);
   flex-direction: column;
   align-items: center;
   width: 269px;
@@ -38,7 +36,7 @@ h2 {
 }
 
 .circle {
-  width: 40%; 
+  width: 40%;
   border-radius: 80%;
   margin: 2%;
   display: flex;
@@ -62,7 +60,7 @@ h2 {
   margin-bottom: 60px;
 }
 
-.pic{
+.pic {
   border: 3px solid var(--color-primario);
   width: 87px;
   height: 87px;
@@ -91,16 +89,15 @@ h2 {
   padding: 10px 20px;
 }
 
-
 .container-left ul li::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
-  width: 0; 
+  width: 0;
   height: 100%;
   background-color: var(--color-primario);
-  transition: width 0.3s ease-out; 
+  transition: width 0.3s ease-out;
   z-index: -1;
 
   border-top-right-radius: 50px;
@@ -109,7 +106,7 @@ h2 {
 
 /* Efecto hover */
 .container-left ul li:hover::after {
-  width: 90%; 
+  width: 90%;
 }
 
 .container-left ul li:hover {
@@ -129,13 +126,11 @@ h2 {
 .container-rigth {
   text-align: center;
   width: 100%;
-  max-height: calc(
-    95vh - 70px
-  ); 
+  max-height: calc(95vh - 70px);
   border: solid var(--color-primario) 2px;
   border-radius: 20px;
   padding: 25px;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 /* Estilo para los usuarios */
@@ -186,16 +181,16 @@ form {
   border: 2px solid var(--color-primario);
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 14px;  
+  font-size: 14px;
   margin-right: 3%;
-  color: var(--tertiary-color);  
-  cursor: pointer;  
-  width: 45%;  
+  color: var(--tertiary-color);
+  cursor: pointer;
+  width: 45%;
   height: 30px;
   position: relative;
 }
 
-.container-drops{
+.container-drops {
   text-align: center;
   margin-bottom: 20px;
   width: 100%;
@@ -205,45 +200,46 @@ form {
 
 /* Estilo base para el dropdown */
 .dropdownModulo {
-  background-color: #EBEEEB;
+  background-color: #ebeeeb;
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 14px;  
-  color: var(--tertiary-color);  
-  appearance: none;  
-  cursor: pointer;  
-  width: 5vw;  
+  font-size: 14px;
+  color: var(--tertiary-color);
+  appearance: none;
+  cursor: pointer;
+  width: 5vw;
   height: 2vw;
   position: relative;
 }
 .dropdownModulo::after {
-  content: '▼'; 
-  font-size: 0.9em;  
-  color: var(--tertiary-color); 
-  position: absolute; 
-  right: 10px; 
+  content: "▼";
+  font-size: 0.9em;
+  color: var(--tertiary-color);
+  position: absolute;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
 }
 
-select{
-  border:none;
+select {
+  border: none;
 }
 
 /* Estilo para cuando el dropdown tiene foco */
 .dropdownModulo:focus {
-  outline: none; 
+  outline: none;
 }
 
-hr{
-  border : 1px solid var(--color-primario);
-  width: 850px; 
+hr {
+  border: 1px solid var(--color-primario);
+  width: 850px;
 }
 
-table, th, td{
+table,
+th,
+td {
   border: 2px solid white;
 }
-
 
 /* Estilo base para las horas*/
 .horas {
@@ -251,24 +247,23 @@ table, th, td{
   text-align: center;
   padding: 5px 10px;
   border-radius: 12px;
-  font-size: 14px;  
-  color: var(--forty-color);  
-  appearance: none; 
-  width: 160px;  
+  font-size: 14px;
+  color: var(--forty-color);
+  appearance: none;
+  width: 160px;
   height: 40px;
   font-family: Arial, sans-serif;
 }
-
 
 /* Estilo base para el título de los días de la semana */
 .cabeceraSemana {
   background-color: var(--color-primario);
   padding: 5px 10px;
-  border-radius: 50px; 
-  font-size: 14px; 
-  color: var(--forty-color); 
-  appearance: none;  
-  width: 160px;  
+  border-radius: 50px;
+  font-size: 14px;
+  color: var(--forty-color);
+  appearance: none;
+  width: 160px;
   height: 30px;
   font-family: Arial, sans-serif;
 }
@@ -277,14 +272,13 @@ table, th, td{
 .cabeceraSemanaBlanc {
   background-color: var(--forty-color);
   padding: 5px 10px;
-  border-radius: 50px;  
-  font-size: 14px; 
-  color: var(--forty-color);  
-  appearance: none;  
-  width: 150px; 
+  border-radius: 50px;
+  font-size: 14px;
+  color: var(--forty-color);
+  appearance: none;
+  width: 150px;
   height: 30px;
 }
-
 
 /* Estilo base para el botón de guardar*/
 .btnGuardar {
@@ -293,11 +287,11 @@ table, th, td{
   margin-right: 5px;
   border-radius: 12px;
   border: none;
-  font-size: 16px;  
-  color: var(--forty-color);  
-  appearance: none;  
-  cursor: pointer;  
-  width: 180px;  
+  font-size: 16px;
+  color: var(--forty-color);
+  appearance: none;
+  cursor: pointer;
+  width: 180px;
   height: 40px;
 }
 
@@ -307,15 +301,15 @@ table, th, td{
   padding: 5px 5px;
   border-radius: 12px;
   border: none;
-  font-size: 14px;  
-  color: var(--forty-color);  
-  appearance: none;  
-  cursor: pointer;  
-  width: 130px;  
+  font-size: 14px;
+  color: var(--forty-color);
+  appearance: none;
+  cursor: pointer;
+  width: 130px;
   height: 30px;
 }
 
-.btnBuscar:hover{
+.btnBuscar:hover {
   background-color: var(--second-color);
 }
 
@@ -323,11 +317,11 @@ table, th, td{
   background-color: var(--second-color);
 }
 
-.logout{
+.logout {
   color: var(--color-primario);
 }
 
-.logout:hover{
+.logout:hover {
   color: var(--second-color);
 }
 
@@ -335,9 +329,8 @@ table, th, td{
   content: attr(data-dia);
 }
 
-@media(max-width: 500px){
-
-  .container-drops{
+@media (max-width: 500px) {
+  .container-drops {
     flex-wrap: nowrap;
     flex-direction: column;
     text-align: center;
@@ -346,7 +339,7 @@ table, th, td{
     padding-left: 0;
   }
 
-  .dropdownCiclo{
+  .dropdownCiclo {
     width: 95%;
     margin-top: 2.5%;
     margin-right: 0;
@@ -359,8 +352,8 @@ table, th, td{
     margin-bottom: 10px;
   }
 
-  .circle{
-    width: 40%; 
+  .circle {
+    width: 40%;
     border-radius: 80%;
     margin: 2%;
     display: flex;
@@ -370,5 +363,4 @@ table, th, td{
   .cabeceraSemana::after {
     content: attr(data-inicial);
   }
-
 }

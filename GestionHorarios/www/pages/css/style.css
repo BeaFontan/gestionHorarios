@@ -1,7 +1,7 @@
 @import url("common.css");
 
-@media(max-width: 500px){
-  .titleLoginPass{
+@media (max-width: 500px) {
+  .titleLoginPass {
     font-size: 100%;
     width: 350px;
   }

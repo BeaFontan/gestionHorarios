@@ -39,7 +39,7 @@ if (isset($_POST["btnUpdate"])) {
 <body>
     <div id="overlay" class="overlay"></div>
     <input type="text" id="checkMenu" value="0" hidden>
-    <button onclick="menu()" class='btn-menu' name=''>    
+    <button onclick="menu()" class='btn-menu' name=''>
         <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
     </button>
 
@@ -93,71 +93,71 @@ if (isset($_POST["btnUpdate"])) {
                                 <div class='user-botones'>
                                     <form method='post' action='../functions/administrator/function_delete_user.php'>
                                         <input type='hidden' name='id' value='<?php echo $id; ?>'>
-                                        <button type='submit' class='btn-delete' name='btnDelete'>    
+                                        <button type='submit' class='btn-delete' name='btnDelete'>
                                             <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
                                             <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
                                         </button>
                                     </form>
                                 </div>
-                            </div>
+                        </div>
 
-                            <div class='user-editar'>
-                                <form action='../functions/vocational_trainings/function_update_vocational_trainings.php' style='all:initial; width: 100%;' method='post'>
-                                    <div class='row-edit'>
-                                        <input type='hidden' name='id' value='<?php echo $id; ?>'>
-                                        <input class='inputs-form-2' type='text' name='txtCourse_code' value='<?php echo $course_code; ?>' placeholder='Código ciclo' required><br>
-                                        <input class='inputs-form-2' type='text' name='txtCourse_name' value='<?php echo $course_name; ?>' placeholder='Nombre'><br>
-                                    </div>
-
-                                    <div class='row-edit'>
-                        
-                                        <select class='inputs-form-select-2' name="selectModality" id="selectModality" required>
-                                            <option value="ordinary" <?= ($modality == 'ordinary') ? 'selected' : ''; ?>>Ordinario</option>
-                                            <option value="modular" <?= ($modality == 'modular') ? 'selected' : ''; ?>>Modular</option>
-                                            <option value="dual" <?= ($modality == 'dual') ? 'selected' : ''; ?>>Dual</option>
-                                        </select>
-
-                            
-                                        <select class='inputs-form-select-2' name="selectType" id="selectType" required>
-                                            <option value="medium" <?= ($type == 'medium') ? 'selected' : ''; ?>>Medio</option>
-                                            <option value="higher" <?= ($type == 'higher') ? 'selected' : ''; ?>>Superior</option>
-                                        </select>
-                                    </div>
-
-                                    <div class='row-guardar'>
-                                        <button type='submit' class='btnActualizar' name='btnSave'>Actualizar</button>
-                                    </div>
-                                </form>
-                            </div>
-
-                            <?php else: ?>
-                                <div class='user-botones'>
-                                    <form method='post'>
-                                        <input type='hidden' name='id' value='<?php echo $id; ?>'>
-                                        <input type='hidden' name='course_code' value='<?php echo $course_code; ?>'>
-                                        <input type='hidden' name='course_name' value='<?php echo $course_name; ?>'>
-                                        <input type='hidden' name='modality' value='<?php echo $modality; ?>'>
-                                        <input type='hidden' name='type' value='<?php echo $type; ?>'>
-
-                                        <button type='submit' class='btn' name='btnUpdate'>
-                                            <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
-                                            <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
-                                        </button>
-                                    </form>
-                                    <form method='post' action='../functions/vocational_trainings/function_delete_vocational_training.php'>
-                                        <input type='hidden' name='id' value='<?php echo $id; ?>'>
-                                        <button type='submit' class='btn-delete' name='btnDelete'>    
-                                            <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
-                                            <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
-                                        </button>
-                                    </form>
+                        <div class='user-editar'>
+                            <form action='../functions/vocational_trainings/function_update_vocational_trainings.php' style='all:initial; width: 100%;' method='post'>
+                                <div class='row-edit'>
+                                    <input type='hidden' name='id' value='<?php echo $id; ?>'>
+                                    <input class='inputs-form-2' type='text' name='txtCourse_code' value='<?php echo $course_code; ?>' placeholder='Código ciclo' required><br>
+                                    <input class='inputs-form-2' type='text' name='txtCourse_name' value='<?php echo $course_name; ?>' placeholder='Nombre'><br>
                                 </div>
-                            </div>
-                        <?php endif; ?>
+
+                                <div class='row-edit'>
+
+                                    <select class='inputs-form-select-2' name="selectModality" id="selectModality" required>
+                                        <option value="ordinary" <?= ($modality == 'ordinary') ? 'selected' : ''; ?>>Ordinario</option>
+                                        <option value="modular" <?= ($modality == 'modular') ? 'selected' : ''; ?>>Modular</option>
+                                        <option value="dual" <?= ($modality == 'dual') ? 'selected' : ''; ?>>Dual</option>
+                                    </select>
+
+
+                                    <select class='inputs-form-select-2' name="selectType" id="selectType" required>
+                                        <option value="medium" <?= ($type == 'medium') ? 'selected' : ''; ?>>Medio</option>
+                                        <option value="higher" <?= ($type == 'higher') ? 'selected' : ''; ?>>Superior</option>
+                                    </select>
+                                </div>
+
+                                <div class='row-guardar'>
+                                    <button type='submit' class='btnActualizar' name='btnSave'>Actualizar</button>
+                                </div>
+                            </form>
+                        </div>
+
+                    <?php else: ?>
+                        <div class='user-botones'>
+                            <form method='post'>
+                                <input type='hidden' name='id' value='<?php echo $id; ?>'>
+                                <input type='hidden' name='course_code' value='<?php echo $course_code; ?>'>
+                                <input type='hidden' name='course_name' value='<?php echo $course_name; ?>'>
+                                <input type='hidden' name='modality' value='<?php echo $modality; ?>'>
+                                <input type='hidden' name='type' value='<?php echo $type; ?>'>
+
+                                <button type='submit' class='btn' name='btnUpdate'>
+                                    <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
+                                    <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
+                                </button>
+                            </form>
+                            <form method='post' action='../functions/vocational_trainings/function_delete_vocational_training.php'>
+                                <input type='hidden' name='id' value='<?php echo $id; ?>'>
+                                <button type='submit' class='btn-delete' name='btnDelete'>
+                                    <img src='/images/delete.png' class='boton-icono-delete' alt='Borrar'>
+                                    <img src='/images/delete_hover.png' class='delete-hover' alt='Borrar'>
+                                </button>
+                            </form>
+                        </div>
                     </div>
-                <?php endwhile; ?>
+                <?php endif; ?>
             </div>
+        <?php endwhile; ?>
         </div>
+    </div>
     </div>
 
     <form action="administrator_create_vocational_training.php">
@@ -169,4 +169,5 @@ if (isset($_POST["btnUpdate"])) {
     <script src="../js/menu.js"></script>
 
 </body>
+
 </html>
