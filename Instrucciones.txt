@@ -7,4 +7,11 @@ $server = "db";
 $user = "root";
 $pass = "root";
 
-El administrativo, una vez inserte el alumno, le comunicará al alumno que la contraseña es su nombre y la primera inicial de su apellido. Luego tendrá que cambiarla.
+Incluido fichero de importación de base de datos en la carpeta Docs/BBDD.
+
+Los administrativos son dados de alta en la aplicación por el administrador de la base de datos.
+
+El administrativo, una vez inserte el alumno, le comunicará al alumno que la contraseña es su nombre y la primera inicial de su apellido todo junto en minúsculas. Luego tendrá que cambiarla.
+
+
+Servidor montado en Docker con apache.

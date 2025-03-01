@@ -16,7 +16,19 @@ if (isset($_POST["btnDelete"])) {
     $query->execute([$id]);
     $session = $query->fetchAll();
 
-    if (empty($session)) {
+    $query = $pdo->prepare("select * from users_modules where module_id like ?");
+    $query->execute([$id]);
+    $user = $query->fetchAll();
+
+    if (!empty($session)) {
+        $_SESSION['mensaxe'] = "Non podes eliminar un módulo que está asignado a un horario";
+        header('Location: ../../pages/administrator_modules.php');
+        exit();
+    } elseif (!empty($user)) {
+        $_SESSION['mensaxe'] = "Non podes eliminar un módulo que ten matriculados alumnos";
+        header('Location: ../../pages/administrator_modules.php');
+        exit();
+    } else {
         try {
             $query = $pdo->prepare("DELETE FROM `modules` WHERE id LIKE ?");
             $query->execute([$id]);
@@ -29,9 +41,6 @@ if (isset($_POST["btnDelete"])) {
             $_SESSION['mensaxe'] = "Erro na eliminación de módulo" . $e->getMessage();
             header('Location: ../../pages/administrator_modules.php');
         }
-    } else {
-        $_SESSION['mensaxe'] = "Non podes eliminar un módulo que está asignado a un horario";
-        header('Location: ../../pages/administrator_modules.php');
-        exit();
+
     }
 }

@@ -673,6 +673,22 @@ p {
   display: none;
 }
 
+/* Para navegadores basados en WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Para Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* Para Internet Explorer y Edge */
+body {
+  -ms-overflow-style: none;
+}
+
+
 @media (max-width: 500px) {
   body {
     margin: 0;
@@ -876,3 +892,4 @@ p {
   height: 7px;
   border-radius: 50%;
 }
+
