@@ -15,9 +15,11 @@
         Clemente
     </h1>
 
-    <div class="circle"></div>
+    <div class="circle">
+        <img src="../images/passkey.png" alt="" class="imagen">
+    </div>
     <?php if (isset($_SESSION['mensaxe'])): ?>
-        <div class="tooltip-container">
+        <div class=" tooltip-container">
             <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
         </div>
         <?php unset($_SESSION['mensaxe']); ?>
