@@ -16,20 +16,19 @@ if (isset($_POST["btnDelete"])) {
     $query->execute([$id]);
     $module = $query->fetchAll();
 
-    if(empty($module)) {
+    if (empty($module)) {
         try {
             $query = $pdo->prepare("DELETE FROM `vocational_trainings` WHERE id LIKE ?");
             $query->execute([$id]);
-    
+
             $_SESSION['mensaxe'] = "Ciclo eliminado correctamente";
-    
+
             header('Location: ../../pages/administrator_vocational_trainings.php');
             exit();
         } catch (PDOException $e) {
             echo $_SESSION['mensaxe'] = "Erro na eliminación de datos" . $e->getMessage();
         }
-
-    }else {
+    } else {
         $_SESSION['mensaxe'] = "Non podes eliminar un Ciclo que contén módulos";
         header('Location: ../../pages/administrator_vocational_trainings.php');
         exit();

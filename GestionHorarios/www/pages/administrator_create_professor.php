@@ -10,6 +10,7 @@ if (!isset($_SESSION['user'])) {
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,35 +38,36 @@ if (!isset($_SESSION['user'])) {
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
-                <form style="width: 100%;" action="../functions/professors/function_create_professor.php" method="post">
-                    <br><br>
+            <form style="width: 100%;" action="../functions/professors/function_create_professor.php" method="post">
+                <br><br>
 
-                    <input type="text" id="checkMenu" value="0" hidden>
-                    <button onclick="menu()" class='btn-menu-crear' name=''>    
-                        <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
-                    </button>
-                    
-                    <div>
-                        <img src='/images/user.png' class='pic-crear' alt='Usuario img'>
-                    </div>
+                <input type="text" id="checkMenu" value="0" hidden>
+                <button onclick="menu()" class='btn-menu-crear' name=''>
+                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+                </button>
 
-                    <br><br>
-                    
-                    <div class="row-crear">
-                        <input type="text" class='inputs-form-add' name="txtName" placeholder="Nome" required maxlength="50">
-                        <input type="text" class='inputs-form-add' name="txtFirstName" placeholder="Apelido 1" required maxlength="50">
-                    </div>
-                    <div class="row-crear">
-                        <input type="text" class='inputs-form-add' name="txtSecondName" placeholder="Apelido 2" maxlength="50">
-                        <input type="email" class='inputs-form-add' name="txtEmail" placeholder="Email" required maxlength="100">
-                    </div>
+                <div>
+                    <img src='/images/user.png' class='pic-crear' alt='Usuario img'>
+                </div>
 
-                    <div class="row-crear-guardar">
+                <br><br>
+
+                <div class="row-crear">
+                    <input type="text" class='inputs-form-add' name="txtName" placeholder="Nome" required maxlength="50">
+                    <input type="text" class='inputs-form-add' name="txtFirstName" placeholder="Apelido 1" required maxlength="50">
+                </div>
+                <div class="row-crear">
+                    <input type="text" class='inputs-form-add' name="txtSecondName" placeholder="Apelido 2" maxlength="50">
+                    <input type="email" class='inputs-form-add' name="txtEmail" placeholder="Email" required maxlength="100">
+                </div>
+
+                <div class="row-crear-guardar">
                     <button type="submit" class='btnActualizar' name="btnCreateProffesor" id="btnCreateUser">Guardar</button>
-                    </div>
-                </form>
+                </div>
+            </form>
         </div>
     </div>
     <script src="../js/menu.js"></script>
 </body>
+
 </html>

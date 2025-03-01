@@ -9,13 +9,13 @@ if (!isset($_SESSION['user'])) {
 include_once '../connection.php';
 
 try {
-    function transformData($data) {
+    function transformData($data)
+    {
         foreach ($data as &$item) {
 
             $item['type'] = ($item['type'] === 'higher') ? "Superior" : "Medio";
 
-            $item['modality'] = ($item['modality'] === 'ordinary') ? "Ordinario" : 
-                               (($item['modality'] === 'modular') ? "Modular" : "Dual");
+            $item['modality'] = ($item['modality'] === 'ordinary') ? "Ordinario" : (($item['modality'] === 'modular') ? "Modular" : "Dual");
         }
         return $data;
     }
@@ -32,9 +32,9 @@ try {
         $query->execute([$searchTerm, $searchTerm, $searchTerm, $searchTerm]);
 
         $searchResults = $query->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode(transformData($searchResults)); 
+        echo json_encode(transformData($searchResults));
     } else {
-    
+
         $query = $pdo->prepare("SELECT * FROM vocational_trainings");
         $query->execute();
 

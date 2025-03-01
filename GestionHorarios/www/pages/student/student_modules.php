@@ -14,7 +14,7 @@ $userId = $_SESSION['user']['id'];
 $sqlModulosAsignados = "SELECT module_id FROM users_modules WHERE user_id = ?";
 $stmtModulosAsignados = $pdo->prepare($sqlModulosAsignados);
 $stmtModulosAsignados->execute([$userId]);
-$modulosAsignados = $stmtModulosAsignados->fetchAll(PDO::FETCH_COLUMN, 0); 
+$modulosAsignados = $stmtModulosAsignados->fetchAll(PDO::FETCH_COLUMN, 0);
 
 
 $sqlModulos = "SELECT m.*, vt.course_name AS ciclo_nombre
@@ -49,7 +49,6 @@ foreach ($modulos as $modulo) {
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 
     <style>
-  
         .toggle-icon {
             display: flex;
             align-items: center;
@@ -91,14 +90,16 @@ foreach ($modulos as $modulo) {
 
         <div class="container-rigth">
             <input type="text" id="checkMenu" value="0" hidden>
-            <button onclick="menu()" class='btn-menu-crear' style="margin-left: 1%;" name=''>    
+            <button onclick="menu()" class='btn-menu-crear' style="margin-left: 1%;" name=''>
                 <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
             </button>
 
             <div class="mostrar-modulos">
                 <?php if (!empty($modulosPorCiclo)) : ?>
                     <?php foreach ($modulosPorCiclo as $ciclo => $modulosCiclo) : ?>
-                        <div class="ciclo-header"><p class='texto-nombre'><strong><?= htmlspecialchars($ciclo) ?></strong></p></div>
+                        <div class="ciclo-header">
+                            <p class='texto-nombre'><strong><?= htmlspecialchars($ciclo) ?></strong></p>
+                        </div>
                         <br>
                         <?php foreach ($modulosCiclo as $modulo) : ?>
                             <div class='container-user container-check'>
@@ -111,11 +112,11 @@ foreach ($modulos as $modulo) {
                                         <p class='texto-descripcion'><?= htmlspecialchars($modulo['course']) ?></p>
                                     </div>
                                     <div class='user-botonesAdd'>
-                               
+
                                         <input type="checkbox" id="modulo<?= $modulo['id'] ?>" name="modulos[]" value="<?= $modulo['id'] ?>"
                                             onchange="toggleModulo(this)"
                                             <?php if (in_array($modulo['id'], $modulosAsignados)) echo 'checked'; ?>>
-                                    
+
                                         <label for="modulo<?= $modulo['id'] ?>" class="toggle-icon" id="iconoModulo<?= $modulo['id'] ?>">
                                             <?php echo (in_array($modulo['id'], $modulosAsignados)) ? '-' : '+'; ?>
                                         </label>

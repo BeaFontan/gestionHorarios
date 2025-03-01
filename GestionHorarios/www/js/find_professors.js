@@ -1,29 +1,26 @@
-
 document.getElementById("buscar").addEventListener("input", function (event) {
-    let query = this.value.trim();
-  
-    if (query.length > 0) {
-      event.preventDefault(); 
-  
+  let query = this.value.trim();
 
-      let formData = new FormData();
-      formData.append("txtFindProfessor", query); 
-  
-      fetch("../functions/professors/find_professors.php", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => response.json()) 
-        .then((data) => {
-          let resultadosDiv = document.querySelector(".mostrar-profesores"); 
-          resultadosDiv.innerHTML = ""; 
-  
-          if (data.length > 0) {
+  if (query.length > 0) {
+    event.preventDefault();
 
-            data.forEach((item) => {
-              let div = document.createElement("div");
-              div.classList.add("container-user");
-              div.innerHTML = `
+    let formData = new FormData();
+    formData.append("txtFindProfessor", query);
+
+    fetch("../functions/professors/find_professors.php", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        let resultadosDiv = document.querySelector(".mostrar-profesores");
+        resultadosDiv.innerHTML = "";
+
+        if (data.length > 0) {
+          data.forEach((item) => {
+            let div = document.createElement("div");
+            div.classList.add("container-user");
+            div.innerHTML = `
                   <div class='row'>
                       <div class='user-imagen'>
                         <img src='/images/user.png' class='pic' alt='Usuario img'>
@@ -55,30 +52,29 @@ document.getElementById("buscar").addEventListener("input", function (event) {
                       </div>
                   </div>
               `;
-              resultadosDiv.appendChild(div); 
-            });
-          } else {
-
-            resultadosDiv.innerHTML = "<p>No se encontraron resultados.</p>";
-          }
-        })
-        .catch((error) => console.error("Error al obtener los resultados:", error));
-    } else {
-
-      fetch("../functions/professors/find_professors.php", {
-        method: "POST",
-        body: new FormData(), 
+            resultadosDiv.appendChild(div);
+          });
+        } else {
+          resultadosDiv.innerHTML = "<p>No se encontraron resultados.</p>";
+        }
       })
-        .then((response) => response.json()) 
-        .then((data) => {
-          let resultadosDiv = document.querySelector(".mostrar-profesores"); 
-          resultadosDiv.innerHTML = ""; 
-          if (data.length > 0) {
-
-            data.forEach((item) => {
-              let div = document.createElement("div");
-              div.classList.add("container-user");
-              div.innerHTML = `
+      .catch((error) =>
+        console.error("Error al obtener los resultados:", error)
+      );
+  } else {
+    fetch("../functions/professors/find_professors.php", {
+      method: "POST",
+      body: new FormData(),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        let resultadosDiv = document.querySelector(".mostrar-profesores");
+        resultadosDiv.innerHTML = "";
+        if (data.length > 0) {
+          data.forEach((item) => {
+            let div = document.createElement("div");
+            div.classList.add("container-user");
+            div.innerHTML = `
                   <div class='row'>
                       <div class='user-imagen'>
                         <img src='/images/user.png' class='pic' alt='Usuario img'>
@@ -110,14 +106,14 @@ document.getElementById("buscar").addEventListener("input", function (event) {
                       </div>
                   </div>
               `;
-              resultadosDiv.appendChild(div); 
-            });
-          } else {
-
-            resultadosDiv.innerHTML = "<p>No se encontraron resultados.</p>";
-          }
-        })
-        .catch((error) => console.error("Error al obtener los resultados:", error));
-    }
-  });
-  
+            resultadosDiv.appendChild(div);
+          });
+        } else {
+          resultadosDiv.innerHTML = "<p>No se encontraron resultados.</p>";
+        }
+      })
+      .catch((error) =>
+        console.error("Error al obtener los resultados:", error)
+      );
+  }
+});

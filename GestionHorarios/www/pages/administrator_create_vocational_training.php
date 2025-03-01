@@ -31,7 +31,7 @@ if (!isset($_SESSION['user'])) {
     <?php endif; ?>
 
     <h2>Engadir Ciclo</h2>
-    
+
     <div class="container">
 
         <!-- Contenedor izquierdo -->
@@ -40,45 +40,46 @@ if (!isset($_SESSION['user'])) {
 
         <!-- Contenedor derecho -->
         <div class="container-rigth">
-            
-                <form style="width: 100%;" action="../functions/vocational_trainings/function_create_vocational_training.php" method="post">
-                    <br><br>
 
-                    <input type="text" id="checkMenu" value="0" hidden>
-                    <button onclick="menu()" class='btn-menu-crear' name=''>    
-                        <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
-                    </button>
+            <form style="width: 100%;" action="../functions/vocational_trainings/function_create_vocational_training.php" method="post">
+                <br><br>
 
-                    <div>
-                        <img src='/images/ciclo.png' class='pic-crear' alt='Usuario img'>
-                    </div>
+                <input type="text" id="checkMenu" value="0" hidden>
+                <button onclick="menu()" class='btn-menu-crear' name=''>
+                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+                </button>
 
-                    <br><br>
-                    
-                    <div class="row-crear">
-                        <input class='inputs-form-add' type="text" name="txtCourse_code" placeholder="Código ciclo" required maxlength="50">
-                        <input class='inputs-form-add' type="text" name="txtName" placeholder="Nombre del Ciclo" maxlength="100">
-                    </div>
+                <div>
+                    <img src='/images/ciclo.png' class='pic-crear' alt='Usuario img'>
+                </div>
 
-                    <div class="row-crear">
+                <br><br>
+
+                <div class="row-crear">
+                    <input class='inputs-form-add' type="text" name="txtCourse_code" placeholder="Código ciclo" required maxlength="50">
+                    <input class='inputs-form-add' type="text" name="txtName" placeholder="Nombre del Ciclo" maxlength="100">
+                </div>
+
+                <div class="row-crear">
                     <select class='inputs-form-add-select' name="selectModality" required>
-                            <option value="ordinary">Ordinario</option>
-                            <option value="modular">Modular</option>
-                            <option value="dual">Dual</option>
-                        </select>
-                        <select class='inputs-form-add-select' name="selectType" required>
-                            <option value="medium">Medio</option>
-                            <option value="higher">Superior</option>
-                        </select>
-                    </div>
-                    <div class="row-crear-guardar">
-                        <button type="submit" class='btnActualizar' name="btnCreateVocationalTraining" id="btnCreateUser">Guardar</button>
-                    </div>
-                </form>
-            
+                        <option value="ordinary">Ordinario</option>
+                        <option value="modular">Modular</option>
+                        <option value="dual">Dual</option>
+                    </select>
+                    <select class='inputs-form-add-select' name="selectType" required>
+                        <option value="medium">Medio</option>
+                        <option value="higher">Superior</option>
+                    </select>
+                </div>
+                <div class="row-crear-guardar">
+                    <button type="submit" class='btnActualizar' name="btnCreateVocationalTraining" id="btnCreateUser">Guardar</button>
+                </div>
+            </form>
+
         </div>
     </div>
 
     <script src="../js/menu.js"></script>
 </body>
+
 </html>

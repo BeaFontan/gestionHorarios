@@ -17,15 +17,13 @@ if (!empty($_POST["ciclo"]) && !empty($_POST["curso"])) {
 
         $queryAssigned = $pdo->query("SELECT session_id, module_id FROM modules_sessions");
         $assignedModules = $queryAssigned->fetchAll(PDO::FETCH_ASSOC);
-        
+
         foreach ($assignedModules as $assigned) {
             $response["assignedModules"][$assigned['session_id']] = $assigned['module_id'];
         }
-
     } catch (PDOException $e) {
         $response["error"] = "Error al obtener módulos: " . $e->getMessage();
     }
 }
 
 echo json_encode($response);
-?>

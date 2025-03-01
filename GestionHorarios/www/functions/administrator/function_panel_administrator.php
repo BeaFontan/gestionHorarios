@@ -10,7 +10,7 @@ include_once '../connection.php';
 
 try {
     if (isset($_POST["txtFindUser"]) && !empty($_POST["txtFindUser"])) {
-        $searchField = strtoupper(trim($_POST["txtFindUser"])); 
+        $searchField = strtoupper(trim($_POST["txtFindUser"]));
         $searchTerm = "%$searchField%";
 
         $query = $pdo->prepare("
@@ -31,7 +31,7 @@ try {
         $searchResults = $query->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($searchResults);
     } else {
-        
+
         $query = $pdo->prepare("
             SELECT id, name, first_name, second_name, email, dni, telephone 
             FROM users 

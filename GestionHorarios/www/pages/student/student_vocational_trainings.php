@@ -32,7 +32,6 @@ $stmt = $pdo->query($sql);
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
 
     <style>
-
         .toggle-icon {
             display: flex;
             align-items: center;
@@ -75,34 +74,34 @@ $stmt = $pdo->query($sql);
 
         <div class="container-rigth">
             <input type="text" id="checkMenu" value="0" hidden>
-            <button onclick="menu()" class='btn-menu-crear' style="margin-left: 1%;" name=''>    
+            <button onclick="menu()" class='btn-menu-crear' style="margin-left: 1%;" name=''>
                 <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
             </button>
 
-                <form class="mostrar-ciclos" id="ciclos-form">
-                    <?php while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
-                        <?php $isChecked = in_array($fila['id'], $userCiclos) ? 'checked' : ''; ?>
-                        <div class='container-user container-check'>
-                            <div class='row'>
-                                <div class='user-imagen-alumn'>
-                                    <img src='/images/ciclo.png' class='pic-alumn' alt='Módulo img'>
-                                </div>
-                                <div class='user-texto'>
-                                    <p class='texto-nombre'><?= htmlspecialchars($fila['course_name']) ?></p>
-                                    <p class='texto-ciclo'><?= htmlspecialchars($fila['modality']) ?></p>
-                                </div>
-                                <div class='user-botonesAdd'>
-                                    <input type="checkbox" id="ciclo<?= $fila['id'] ?>" name="ciclos[]" value="<?= $fila['id'] ?>" <?= $isChecked ?> onchange="toggleCiclo(this)">
-                                
-                                    <label for="ciclo<?= $fila['id'] ?>" class="toggle-icon" id="icono<?= $fila['id'] ?>">
-                                        <?= $isChecked ? '-' : '+' ?>
-                                    </label>
-                                </div>
+            <form class="mostrar-ciclos" id="ciclos-form">
+                <?php while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)): ?>
+                    <?php $isChecked = in_array($fila['id'], $userCiclos) ? 'checked' : ''; ?>
+                    <div class='container-user container-check'>
+                        <div class='row'>
+                            <div class='user-imagen-alumn'>
+                                <img src='/images/ciclo.png' class='pic-alumn' alt='Módulo img'>
+                            </div>
+                            <div class='user-texto'>
+                                <p class='texto-nombre'><?= htmlspecialchars($fila['course_name']) ?></p>
+                                <p class='texto-ciclo'><?= htmlspecialchars($fila['modality']) ?></p>
+                            </div>
+                            <div class='user-botonesAdd'>
+                                <input type="checkbox" id="ciclo<?= $fila['id'] ?>" name="ciclos[]" value="<?= $fila['id'] ?>" <?= $isChecked ?> onchange="toggleCiclo(this)">
+
+                                <label for="ciclo<?= $fila['id'] ?>" class="toggle-icon" id="icono<?= $fila['id'] ?>">
+                                    <?= $isChecked ? '-' : '+' ?>
+                                </label>
                             </div>
                         </div>
-                    <?php endwhile; ?>
-                </form>
-            
+                    </div>
+                <?php endwhile; ?>
+            </form>
+
         </div>
     </div>
 
@@ -116,7 +115,7 @@ $stmt = $pdo->query($sql);
 
 
             if (checkedBoxes.length > 2) {
-                checkbox.checked = false; 
+                checkbox.checked = false;
                 return;
             }
 

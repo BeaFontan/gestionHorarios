@@ -9,7 +9,7 @@ if (!isset($_SESSION['user'])) {
 include('../connection.php');
 
 if (isset($_POST["btnSave"])) {
-    
+
     $id = $_POST["id"];
     $name = $_POST["txtName"];
     $firstName = $_POST["txtFirstName"];

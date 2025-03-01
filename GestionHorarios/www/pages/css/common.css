@@ -13,10 +13,9 @@
   box-sizing: border-box;
 }
 
-body{
-padding: 0 12% 0 12%;
-margin-top: 3%;
-
+body {
+  padding: 0 12% 0 12%;
+  margin-top: 3%;
 }
 
 /* estilos para ver o no las pass */
@@ -37,6 +36,3 @@ margin-top: 3%;
   color: rgba(68, 68, 68, 0.45);
   width: 5px;
 }
-
-
-

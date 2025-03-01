@@ -41,9 +41,9 @@ if (isset($_POST["btnUpdate"])) {
     $name = $_POST['name'];
     $selectCourse = $_POST['selectCourse'];
     $sessions_number = $_POST['sessions_number'];
-    $classRoom=$_POST['classroom'];
-    $color=$_POST['color'];
-    $module_acronym=$_POST['module_acronym'];
+    $classRoom = $_POST['classroom'];
+    $color = $_POST['color'];
+    $module_acronym = $_POST['module_acronym'];
 }
 ?>
 
@@ -62,12 +62,12 @@ if (isset($_POST["btnUpdate"])) {
 
 <body>
     <div id="overlay" class="overlay"></div>
-<?php if (isset($_SESSION['mensaxe'])): ?>
-    <div class="tooltip-container">
-        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
-    </div>
-    <?php unset($_SESSION['mensaxe']); ?>
-<?php endif; ?>
+    <?php if (isset($_SESSION['mensaxe'])): ?>
+        <div class="tooltip-container">
+            <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+        </div>
+        <?php unset($_SESSION['mensaxe']); ?>
+    <?php endif; ?>
 
     <h2>Módulos</h2>
 
@@ -80,7 +80,7 @@ if (isset($_POST["btnUpdate"])) {
         <div class="container-rigth">
             <div class="container-buscador">
                 <input type="text" id="checkMenu" value="0" hidden>
-                <button onclick="menu()" class='btn-menu' name=''>    
+                <button onclick="menu()" class='btn-menu' name=''>
                     <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
                 </button>
                 <form method="post" style="all:initial; width: 100%;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
@@ -118,17 +118,17 @@ if (isset($_POST["btnUpdate"])) {
                                 <p class='texto-nombre'>$name 
                                 <span class='color_circle' style='background-color: $color; display: inline-block; width: 15px; height: 15px; border-radius: 50%; margin-left: 5px;'></span>
                                 </p>";
-                               
+
 
 
                     if (!empty($arrayProfessors)) {
                         foreach ($arrayProfessors as $professor) {
                             foreach ($arrayVocationalTrainings as $vocationalTrining) {
                                 if ($professor["id"] === $professor_id && $vocationalTrining["id"] === $vocational_training_id) {
-                                    if ($course == "first" ) {
-                                        echo "<p class='texto-ciclo'>".$professor["name"]. ' '. $professor["first_name"].' - 1º '.$vocationalTrining["course_name"].'</p>';
+                                    if ($course == "first") {
+                                        echo "<p class='texto-ciclo'>" . $professor["name"] . ' ' . $professor["first_name"] . ' - 1º ' . $vocationalTrining["course_name"] . '</p>';
                                     } else {
-                                        echo "<p class='texto-ciclo'>".$professor["name"]. ' '. $professor["first_name"].' - 2º ' .$vocationalTrining["course_name"].'</p>';
+                                        echo "<p class='texto-ciclo'>" . $professor["name"] . ' ' . $professor["first_name"] . ' - 2º ' . $vocationalTrining["course_name"] . '</p>';
                                     }
                                 }
                             }
@@ -171,20 +171,20 @@ if (isset($_POST["btnUpdate"])) {
                                 <div class='row-edit' style='margin-left: 3.5%;'>
                                          <select class='inputs-form-select' name='selectProfessor' required>
                                         ";
-                                        foreach ($arrayProfessors as $professor) {
-                                            $selected = ($professor['id'] == $professor_id) ? "selected" : "";
-                                            echo "<option value='{$professor['id']}' $selected>{$professor['name']} {$professor['first_name']}</option>";
-                                        }
-                                        echo "
+                        foreach ($arrayProfessors as $professor) {
+                            $selected = ($professor['id'] == $professor_id) ? "selected" : "";
+                            echo "<option value='{$professor['id']}' $selected>{$professor['name']} {$professor['first_name']}</option>";
+                        }
+                        echo "
                                     </select>
 
                                     <select class='inputs-form-select' name='selectVocationalTraining' required>
                                         ";
-                                        foreach ($arrayVocationalTrainings as $vocationalTrining) {
-                                            $selected = ($vocationalTrining['id'] == $vocational_training_id) ? "selected" : "";
-                                            echo "<option value='{$vocationalTrining['id']}' $selected>{$vocationalTrining['course_name']}</option>";
-                                        }
-                                        echo "
+                        foreach ($arrayVocationalTrainings as $vocationalTrining) {
+                            $selected = ($vocationalTrining['id'] == $vocational_training_id) ? "selected" : "";
+                            echo "<option value='{$vocationalTrining['id']}' $selected>{$vocationalTrining['course_name']}</option>";
+                        }
+                        echo "
                                     </select>
 
                                     <select class='inputs-form-select' name='selectCourse'>

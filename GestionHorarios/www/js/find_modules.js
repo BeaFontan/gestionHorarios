@@ -1,5 +1,5 @@
 document.getElementById("buscar").addEventListener("input", function (event) {
-  let query = this.value.trim(); 
+  let query = this.value.trim();
   let formData = new FormData();
 
   if (query.length > 0) {
@@ -13,7 +13,7 @@ document.getElementById("buscar").addEventListener("input", function (event) {
     .then((response) => response.json())
     .then((data) => {
       let resultadosDiv = document.querySelector(".mostrar-modulos");
-      resultadosDiv.innerHTML = ""; 
+      resultadosDiv.innerHTML = "";
 
       if (data.length > 0) {
         data.forEach((item) => {

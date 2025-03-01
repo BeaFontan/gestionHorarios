@@ -1,23 +1,22 @@
 document.getElementById("buscar").addEventListener("input", function (event) {
-  let query = this.value.trim(); 
+  let query = this.value.trim();
   let formData = new FormData();
 
   if (query.length > 0) {
-    formData.append("txtFindVocationalTraining", query); 
+    formData.append("txtFindVocationalTraining", query);
   }
 
   fetch("../functions/vocational_trainings/find_vocational_training.php", {
     method: "POST",
     body: formData,
   })
-    .then((response) => response.json()) 
+    .then((response) => response.json())
     .then((data) => {
       let resultadosDiv = document.querySelector(".mostrar-ciclos");
-      resultadosDiv.innerHTML = ""; 
+      resultadosDiv.innerHTML = "";
 
       if (data.length > 0) {
         data.forEach((item) => {
-
           let typeTransform = item.type === "higher" ? "Superior" : "Medio";
           let modalityTransform =
             item.modality === "ordinary"
@@ -25,7 +24,6 @@ document.getElementById("buscar").addEventListener("input", function (event) {
               : item.modality === "modular"
               ? "Modular"
               : "Dual";
-
 
           let div = document.createElement("div");
           div.classList.add("container-user");

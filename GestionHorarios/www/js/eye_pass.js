@@ -7,8 +7,3 @@ document.getElementById("togglePassword").addEventListener("click", () => {
   icon.classList.toggle("fa-eye-slash");
   icon.classList.toggle("fa-eye");
 });
-
-
-
-
-

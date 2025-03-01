@@ -17,9 +17,9 @@ if (isset($_POST["btnSave"])) {
     $name = $_POST['txtModule_name'];
     $selectCourse = $_POST['selectCourse'];
     $sessions_number = $_POST['txtSessions_number'];
-    $classRoom=$_POST['txtCLassRoom'];
-    $color=$_POST['txtColor'];
-    $module_acronym=$_POST['txtModuleAcronym'];
+    $classRoom = $_POST['txtCLassRoom'];
+    $color = $_POST['txtColor'];
+    $module_acronym = $_POST['txtModuleAcronym'];
 
     try {
 

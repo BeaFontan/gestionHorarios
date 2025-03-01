@@ -17,11 +17,11 @@
 
     <div class="circle"></div>
     <?php if (isset($_SESSION['mensaxe'])): ?>
-    <div class="tooltip-container">
-        <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
-    </div>
-    <?php unset($_SESSION['mensaxe']); ?>
-<?php endif; ?>
+        <div class="tooltip-container">
+            <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
+        </div>
+        <?php unset($_SESSION['mensaxe']); ?>
+    <?php endif; ?>
 
     <form action="../functions/user/function_reset_password.php" method="post">
         <input

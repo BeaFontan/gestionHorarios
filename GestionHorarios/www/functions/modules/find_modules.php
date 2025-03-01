@@ -3,7 +3,8 @@
 include_once '../connection.php';
 
 try {
-    function transformData($data) {
+    function transformData($data)
+    {
         foreach ($data as &$item) {
             $item['course'] = ($item['course'] === 'first') ? "1º" : "2º";
         }
@@ -30,7 +31,7 @@ try {
         $searchResults = $query->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode(transformData($searchResults));
     } else {
-       
+
         $query = $pdo->prepare("
             SELECT m.*, p.name AS professor_name, p.first_name AS professor_first_name, vt.course_name 
             FROM modules m

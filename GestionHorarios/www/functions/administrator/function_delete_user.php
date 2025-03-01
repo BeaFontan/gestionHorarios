@@ -20,27 +20,21 @@ if (isset($_POST["btnDelete"])) {
         $_SESSION['mensaxe'] = "Non podes eliminar un alumno que está matriculado nun módulo";
         header('Location: ../../pages/administrator_panel.php');
         exit();
-
-    }else if (!empty($userVocationalTraining)) {
+    } else if (!empty($userVocationalTraining)) {
         $_SESSION['mensaxe'] = "Non podes eliminar un alumno que está matriculado nun ciclo";
         header('Location: ../../pages/administrator_panel.php');
         exit();
-        
-    }else {
+    } else {
         try {
             $query = $pdo->prepare("DELETE FROM `users` WHERE id LIKE ?");
             $query->execute([$id]);
-    
+
             $_SESSION['mensaxe'] = "Usuario eliminado correctamente";
-    
+
             header('Location: ../../pages/administrator_panel.php');
             exit();
         } catch (PDOException $e) {
             $_SESSION['mensaxe'] = "Erro na eliminación de datos" . $e->getMessage();
         }
     }
-
-
-
-
 }
