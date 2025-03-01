@@ -30,8 +30,6 @@ if (isset($_POST["ciclo"]) && !empty($_POST["ciclo"])) {
 }
 
 if (!empty($alumnos)) {
-    echo '<div class="mostrar-users">';
-
 
     foreach ($alumnos as $fila) {
         $id = htmlspecialchars($fila['id']);
