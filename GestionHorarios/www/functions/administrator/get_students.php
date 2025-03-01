@@ -12,7 +12,7 @@ if (isset($_POST["ciclo"]) && !empty($_POST["ciclo"])) {
         SELECT u.id, u.name, u.first_name, u.second_name, u.dni, u.email, u.telephone 
         FROM users u
         INNER JOIN users_vocational_trainings uv ON u.id = uv.user_id
-        WHERE uv.vocational_training_id = ?
+        WHERE uv.vocational_training_id = ? AND u.rol = 'student'
     ";
 
     $stmtAlumnos = $pdo->prepare($query);
@@ -30,8 +30,7 @@ if (isset($_POST["ciclo"]) && !empty($_POST["ciclo"])) {
 }
 
 if (!empty($alumnos)) {
-    echo '<div class="mostrar-users">';
-
+    
     foreach ($alumnos as $fila) {
         $id = htmlspecialchars($fila['id']);
         $name = htmlspecialchars($fila['name']);
@@ -56,7 +55,7 @@ if (!empty($alumnos)) {
             echo "
                 </div>
                 <div class='user-editar'>
-                    <form action='../functions/administrator/function_update_user.php' method='post'>
+                    <form action='../functions/administrator/function_update_user.php' style='all:initial; width: 100%;' method='post'>
                         <input type='hidden' name='id' value='$id'>
                         <div class='row-edit'>
                             <input type='text' class='inputs-form' name='txtName' value='$name' maxlength='50' required><br>
@@ -76,10 +75,21 @@ if (!empty($alumnos)) {
         } else {
             echo "
                 <div class='user-botones'>
-                    <button class='btn' onclick='editUser(\"$id\")'>
-                        <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
-                        <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
-                    </button>
+                    <form method='post'>
+                                <input type='hidden' name='id' value='$id'>
+                                <input type='hidden' name='name' value='$name'>
+                                <input type='hidden' name='first_name' value='$firstName'>
+                                <input type='hidden' name='second_name' value='$secondName'>
+                                <input type='hidden' name='email' value='$email'>
+                                <input type='hidden' name='telephone' value='$telephone'>
+                                <input type='hidden' name='dni' value='$dni'>
+                            
+                                
+                                <button type='submit' class='btn' name='btnUpdate'>
+                                    <img src='/images/edit.png' class='boton-icono-edit' alt='Editar'>
+                                    <img src='/images/edit_hover.png' class='edit-hover' alt='Editar'>
+                                </button>
+                            </form>
                     <form method='post' action='../functions/administrator/function_delete_user.php'>
                         <input type='hidden' name='id' value='$id'>
                         <button type='submit' class='btn-delete' name='btnDelete'>    
@@ -94,7 +104,7 @@ if (!empty($alumnos)) {
         echo "</div>";
     }
 
-    echo '</div>';
 } else {
     echo "<p>No hay alumnos disponibles.</p>";
 }
+?>

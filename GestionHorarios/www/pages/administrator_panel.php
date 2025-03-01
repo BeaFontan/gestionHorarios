@@ -40,11 +40,16 @@ if (isset($_POST["btnUpdate"])) {
     <link rel="icon" type="image/png" href="../images/icono.png">
     <link rel="stylesheet" href="../pages/css/administrator_panel.css">
     <script src="https://kit.fontawesome.com/d685d46b6c.js" crossorigin="anonymous"></script>
-
+  
 </head>
 
 <body>
     <div id="overlay" class="overlay"></div>
+    <input type="text" id="checkMenu" value="0" hidden>
+    <button onclick="menu()" class='btn-menu' name=''>    
+        <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
+    </button>
+    
     <?php if (isset($_SESSION['mensaxe'])): ?>
         <div class="tooltip-container">
             <span class="error-tooltip"><?php echo $_SESSION['mensaxe']; ?></span>
@@ -62,19 +67,15 @@ if (isset($_POST["btnUpdate"])) {
         <!-- Contenedor derecho -->
         <div class="container-rigth">
             <div class="container-buscador">
-                <input type="text" id="checkMenu" value="0" hidden>
-                <button onclick="menu()" class='btn-menu' name=''>
-                    <img src='/images/menu.png' class='boton-icono-menu' alt='Menu'>
-                </button>
                 <form method="post" style="all:initial; width: 100%;" action="../functions/administrator/function_panel_administrator.php" id="search-form">
                     <input class="buscador" type="text" id="buscar" placeholder="Buscar alumno" name="txtFindUser">
                 </form>
-                <button id="filter-button" onclick="toggleFilters()">Filtro</button>
+                <button id="filter-button" class="btnFiltrar" onclick="toggleFilters()">Filtro</button>
             </div>
 
-            <div id="filters" style="display:none;">
+             <div id="filters" style="display:none;">
                 <form id="filter-form">
-                    <select name="ciclo" id="ciclo" onchange="loadModulos(this.value)">
+                    <select name="ciclo" class="drpCiclo" id="ciclo" onchange="loadModulos(this.value)">
                         <option value="">Selecciona Ciclo</option>
                         <?php
                         if ($arrayVocationalTrainings) {
@@ -111,7 +112,7 @@ if (isset($_POST["btnUpdate"])) {
 
                                 </div>";
 
-                    if ($editUserId == $id) {
+                        if ($editUserId == $id) {
                         echo "
                                 <div class='user-botones'>
                                     <form method='post' action='../functions/administrator/function_delete_user.php'>
@@ -143,7 +144,7 @@ if (isset($_POST["btnUpdate"])) {
                             </form>
                         </div>
                         ";
-                    } else {
+                        } else {
                         echo "
                         <div class='user-botones'>
                             <form method='post'>
@@ -187,40 +188,40 @@ if (isset($_POST["btnUpdate"])) {
     <script src="../js/menu.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Mantener visible el filtro si se activó
-            document.getElementById("filters").style.display = "none";
+    document.addEventListener("DOMContentLoaded", function () {
+        // Mantener visible el filtro si se activó
+        document.getElementById("filters").style.display = "none";
 
-            // Capturar el evento de cambio en el select
-            document.getElementById("ciclo").addEventListener("change", function() {
-                let cicloId = this.value;
-                let formData = new FormData();
-                formData.append("ciclo", cicloId);
+        // Capturar el evento de cambio en el select
+        document.getElementById("ciclo").addEventListener("change", function () {
+            let cicloId = this.value;
+            let formData = new FormData();
+            formData.append("ciclo", cicloId);
 
-                fetch("../functions/administrator/get_students.php", {
-                        method: "POST",
-                        body: formData
-                    })
-                    .then(response => response.text())
-                    .then(data => {
-                        document.querySelector(".mostrar-users").innerHTML = data;
-                        document.getElementById("filters").style.display = "block";
-                    })
-                    .catch(error => console.error("Error:", error));
-            });
+            fetch("../functions/administrator/get_students.php", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.querySelector(".mostrar-users").innerHTML = data;
+                document.getElementById("filters").style.display = "block";
+            })
+            .catch(error => console.error("Error:", error));
         });
+    });
 
-        function toggleFilters() {
-            var filtersDiv = document.getElementById("filters");
-            var currentDisplay = window.getComputedStyle(filtersDiv).display;
+    function toggleFilters() {
+    var filtersDiv = document.getElementById("filters");
+    var currentDisplay = window.getComputedStyle(filtersDiv).display;
 
-            if (currentDisplay === "none") {
-                filtersDiv.style.display = "block";
-            } else {
-                filtersDiv.style.display = "none";
-            }
-        }
-    </script>
+    if (currentDisplay === "none") {
+        filtersDiv.style.display = "block";
+    } else {
+        filtersDiv.style.display = "none";
+    }
+}
+</script>
 
 </body>
 
