@@ -1,0 +1,10 @@
+Instrucciones:
+
+
+Acceso a base de datos:
+
+$server = "db";
+$user = "root";
+$pass = "root";
+
+El administrativo, una vez inserte el alumno, le comunicará al alumno que la contraseña es su nombre y la primera inicial de su apellido. Luego tendrá que cambiarla.

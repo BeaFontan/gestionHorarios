@@ -11,7 +11,7 @@ if (isset($_POST["btnFormCreateUser"])) {
     $phone = $_POST["txtPhone"];
     $dni = $_POST["txtDNI"];
     $rol = "student";
-    $password = $name . substr($firstName, 0, 1) . substr($secondName, 0, 1);
+    $password = strtolower($name) . strtolower(substr($firstName, 0, 1));
     $passHash = password_hash($password, PASSWORD_DEFAULT);
     $password_reset = 0;
 

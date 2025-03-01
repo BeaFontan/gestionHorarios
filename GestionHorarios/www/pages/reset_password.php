@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <h1>
+    <h1 class="titleLoginPass">
         <span class="raya">Cambiar Contrasinal</span> <span class="negrita">IES</span> San
         Clemente
     </h1>
