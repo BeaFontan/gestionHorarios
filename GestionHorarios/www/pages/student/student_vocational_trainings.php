@@ -87,8 +87,15 @@ $stmt = $pdo->query($sql);
                                 <img src='/images/ciclo.png' class='pic-alumn' alt='Módulo img'>
                             </div>
                             <div class='user-texto'>
+                                <?php
+                                $course_code = $fila['course_code'];
+                                $type = $fila['type'];
+                                $modality = $fila['modality'];
+                                $typeTransform = ($type === 'higher') ? "Superior" : "Medio";
+                                $modalityTransform = ($modality === 'ordinary') ? "Ordinario" : (($modality === 'modular') ? "Modular" : "Dual");
+                                ?>
                                 <p class='texto-nombre'><?= htmlspecialchars($fila['course_name']) ?></p>
-                                <p class='texto-ciclo'><?= htmlspecialchars($fila['modality']) ?></p>
+                                <p class='texto-ciclo'><?php echo "$course_code - $modalityTransform - $typeTransform"; ?></p>
                             </div>
                             <div class='user-botonesAdd'>
                                 <input type="checkbox" id="ciclo<?= $fila['id'] ?>" name="ciclos[]" value="<?= $fila['id'] ?>" <?= $isChecked ?> onchange="toggleCiclo(this)">
